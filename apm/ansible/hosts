@@ -1,0 +1,17 @@
+#init_chain_node:allhost
+#node_type:muta_all_node    #option: muta_consensus_node|muta_rsync_node|muta_all_node
+
+
+[mercury_node]
+8.210.169.63
+47.243.115.142
+
+[prometheus_server]
+localhost
+
+[allhost:children]
+mercury_node
+prometheus_server
+
+
+

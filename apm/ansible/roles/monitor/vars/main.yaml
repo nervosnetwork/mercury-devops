@@ -1,0 +1,3 @@
+monitor_dir: /Users/zjh/Desktop/mercury-monitor
+prometheus_port: 9090
+grafana_port: 3000

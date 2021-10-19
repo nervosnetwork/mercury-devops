@@ -1,0 +1,23 @@
+---
+- name: check monitor dir
+  stat:
+    path: "{{ monitor_dir }}"
+  register: file_status
+- name: create monitor dir
+  file:
+    path: "{{ monitor_dir }}"
+    state: directory
+  when:
+    file_status.stat.exists == False
+- name: copy docker-compose.yml
+  copy:
+    src: ../monitor/docker-compose.yml
+    dest: "{{ monitor_dir }}/docker-compose.yml"
+    mode: 0755
+- name: copy config
+  copy:
+    src: ../monitor/config
+    dest: "{{ monitor_dir }}"
+    mode: 0755
+- name: set node exporter ip:port
+  shell: sh init_config.sh "{{ monitor_dir }}"
