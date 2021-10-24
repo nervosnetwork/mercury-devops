@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  postgres-main:
+    container_name: postgres-main
+    image: postgres:latest
+    restart: always
+    privileged: true
+    shm_size: 16G
+    ports:
+      - 8532:5432
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: mercury
+      PGDATA: /var/lib/postgresql/data/pgdata
+      entrypoint: /entrypoint.sh
+    volumes:
+      - ./pg_data/data:/var/lib/postgresql/data/pgdata
+      - ./devtools/create_table/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+      - ./devtools/my-postgres.conf:/etc/postgresql/postgresql.conf
+    networks:
+      - mercury-main-net
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
+
+  ckb-node-main:
+    container_name: ckb-node-main
+    user: root
+    restart: always
+    image: nervos/perkins-tent:v0.43.0
+    environment:
+      CKB_NETWORK: mainnet
+    ports:
+      - "8214:9115"
+      - "8215:8115"
+    volumes:
+      - ./ckb-node-data:/data
+    networks:
+      - mercury-main-net
+
+  mercury-main:
+    container_name: mercury-main
+    restart: always
+    build: .
+    ports:
+      - 8216:8116
+    volumes:
+      - ./devtools/config:/app/devtools/config
+      - ./free-space:/app/free-space
+    depends_on:
+      - ckb-node-main
+      - postgres-main
+    networks:
+      - mercury-main-net
+    command: ./mercury -c devtools/config/mainnet_config.toml
+
+networks:
+  mercury-main-net:
