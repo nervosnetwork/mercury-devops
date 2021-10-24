@@ -1,0 +1,10 @@
+# monitor
+monitor_dir: /Users/zjh/Desktop/mercury-monitor
+# prometheus_port: 9090
+# grafana_port: 3000
+
+
+# agent
+monitor_agent_dir: /Users/zjh/Desktop/agent
+log_path: \/Users\/zjh\/Documents\/cryptape\/mercury\/free-space\/testnet
+loki_address: 192.168.31.149
