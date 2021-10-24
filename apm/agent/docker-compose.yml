@@ -1,0 +1,27 @@
+version: '3'
+services:
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:v0.18.1
+    container_name: muta-node-exporter
+    command:
+      - '--path.rootfs=/host'
+      - '--collector.tcpstat'
+    restart: on-failure
+    network_mode: 'host'
+    pid: 'host'
+    volumes:
+      - /:/host:ro,rslave
+
+  promtail:
+    image: grafana/promtail:master-9ad98df
+    container_name: muta-promtail
+    restart: on-failure
+    ports:
+      - '9080:9080'
+    volumes:
+      - ./data/promtail/positions:/tmp/promtail/
+      - ./config/promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
+      - ${MERCURY_LOG_PATH}:/var/logs
+    command: 
+      -config.file=/etc/promtail/promtail-config.yaml
+
