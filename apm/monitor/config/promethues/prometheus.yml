@@ -37,19 +37,18 @@ scrape_configs:
     static_configs:
     - targets: [mercury_exporter_ip:8116]
 
-  # 配置为 Loki server 所在 ip，端口和例子如下
-  # Loki server 的状态监控
-  - job_name: 'loki'
-    static_configs:
-    - targets: ['loki:3100']
-
   # 这里配置所有 App 节点， ['node_id_1:9080', 'node_ip_2:9080', 'node_ip_3:9080']
   # Loki 采集端 Promtail 的状态监控
   - job_name: 'promtail_agent'
     static_configs:
     - targets: [promtail_agent_ip:9080]
 
+  # 配置为 Loki server 所在 ip，端口和例子如下
+  # Loki server 的状态监控
+  - job_name: 'loki'
+    static_configs:
+    - targets: ['loki:3100']
+
   - job_name: 'postgres_exporter_agent'
     static_configs:
-    - targets: [47.243.115.142:8187]
-    # - targets: [postgres_exporter_ip:9187]
+    - targets: ['postgres_exporter_address']

@@ -1,5 +1,6 @@
 # monitor
 monitor_dir: /Users/zjh/Desktop/mercury-monitor
+postgres_exporter_address: 192.168.31.149:8187
 # prometheus_port: 9090
 # grafana_port: 3000
 
@@ -8,3 +9,12 @@ monitor_dir: /Users/zjh/Desktop/mercury-monitor
 monitor_agent_dir: /Users/zjh/Desktop/agent
 log_path: \/Users\/zjh\/Documents\/cryptape\/mercury\/free-space\/testnet
 loki_address: 192.168.31.149
+
+
+
+# pgsql-agent
+monitor_agent_dir: /Users/zjh/Desktop/pgsql-agent
+log_path: \/Users\/zjh\/Documents\/cryptape\/mercury\/free-space\/testnet
+url: postgresql:\/\/postgres:123456@47.243.115.142:8432\/mercury?sslmode=disable
+
+
