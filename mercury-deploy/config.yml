@@ -1,0 +1,5 @@
+deploy_path: "/home/ckb/mercury-test"
+mercury_repo: "https://github.com/nervosnetwork/mercury.git"
+mercury_version: "main"
+net_type: "testnet"
+kill_name: "devtools/config/testnet_config.toml"
