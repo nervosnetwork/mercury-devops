@@ -14,11 +14,11 @@ clients:
   - url: http://LOKI_ADDRESS:8601/api/prom/push
 
 scrape_configs:
-  - job_name: muta-logs
+  - job_name: mercury-logs
     entry_parser: raw
     pipeline_stages:
     - match:
-        selector: '{app="muta"}'
+        selector: '{app="mercury"}'
         stages:
         - json:
             expressions:
@@ -36,8 +36,8 @@ scrape_configs:
           - localhost
         # 设置采集的 label，后续检索日志会用到
         labels:
-          job: muta-logs
-          app: muta
+          job: mercury-logs
+          app: mercury
           # 这里改成宿主机的 ip 方便日志查询用
           hostip: host.docker.internal
           __path__: /var/logs/*log
