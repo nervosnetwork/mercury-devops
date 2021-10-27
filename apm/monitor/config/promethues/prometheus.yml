@@ -47,7 +47,7 @@ scrape_configs:
   # Loki server 的状态监控
   - job_name: 'loki'
     static_configs:
-    - targets: ['loki:3100']
+    - targets: ['loki:8601']
 
   - job_name: 'postgres_exporter_agent'
     static_configs:

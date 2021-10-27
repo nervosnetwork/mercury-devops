@@ -29,9 +29,9 @@ set_exporter() {
 
     
     # cp -rp ./roles/prometheus/templates/prometheus.yml.j2 ./roles/prometheus/templates/prometheus.yml_new.j2
-    sed -i '' "s/node_exporter_ip:9100/${node_exporters}/g" "$1/config/promethues/prometheus.yml"
-    sed -i '' "s/mercury_exporter_ip:8116/${mercury_exporters}/g" "$1/config/promethues/prometheus.yml"
-    sed -i '' "s/promtail_agent_ip:9080/${promtail_agents}/g" "$1/config/promethues/prometheus.yml"
+    sed -i "s/node_exporter_ip:9100/${node_exporters}/g" "$1/config/promethues/prometheus.yml"
+    sed -i "s/mercury_exporter_ip:8116/${mercury_exporters}/g" "$1/config/promethues/prometheus.yml"
+    sed -i "s/promtail_agent_ip:9080/${promtail_agents}/g" "$1/config/promethues/prometheus.yml"
 }
 
 set_exporter $1

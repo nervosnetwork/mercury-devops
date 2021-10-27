@@ -38,11 +38,10 @@
       when: net_type == "mainnet"    
       
     - name: copy pgsql config
-      copy:
-      src: ./templates/my-postgres.conf
-      dest: "{{ monitor_dir }}/devtools/my-postgres.conf"
-      mode: 0755
-
+      shell: cp -r templates/my-postgres.conf  {{ deploy_path }}/devtools/my-postgres.conf
+      become: yes
+      become_method: sudo
+      
     - name: Check if the process exists
       shell: ps -ef | grep mercury | grep {{ kill_name }} | grep -v grep | awk '{print $2}'
       register: process_exists

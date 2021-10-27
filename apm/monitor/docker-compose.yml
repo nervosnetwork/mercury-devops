@@ -8,7 +8,7 @@ services:
     container_name: muta-granafa
     restart: on-failure
     ports:
-      - "3000:3000"
+      - "8600:3000"
     volumes:
       - "./config/grafana/grafana.ini:/etc/grafana/grafana.ini"
       - "./config/grafana/dashboards:/var/lib/grafana/dashboards"
@@ -57,7 +57,7 @@ services:
     container_name: muta-loki
     restart: on-failure
     ports:
-      - "3100:3100"
+      - "8601:3100"
     volumes:
       - ./config/loki:/etc/loki
       - ./data/nginx:/var/log/nginx
