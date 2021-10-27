@@ -28,6 +28,6 @@
     mode: 0755
 
 - name: sed env
-  shell: sed -i '' 's/LOG_COLLECT_PATH/{{ log_path }}/' "{{ monitor_agent_dir }}/.env"
+  shell: sed -i 's/LOG_COLLECT_PATH/{{ log_path }}/' "{{ monitor_agent_dir }}/.env"
 - name: sed promtail
-  shell: sed -i '' 's/LOKI_ADDRESS/{{ loki_address }}/' "{{ monitor_agent_dir }}/config/promtail/promtail-config.yaml"
+  shell: sed -i 's/LOKI_ADDRESS/{{ loki_address }}/' "{{ monitor_agent_dir }}/config/promtail/promtail-config.yaml"
