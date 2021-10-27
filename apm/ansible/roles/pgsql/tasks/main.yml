@@ -22,4 +22,4 @@
     mode: 0755
 
 - name: sed env
-  shell: sed -i '' 's/DATA_SOURCE_NAME/{{ url }}/' "{{ monitor_pgsql_agent_dir }}/.env" 
+  shell: sed -i 's/DATA_SOURCE_NAME/{{ url }}/' "{{ monitor_pgsql_agent_dir }}/.env" 
