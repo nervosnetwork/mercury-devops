@@ -1,11 +1,11 @@
 ---
 - name: check monitor dir
   stat:
-    path: "{{ monitor_agent_dir }}"
+    path: "{{ monitor_pgsql_agent_dir }}"
   register: file_status
 - name: create monitor dir
   file:
-    path: "{{ monitor_agent_dir }}"
+    path: "{{ monitor_pgsql_agent_dir }}"
     state: directory
   when:
     file_status.stat.exists == False
@@ -13,13 +13,13 @@
 - name: copy docker-compose.yml
   copy:
     src: ../pgsql-agent/docker-compose.yml
-    dest: "{{ monitor_agent_dir }}/docker-compose.yml"
+    dest: "{{ monitor_pgsql_agent_dir }}/docker-compose.yml"
     mode: 0755
 - name: copy env
   copy:
     src: ../pgsql-agent/.env.example
-    dest: "{{ monitor_agent_dir }}/.env"
+    dest: "{{ monitor_pgsql_agent_dir }}/.env"
     mode: 0755
 
 - name: sed env
-  shell: sed -i '' 's/DATA_SOURCE_NAME/{{ url }}/' "{{ monitor_agent_dir }}/.env" 
+  shell: sed -i '' 's/DATA_SOURCE_NAME/{{ url }}/' "{{ monitor_pgsql_agent_dir }}/.env" 

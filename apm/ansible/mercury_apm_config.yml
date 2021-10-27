@@ -13,8 +13,8 @@ loki_address: 192.168.31.149
 
 
 # pgsql-agent
-monitor_agent_dir: /Users/zjh/Desktop/pgsql-agent
-log_path: \/Users\/zjh\/Documents\/cryptape\/mercury\/free-space\/testnet
+monitor_pgsql_agent_dir: /Users/zjh/Desktop/pgsql-agent
+pg_log_path: \/Users\/zjh\/Documents\/cryptape\/mercury\/free-space\/testnet
 url: postgresql:\/\/postgres:123456@47.243.115.142:8432\/mercury?sslmode=disable
 
 
