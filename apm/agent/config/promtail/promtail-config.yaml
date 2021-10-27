@@ -27,7 +27,7 @@ scrape_configs:
         - json:
             expressions:
               event: 
-            source: message       
+              source: message       
         - labels:
             level:
             event:
