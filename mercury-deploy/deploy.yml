@@ -35,7 +35,13 @@
       shell: cp -r templates/mainnet_config.toml.j2  {{ deploy_path }}/devtools/config/mainnet_config.toml
       become: yes
       become_method: sudo
-      when: net_type == "mainnet"        
+      when: net_type == "mainnet"    
+      
+    - name: copy pgsql config
+      copy:
+      src: ./templates/my-postgres.conf
+      dest: "{{ monitor_dir }}/devtools/my-postgres.conf"
+      mode: 0755
 
     - name: Check if the process exists
       shell: ps -ef | grep mercury | grep {{ kill_name }} | grep -v grep | awk '{print $2}'
