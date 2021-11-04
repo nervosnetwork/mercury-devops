@@ -1,6 +1,6 @@
 version: '3'
 services:
-  promtail:
+  postgres-exporter:
     image: quay.io/prometheuscommunity/postgres-exporter
     container_name: postgres-exporter
     restart: on-failure
@@ -22,16 +22,16 @@ services:
   #   volumes:
   #     - /:/host:ro,rslave
 
-  # promtail:
-  #   image: grafana/promtail:master-9ad98df
-  #   container_name: muta-promtail
-  #   restart: on-failure
-  #   ports:
-  #     - '9080:9080'
-  #   volumes:
-  #     - ./data/promtail/positions:/tmp/promtail/
-  #     - ./config/promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
-  #     - ${MERCURY_LOG_PATH}:/var/logs
-  #   command: 
-  #     -config.file=/etc/promtail/promtail-config.yaml
+  promtail:
+    image: grafana/promtail:master-9ad98df
+    container_name: muta-promtail
+    restart: on-failure
+    ports:
+      - '9081:9080'
+    volumes:
+      - ./data/promtail/positions:/tmp/promtail/
+      - ./config/promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
+      - ${PGSQL_LOG_PATH}:/var/logs
+    command: 
+      -config.file=/etc/promtail/promtail-config.yaml
 

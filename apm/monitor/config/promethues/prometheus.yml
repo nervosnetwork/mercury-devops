@@ -52,3 +52,7 @@ scrape_configs:
   - job_name: 'postgres_exporter_agent'
     static_configs:
     - targets: [postgres_exporter_address]
+
+  - job_name: 'postgres_promtail_agent'
+    static_configs:
+    - targets: [postgres_exporter_address:9081]

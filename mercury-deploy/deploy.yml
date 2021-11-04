@@ -57,3 +57,16 @@
 
     - name: Start mercury
       shell: cd {{ deploy_path }} && docker-compose up -d
+
+    - name: pause for 30 seconds 
+      pause:
+      seconds: 30  
+
+    - name: chmod pg data
+      shell: "chmod 777 {{ deploy_path }}/pg_data/data"
+      become: yes
+      become_method: sudo
+    - name: chmod pg log
+      shell: "chmod 777 {{ deploy_path }}/pg_data/data/log"
+      become: yes
+      become_method: sudo

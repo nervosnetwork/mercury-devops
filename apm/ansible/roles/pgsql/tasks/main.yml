@@ -15,11 +15,20 @@
     src: ../pgsql-agent/docker-compose.yml
     dest: "{{ monitor_pgsql_agent_dir }}/docker-compose.yml"
     mode: 0755
+- name: copy config
+  copy:
+    src: ../pgsql-agent/config
+    dest: "{{ monitor_pgsql_agent_dir }}"
+    mode: 0755
 - name: copy env
   copy:
     src: ../pgsql-agent/.env.example
     dest: "{{ monitor_pgsql_agent_dir }}/.env"
     mode: 0755
 
-- name: sed env
+- name: sed db address
   shell: sed -i 's/DATA_SOURCE_NAME/{{ url }}/' "{{ monitor_pgsql_agent_dir }}/.env" 
+- name: sed log path
+  shell: sed -i 's/LOG_COLLECT_PATH/{{ pg_log_path }}/' "{{ monitor_pgsql_agent_dir }}/.env"
+- name: sed promtail
+  shell: sed -i 's/LOKI_ADDRESS/{{ loki_address }}/' "{{ monitor_pgsql_agent_dir }}/config/promtail/promtail-config.yaml"
