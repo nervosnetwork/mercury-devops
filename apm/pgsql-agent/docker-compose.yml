@@ -22,9 +22,9 @@ services:
   #   volumes:
   #     - /:/host:ro,rslave
 
-  promtail:
+  pgsql-promtail:
     image: grafana/promtail:master-9ad98df
-    container_name: muta-promtail
+    container_name: pgsql-promtail
     restart: on-failure
     ports:
       - '9081:9080'
