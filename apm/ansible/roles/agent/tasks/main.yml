@@ -1,5 +1,9 @@
 ---
-
+- name: down 
+  shell: "docker-compose -f {{ monitor_agent_dir }}/docker-compose.yml down"
+  ignore_errors: yes
+  become: yes
+  become_method: sudo
 - name: check monitor dir
   stat:
     path: "{{ monitor_agent_dir }}"
@@ -31,3 +35,8 @@
   shell: sed -i 's/LOG_COLLECT_PATH/{{ log_path }}/' "{{ monitor_agent_dir }}/.env"
 - name: sed promtail
   shell: sed -i 's/LOKI_ADDRESS/{{ loki_address }}/' "{{ monitor_agent_dir }}/config/promtail/promtail-config.yaml"
+
+- name: start 
+  shell: "docker-compose -f {{ monitor_agent_dir }}/docker-compose.yml up -d"
+  become: yes
+  become_method: sudo
