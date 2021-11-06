@@ -41,6 +41,6 @@
     seconds: 15 
 
 - name: start 
-  shell: "docker-compose -f {{ monitor_agent_dir }}/docker-compose.yml up -d"
+  shell: "cd {{ monitor_agent_dir }} && docker-compose up -d"
   become: yes
   become_method: sudo
