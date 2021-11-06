@@ -43,6 +43,6 @@
     seconds: 15  
 
 - name: start 
-  shell: "cd /home/ckb/{{ monitor_pgsql_agent_dir }} && docker-compose up -d"
+  shell: "cd {{ monitor_pgsql_agent_dir }} && docker-compose up -d"
   become: yes
   become_method: sudo
