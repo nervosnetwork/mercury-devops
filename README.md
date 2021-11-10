@@ -167,3 +167,7 @@ $ cd {mercury-devops}/mercury-benchmark && screen python3 main.py testnet get_sp
 
 # mercury-test
 重构集成中，敬请期待！
+
+
+
+test
