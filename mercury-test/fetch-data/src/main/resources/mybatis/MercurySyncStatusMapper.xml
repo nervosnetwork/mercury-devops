@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercurySyncStatusMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercurySyncStatus">
+    <id column="block_number" jdbcType="INTEGER" property="blockNumber" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mercury_sync_status
+    where block_number = #{blockNumber,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercurySyncStatus">
+    insert into mercury_sync_status (block_number)
+    values (#{blockNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercurySyncStatus">
+    insert into mercury_sync_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blockNumber != null">
+        block_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blockNumber != null">
+        #{blockNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

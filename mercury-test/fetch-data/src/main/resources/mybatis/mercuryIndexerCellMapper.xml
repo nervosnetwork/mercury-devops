@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.mercuryIndexerCellMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="block_number" jdbcType="INTEGER" property="blockNumber" />
+    <result column="io_type" jdbcType="SMALLINT" property="ioType" />
+    <result column="io_index" jdbcType="INTEGER" property="ioIndex" />
+    <result column="tx_index" jdbcType="INTEGER" property="txIndex" />
+    <result column="lock_script_type" jdbcType="SMALLINT" property="lockScriptType" />
+    <result column="type_script_type" jdbcType="SMALLINT" property="typeScriptType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    <result column="tx_hash" jdbcType="BLOB" property="txHash" />
+    <result column="lock_hash" jdbcType="BLOB" property="lockHash" />
+    <result column="lock_code_hash" jdbcType="BLOB" property="lockCodeHash" />
+    <result column="lock_args" jdbcType="BLOB" property="lockArgs" />
+    <result column="type_hash" jdbcType="BLOB" property="typeHash" />
+    <result column="type_code_hash" jdbcType="BLOB" property="typeCodeHash" />
+    <result column="type_args" jdbcType="BLOB" property="typeArgs" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, block_number, io_type, io_index, tx_index, lock_script_type, type_script_type
+  </sql>
+  <sql id="Blob_Column_List">
+    tx_hash, lock_hash, lock_code_hash, lock_args, type_hash, type_code_hash, type_args
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mercury_indexer_cell
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mercury_indexer_cell
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    insert into mercury_indexer_cell (id, block_number, io_type, 
+      io_index, tx_index, lock_script_type, 
+      type_script_type, tx_hash, lock_hash, 
+      lock_code_hash, lock_args, type_hash, 
+      type_code_hash, type_args)
+    values (#{id,jdbcType=BIGINT}, #{blockNumber,jdbcType=INTEGER}, #{ioType,jdbcType=SMALLINT}, 
+      #{ioIndex,jdbcType=INTEGER}, #{txIndex,jdbcType=INTEGER}, #{lockScriptType,jdbcType=SMALLINT}, 
+      #{typeScriptType,jdbcType=SMALLINT}, #{txHash,jdbcType=BLOB}, #{lockHash,jdbcType=BLOB}, 
+      #{lockCodeHash,jdbcType=BLOB}, #{lockArgs,jdbcType=BLOB}, #{typeHash,jdbcType=BLOB}, 
+      #{typeCodeHash,jdbcType=BLOB}, #{typeArgs,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    insert into mercury_indexer_cell
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blockNumber != null">
+        block_number,
+      </if>
+      <if test="ioType != null">
+        io_type,
+      </if>
+      <if test="ioIndex != null">
+        io_index,
+      </if>
+      <if test="txIndex != null">
+        tx_index,
+      </if>
+      <if test="lockScriptType != null">
+        lock_script_type,
+      </if>
+      <if test="typeScriptType != null">
+        type_script_type,
+      </if>
+      <if test="txHash != null">
+        tx_hash,
+      </if>
+      <if test="lockHash != null">
+        lock_hash,
+      </if>
+      <if test="lockCodeHash != null">
+        lock_code_hash,
+      </if>
+      <if test="lockArgs != null">
+        lock_args,
+      </if>
+      <if test="typeHash != null">
+        type_hash,
+      </if>
+      <if test="typeCodeHash != null">
+        type_code_hash,
+      </if>
+      <if test="typeArgs != null">
+        type_args,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="blockNumber != null">
+        #{blockNumber,jdbcType=INTEGER},
+      </if>
+      <if test="ioType != null">
+        #{ioType,jdbcType=SMALLINT},
+      </if>
+      <if test="ioIndex != null">
+        #{ioIndex,jdbcType=INTEGER},
+      </if>
+      <if test="txIndex != null">
+        #{txIndex,jdbcType=INTEGER},
+      </if>
+      <if test="lockScriptType != null">
+        #{lockScriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="typeScriptType != null">
+        #{typeScriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="txHash != null">
+        #{txHash,jdbcType=BLOB},
+      </if>
+      <if test="lockHash != null">
+        #{lockHash,jdbcType=BLOB},
+      </if>
+      <if test="lockCodeHash != null">
+        #{lockCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="lockArgs != null">
+        #{lockArgs,jdbcType=BLOB},
+      </if>
+      <if test="typeHash != null">
+        #{typeHash,jdbcType=BLOB},
+      </if>
+      <if test="typeCodeHash != null">
+        #{typeCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="typeArgs != null">
+        #{typeArgs,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    update mercury_indexer_cell
+    <set>
+      <if test="blockNumber != null">
+        block_number = #{blockNumber,jdbcType=INTEGER},
+      </if>
+      <if test="ioType != null">
+        io_type = #{ioType,jdbcType=SMALLINT},
+      </if>
+      <if test="ioIndex != null">
+        io_index = #{ioIndex,jdbcType=INTEGER},
+      </if>
+      <if test="txIndex != null">
+        tx_index = #{txIndex,jdbcType=INTEGER},
+      </if>
+      <if test="lockScriptType != null">
+        lock_script_type = #{lockScriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="typeScriptType != null">
+        type_script_type = #{typeScriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="txHash != null">
+        tx_hash = #{txHash,jdbcType=BLOB},
+      </if>
+      <if test="lockHash != null">
+        lock_hash = #{lockHash,jdbcType=BLOB},
+      </if>
+      <if test="lockCodeHash != null">
+        lock_code_hash = #{lockCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="lockArgs != null">
+        lock_args = #{lockArgs,jdbcType=BLOB},
+      </if>
+      <if test="typeHash != null">
+        type_hash = #{typeHash,jdbcType=BLOB},
+      </if>
+      <if test="typeCodeHash != null">
+        type_code_hash = #{typeCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="typeArgs != null">
+        type_args = #{typeArgs,jdbcType=BLOB},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    update mercury_indexer_cell
+    set block_number = #{blockNumber,jdbcType=INTEGER},
+      io_type = #{ioType,jdbcType=SMALLINT},
+      io_index = #{ioIndex,jdbcType=INTEGER},
+      tx_index = #{txIndex,jdbcType=INTEGER},
+      lock_script_type = #{lockScriptType,jdbcType=SMALLINT},
+      type_script_type = #{typeScriptType,jdbcType=SMALLINT},
+      tx_hash = #{txHash,jdbcType=BLOB},
+      lock_hash = #{lockHash,jdbcType=BLOB},
+      lock_code_hash = #{lockCodeHash,jdbcType=BLOB},
+      lock_args = #{lockArgs,jdbcType=BLOB},
+      type_hash = #{typeHash,jdbcType=BLOB},
+      type_code_hash = #{typeCodeHash,jdbcType=BLOB},
+      type_args = #{typeArgs,jdbcType=BLOB}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.mercuryIndexerCell">
+    update mercury_indexer_cell
+    set block_number = #{blockNumber,jdbcType=INTEGER},
+      io_type = #{ioType,jdbcType=SMALLINT},
+      io_index = #{ioIndex,jdbcType=INTEGER},
+      tx_index = #{txIndex,jdbcType=INTEGER},
+      lock_script_type = #{lockScriptType,jdbcType=SMALLINT},
+      type_script_type = #{typeScriptType,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

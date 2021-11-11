@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryRegisteredAddressMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryRegisteredAddress">
+    <id column="lock_hash" jdbcType="BLOB" property="lockHash" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lock_hash, address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mercury_registered_address
+    where lock_hash = #{lockHash,jdbcType=BLOB}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
+    delete from mercury_registered_address
+    where lock_hash = #{lockHash,jdbcType=BLOB}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryRegisteredAddress">
+    insert into mercury_registered_address (lock_hash, address)
+    values (#{lockHash,jdbcType=BLOB}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryRegisteredAddress">
+    insert into mercury_registered_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lockHash != null">
+        lock_hash,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lockHash != null">
+        #{lockHash,jdbcType=BLOB},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryRegisteredAddress">
+    update mercury_registered_address
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lock_hash = #{lockHash,jdbcType=BLOB}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryRegisteredAddress">
+    update mercury_registered_address
+    set address = #{address,jdbcType=VARCHAR}
+    where lock_hash = #{lockHash,jdbcType=BLOB}
+  </update>
+</mapper>

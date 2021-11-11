@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryTransactionMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tx_index" jdbcType="INTEGER" property="txIndex" />
+    <result column="input_count" jdbcType="INTEGER" property="inputCount" />
+    <result column="output_count" jdbcType="INTEGER" property="outputCount" />
+    <result column="block_number" jdbcType="INTEGER" property="blockNumber" />
+    <result column="tx_timestamp" jdbcType="BIGINT" property="txTimestamp" />
+    <result column="version" jdbcType="SMALLINT" property="version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    <result column="tx_hash" jdbcType="BLOB" property="txHash" />
+    <result column="block_hash" jdbcType="BLOB" property="blockHash" />
+    <result column="cell_deps" jdbcType="BLOB" property="cellDeps" />
+    <result column="header_deps" jdbcType="BLOB" property="headerDeps" />
+    <result column="witnesses" jdbcType="BLOB" property="witnesses" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tx_index, input_count, output_count, block_number, tx_timestamp, version
+  </sql>
+  <sql id="Blob_Column_List">
+    tx_hash, block_hash, cell_deps, header_deps, witnesses
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mercury_transaction
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mercury_transaction
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    insert into mercury_transaction (id, tx_index, input_count, 
+      output_count, block_number, tx_timestamp, 
+      version, tx_hash, block_hash, 
+      cell_deps, header_deps, witnesses
+      )
+    values (#{id,jdbcType=BIGINT}, #{txIndex,jdbcType=INTEGER}, #{inputCount,jdbcType=INTEGER}, 
+      #{outputCount,jdbcType=INTEGER}, #{blockNumber,jdbcType=INTEGER}, #{txTimestamp,jdbcType=BIGINT}, 
+      #{version,jdbcType=SMALLINT}, #{txHash,jdbcType=BLOB}, #{blockHash,jdbcType=BLOB}, 
+      #{cellDeps,jdbcType=BLOB}, #{headerDeps,jdbcType=BLOB}, #{witnesses,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    insert into mercury_transaction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="txIndex != null">
+        tx_index,
+      </if>
+      <if test="inputCount != null">
+        input_count,
+      </if>
+      <if test="outputCount != null">
+        output_count,
+      </if>
+      <if test="blockNumber != null">
+        block_number,
+      </if>
+      <if test="txTimestamp != null">
+        tx_timestamp,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="txHash != null">
+        tx_hash,
+      </if>
+      <if test="blockHash != null">
+        block_hash,
+      </if>
+      <if test="cellDeps != null">
+        cell_deps,
+      </if>
+      <if test="headerDeps != null">
+        header_deps,
+      </if>
+      <if test="witnesses != null">
+        witnesses,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="txIndex != null">
+        #{txIndex,jdbcType=INTEGER},
+      </if>
+      <if test="inputCount != null">
+        #{inputCount,jdbcType=INTEGER},
+      </if>
+      <if test="outputCount != null">
+        #{outputCount,jdbcType=INTEGER},
+      </if>
+      <if test="blockNumber != null">
+        #{blockNumber,jdbcType=INTEGER},
+      </if>
+      <if test="txTimestamp != null">
+        #{txTimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=SMALLINT},
+      </if>
+      <if test="txHash != null">
+        #{txHash,jdbcType=BLOB},
+      </if>
+      <if test="blockHash != null">
+        #{blockHash,jdbcType=BLOB},
+      </if>
+      <if test="cellDeps != null">
+        #{cellDeps,jdbcType=BLOB},
+      </if>
+      <if test="headerDeps != null">
+        #{headerDeps,jdbcType=BLOB},
+      </if>
+      <if test="witnesses != null">
+        #{witnesses,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    update mercury_transaction
+    <set>
+      <if test="txIndex != null">
+        tx_index = #{txIndex,jdbcType=INTEGER},
+      </if>
+      <if test="inputCount != null">
+        input_count = #{inputCount,jdbcType=INTEGER},
+      </if>
+      <if test="outputCount != null">
+        output_count = #{outputCount,jdbcType=INTEGER},
+      </if>
+      <if test="blockNumber != null">
+        block_number = #{blockNumber,jdbcType=INTEGER},
+      </if>
+      <if test="txTimestamp != null">
+        tx_timestamp = #{txTimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=SMALLINT},
+      </if>
+      <if test="txHash != null">
+        tx_hash = #{txHash,jdbcType=BLOB},
+      </if>
+      <if test="blockHash != null">
+        block_hash = #{blockHash,jdbcType=BLOB},
+      </if>
+      <if test="cellDeps != null">
+        cell_deps = #{cellDeps,jdbcType=BLOB},
+      </if>
+      <if test="headerDeps != null">
+        header_deps = #{headerDeps,jdbcType=BLOB},
+      </if>
+      <if test="witnesses != null">
+        witnesses = #{witnesses,jdbcType=BLOB},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    update mercury_transaction
+    set tx_index = #{txIndex,jdbcType=INTEGER},
+      input_count = #{inputCount,jdbcType=INTEGER},
+      output_count = #{outputCount,jdbcType=INTEGER},
+      block_number = #{blockNumber,jdbcType=INTEGER},
+      tx_timestamp = #{txTimestamp,jdbcType=BIGINT},
+      version = #{version,jdbcType=SMALLINT},
+      tx_hash = #{txHash,jdbcType=BLOB},
+      block_hash = #{blockHash,jdbcType=BLOB},
+      cell_deps = #{cellDeps,jdbcType=BLOB},
+      header_deps = #{headerDeps,jdbcType=BLOB},
+      witnesses = #{witnesses,jdbcType=BLOB}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryTransaction">
+    update mercury_transaction
+    set tx_index = #{txIndex,jdbcType=INTEGER},
+      input_count = #{inputCount,jdbcType=INTEGER},
+      output_count = #{outputCount,jdbcType=INTEGER},
+      block_number = #{blockNumber,jdbcType=INTEGER},
+      tx_timestamp = #{txTimestamp,jdbcType=BIGINT},
+      version = #{version,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryScriptMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    <id column="script_hash" jdbcType="BLOB" property="scriptHash" />
+    <result column="script_type" jdbcType="SMALLINT" property="scriptType" />
+    <result column="script_args_len" jdbcType="INTEGER" property="scriptArgsLen" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    <result column="script_hash_160" jdbcType="BLOB" property="scriptHash160" />
+    <result column="script_code_hash" jdbcType="BLOB" property="scriptCodeHash" />
+    <result column="script_args" jdbcType="BLOB" property="scriptArgs" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    script_hash, script_type, script_args_len
+  </sql>
+  <sql id="Blob_Column_List">
+    script_hash_160, script_code_hash, script_args
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mercury_script
+    where script_hash = #{scriptHash,jdbcType=BLOB}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
+    delete from mercury_script
+    where script_hash = #{scriptHash,jdbcType=BLOB}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    insert into mercury_script (script_hash, script_type, script_args_len, 
+      script_hash_160, script_code_hash, script_args
+      )
+    values (#{scriptHash,jdbcType=BLOB}, #{scriptType,jdbcType=SMALLINT}, #{scriptArgsLen,jdbcType=INTEGER}, 
+      #{scriptHash160,jdbcType=BLOB}, #{scriptCodeHash,jdbcType=BLOB}, #{scriptArgs,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    insert into mercury_script
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scriptHash != null">
+        script_hash,
+      </if>
+      <if test="scriptType != null">
+        script_type,
+      </if>
+      <if test="scriptArgsLen != null">
+        script_args_len,
+      </if>
+      <if test="scriptHash160 != null">
+        script_hash_160,
+      </if>
+      <if test="scriptCodeHash != null">
+        script_code_hash,
+      </if>
+      <if test="scriptArgs != null">
+        script_args,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scriptHash != null">
+        #{scriptHash,jdbcType=BLOB},
+      </if>
+      <if test="scriptType != null">
+        #{scriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="scriptArgsLen != null">
+        #{scriptArgsLen,jdbcType=INTEGER},
+      </if>
+      <if test="scriptHash160 != null">
+        #{scriptHash160,jdbcType=BLOB},
+      </if>
+      <if test="scriptCodeHash != null">
+        #{scriptCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="scriptArgs != null">
+        #{scriptArgs,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    update mercury_script
+    <set>
+      <if test="scriptType != null">
+        script_type = #{scriptType,jdbcType=SMALLINT},
+      </if>
+      <if test="scriptArgsLen != null">
+        script_args_len = #{scriptArgsLen,jdbcType=INTEGER},
+      </if>
+      <if test="scriptHash160 != null">
+        script_hash_160 = #{scriptHash160,jdbcType=BLOB},
+      </if>
+      <if test="scriptCodeHash != null">
+        script_code_hash = #{scriptCodeHash,jdbcType=BLOB},
+      </if>
+      <if test="scriptArgs != null">
+        script_args = #{scriptArgs,jdbcType=BLOB},
+      </if>
+    </set>
+    where script_hash = #{scriptHash,jdbcType=BLOB}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    update mercury_script
+    set script_type = #{scriptType,jdbcType=SMALLINT},
+      script_args_len = #{scriptArgsLen,jdbcType=INTEGER},
+      script_hash_160 = #{scriptHash160,jdbcType=BLOB},
+      script_code_hash = #{scriptCodeHash,jdbcType=BLOB},
+      script_args = #{scriptArgs,jdbcType=BLOB}
+    where script_hash = #{scriptHash,jdbcType=BLOB}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    update mercury_script
+    set script_type = #{scriptType,jdbcType=SMALLINT},
+      script_args_len = #{scriptArgsLen,jdbcType=INTEGER}
+    where script_hash = #{scriptHash,jdbcType=BLOB}
+  </update>
+</mapper>

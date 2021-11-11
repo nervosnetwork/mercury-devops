@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryUncleRelationshipMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryUncleRelationship">
+    <id column="block_hash" jdbcType="BLOB" property="blockHash" />
+    <id column="uncle_hashes" jdbcType="BLOB" property="uncleHashes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from mercury_uncle_relationship
+    where block_hash = #{blockHash,jdbcType=BLOB}
+      and uncle_hashes = #{uncleHashes,jdbcType=BLOB}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryUncleRelationship">
+    insert into mercury_uncle_relationship (block_hash, uncle_hashes)
+    values (#{blockHash,jdbcType=BLOB}, #{uncleHashes,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryUncleRelationship">
+    insert into mercury_uncle_relationship
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blockHash != null">
+        block_hash,
+      </if>
+      <if test="uncleHashes != null">
+        uncle_hashes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blockHash != null">
+        #{blockHash,jdbcType=BLOB},
+      </if>
+      <if test="uncleHashes != null">
+        #{uncleHashes,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,4 @@
+rootProject.name = 'mercury-test'
+include 'fetch-data'
+include 'regression-test'
+

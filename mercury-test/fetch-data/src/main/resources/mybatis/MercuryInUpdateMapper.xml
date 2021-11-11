@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryInUpdateMapper">
+  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryInUpdate">
+    <id column="is_in" jdbcType="BIT" property="isIn" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Boolean">
+    delete from mercury_in_update
+    where is_in = #{isIn,jdbcType=BIT}
+  </delete>
+  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryInUpdate">
+    insert into mercury_in_update (is_in)
+    values (#{isIn,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryInUpdate">
+    insert into mercury_in_update
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isIn != null">
+        is_in,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isIn != null">
+        #{isIn,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
