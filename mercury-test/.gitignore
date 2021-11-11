@@ -2,4 +2,4 @@
 .gradle
 build
 gradle
-mercury-test*.log
+mercury-test.log*
