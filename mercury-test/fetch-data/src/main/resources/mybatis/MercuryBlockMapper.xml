@@ -1,254 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryBlockMapper">
-  <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    <id column="block_hash" jdbcType="BLOB" property="blockHash" />
-    <result column="block_number" jdbcType="INTEGER" property="blockNumber" />
-    <result column="version" jdbcType="SMALLINT" property="version" />
-    <result column="compact_target" jdbcType="INTEGER" property="compactTarget" />
-    <result column="block_timestamp" jdbcType="BIGINT" property="blockTimestamp" />
-    <result column="epoch_number" jdbcType="INTEGER" property="epochNumber" />
-    <result column="epoch_index" jdbcType="INTEGER" property="epochIndex" />
-    <result column="epoch_length" jdbcType="INTEGER" property="epochLength" />
-    <result column="uncles_count" jdbcType="INTEGER" property="unclesCount" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    <result column="parent_hash" jdbcType="BLOB" property="parentHash" />
-    <result column="transactions_root" jdbcType="BLOB" property="transactionsRoot" />
-    <result column="proposals_hash" jdbcType="BLOB" property="proposalsHash" />
-    <result column="uncles_hash" jdbcType="BLOB" property="unclesHash" />
-    <result column="uncles" jdbcType="BLOB" property="uncles" />
-    <result column="dao" jdbcType="BLOB" property="dao" />
-    <result column="nonce" jdbcType="BLOB" property="nonce" />
-    <result column="proposals" jdbcType="BLOB" property="proposals" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    block_hash, block_number, version, compact_target, block_timestamp, epoch_number, 
+    <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        <id column="block_hash" jdbcType="BLOB" property="blockHash"/>
+        <result column="block_number" jdbcType="INTEGER" property="blockNumber"/>
+        <result column="version" jdbcType="SMALLINT" property="version"/>
+        <result column="compact_target" jdbcType="INTEGER" property="compactTarget"/>
+        <result column="block_timestamp" jdbcType="BIGINT" property="blockTimestamp"/>
+        <result column="epoch_number" jdbcType="INTEGER" property="epochNumber"/>
+        <result column="epoch_index" jdbcType="INTEGER" property="epochIndex"/>
+        <result column="epoch_length" jdbcType="INTEGER" property="epochLength"/>
+        <result column="uncles_count" jdbcType="INTEGER" property="unclesCount"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        <result column="parent_hash" jdbcType="BLOB" property="parentHash"/>
+        <result column="transactions_root" jdbcType="BLOB" property="transactionsRoot"/>
+        <result column="proposals_hash" jdbcType="BLOB" property="proposalsHash"/>
+        <result column="uncles_hash" jdbcType="BLOB" property="unclesHash"/>
+        <result column="uncles" jdbcType="BLOB" property="uncles"/>
+        <result column="dao" jdbcType="BLOB" property="dao"/>
+        <result column="nonce" jdbcType="BLOB" property="nonce"/>
+        <result column="proposals" jdbcType="BLOB" property="proposals"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        block_hash
+        , block_number, version, compact_target, block_timestamp, epoch_number,
     epoch_index, epoch_length, uncles_count
-  </sql>
-  <sql id="Blob_Column_List">
-    parent_hash, transactions_root, proposals_hash, uncles_hash, uncles, dao, nonce, 
+    </sql>
+    <sql id="Blob_Column_List">
+        parent_hash
+        , transactions_root, proposals_hash, uncles_hash, uncles, dao, nonce,
     proposals
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from mercury_block
-    where block_hash = #{blockHash,jdbcType=BLOB}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
-    delete from mercury_block
-    where block_hash = #{blockHash,jdbcType=BLOB}
-  </delete>
-  <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    insert into mercury_block (block_hash, block_number, version, 
-      compact_target, block_timestamp, epoch_number, 
-      epoch_index, epoch_length, uncles_count, 
-      parent_hash, transactions_root, proposals_hash, 
-      uncles_hash, uncles, dao, nonce, 
-      proposals)
-    values (#{blockHash,jdbcType=BLOB}, #{blockNumber,jdbcType=INTEGER}, #{version,jdbcType=SMALLINT}, 
-      #{compactTarget,jdbcType=INTEGER}, #{blockTimestamp,jdbcType=BIGINT}, #{epochNumber,jdbcType=INTEGER}, 
-      #{epochIndex,jdbcType=INTEGER}, #{epochLength,jdbcType=INTEGER}, #{unclesCount,jdbcType=INTEGER}, 
-      #{parentHash,jdbcType=BLOB}, #{transactionsRoot,jdbcType=BLOB}, #{proposalsHash,jdbcType=BLOB}, 
-      #{unclesHash,jdbcType=BLOB}, #{uncles,jdbcType=BLOB}, #{dao,jdbcType=BLOB}, #{nonce,jdbcType=BLOB}, 
-      #{proposals,jdbcType=BLOB})
-  </insert>
-  <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    insert into mercury_block
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="blockHash != null">
-        block_hash,
-      </if>
-      <if test="blockNumber != null">
-        block_number,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-      <if test="compactTarget != null">
-        compact_target,
-      </if>
-      <if test="blockTimestamp != null">
-        block_timestamp,
-      </if>
-      <if test="epochNumber != null">
-        epoch_number,
-      </if>
-      <if test="epochIndex != null">
-        epoch_index,
-      </if>
-      <if test="epochLength != null">
-        epoch_length,
-      </if>
-      <if test="unclesCount != null">
-        uncles_count,
-      </if>
-      <if test="parentHash != null">
-        parent_hash,
-      </if>
-      <if test="transactionsRoot != null">
-        transactions_root,
-      </if>
-      <if test="proposalsHash != null">
-        proposals_hash,
-      </if>
-      <if test="unclesHash != null">
-        uncles_hash,
-      </if>
-      <if test="uncles != null">
-        uncles,
-      </if>
-      <if test="dao != null">
-        dao,
-      </if>
-      <if test="nonce != null">
-        nonce,
-      </if>
-      <if test="proposals != null">
-        proposals,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="blockHash != null">
-        #{blockHash,jdbcType=BLOB},
-      </if>
-      <if test="blockNumber != null">
-        #{blockNumber,jdbcType=INTEGER},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=SMALLINT},
-      </if>
-      <if test="compactTarget != null">
-        #{compactTarget,jdbcType=INTEGER},
-      </if>
-      <if test="blockTimestamp != null">
-        #{blockTimestamp,jdbcType=BIGINT},
-      </if>
-      <if test="epochNumber != null">
-        #{epochNumber,jdbcType=INTEGER},
-      </if>
-      <if test="epochIndex != null">
-        #{epochIndex,jdbcType=INTEGER},
-      </if>
-      <if test="epochLength != null">
-        #{epochLength,jdbcType=INTEGER},
-      </if>
-      <if test="unclesCount != null">
-        #{unclesCount,jdbcType=INTEGER},
-      </if>
-      <if test="parentHash != null">
-        #{parentHash,jdbcType=BLOB},
-      </if>
-      <if test="transactionsRoot != null">
-        #{transactionsRoot,jdbcType=BLOB},
-      </if>
-      <if test="proposalsHash != null">
-        #{proposalsHash,jdbcType=BLOB},
-      </if>
-      <if test="unclesHash != null">
-        #{unclesHash,jdbcType=BLOB},
-      </if>
-      <if test="uncles != null">
-        #{uncles,jdbcType=BLOB},
-      </if>
-      <if test="dao != null">
-        #{dao,jdbcType=BLOB},
-      </if>
-      <if test="nonce != null">
-        #{nonce,jdbcType=BLOB},
-      </if>
-      <if test="proposals != null">
-        #{proposals,jdbcType=BLOB},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    update mercury_block
-    <set>
-      <if test="blockNumber != null">
-        block_number = #{blockNumber,jdbcType=INTEGER},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=SMALLINT},
-      </if>
-      <if test="compactTarget != null">
-        compact_target = #{compactTarget,jdbcType=INTEGER},
-      </if>
-      <if test="blockTimestamp != null">
-        block_timestamp = #{blockTimestamp,jdbcType=BIGINT},
-      </if>
-      <if test="epochNumber != null">
-        epoch_number = #{epochNumber,jdbcType=INTEGER},
-      </if>
-      <if test="epochIndex != null">
-        epoch_index = #{epochIndex,jdbcType=INTEGER},
-      </if>
-      <if test="epochLength != null">
-        epoch_length = #{epochLength,jdbcType=INTEGER},
-      </if>
-      <if test="unclesCount != null">
-        uncles_count = #{unclesCount,jdbcType=INTEGER},
-      </if>
-      <if test="parentHash != null">
-        parent_hash = #{parentHash,jdbcType=BLOB},
-      </if>
-      <if test="transactionsRoot != null">
-        transactions_root = #{transactionsRoot,jdbcType=BLOB},
-      </if>
-      <if test="proposalsHash != null">
-        proposals_hash = #{proposalsHash,jdbcType=BLOB},
-      </if>
-      <if test="unclesHash != null">
-        uncles_hash = #{unclesHash,jdbcType=BLOB},
-      </if>
-      <if test="uncles != null">
-        uncles = #{uncles,jdbcType=BLOB},
-      </if>
-      <if test="dao != null">
-        dao = #{dao,jdbcType=BLOB},
-      </if>
-      <if test="nonce != null">
-        nonce = #{nonce,jdbcType=BLOB},
-      </if>
-      <if test="proposals != null">
-        proposals = #{proposals,jdbcType=BLOB},
-      </if>
-    </set>
-    where block_hash = #{blockHash,jdbcType=BLOB}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    update mercury_block
-    set block_number = #{blockNumber,jdbcType=INTEGER},
-      version = #{version,jdbcType=SMALLINT},
-      compact_target = #{compactTarget,jdbcType=INTEGER},
-      block_timestamp = #{blockTimestamp,jdbcType=BIGINT},
-      epoch_number = #{epochNumber,jdbcType=INTEGER},
-      epoch_index = #{epochIndex,jdbcType=INTEGER},
-      epoch_length = #{epochLength,jdbcType=INTEGER},
-      uncles_count = #{unclesCount,jdbcType=INTEGER},
-      parent_hash = #{parentHash,jdbcType=BLOB},
-      transactions_root = #{transactionsRoot,jdbcType=BLOB},
-      proposals_hash = #{proposalsHash,jdbcType=BLOB},
-      uncles_hash = #{unclesHash,jdbcType=BLOB},
-      uncles = #{uncles,jdbcType=BLOB},
-      dao = #{dao,jdbcType=BLOB},
-      nonce = #{nonce,jdbcType=BLOB},
-      proposals = #{proposals,jdbcType=BLOB}
-    where block_hash = #{blockHash,jdbcType=BLOB}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
-    update mercury_block
-    set block_number = #{blockNumber,jdbcType=INTEGER},
-      version = #{version,jdbcType=SMALLINT},
-      compact_target = #{compactTarget,jdbcType=INTEGER},
-      block_timestamp = #{blockTimestamp,jdbcType=BIGINT},
-      epoch_number = #{epochNumber,jdbcType=INTEGER},
-      epoch_index = #{epochIndex,jdbcType=INTEGER},
-      epoch_length = #{epochLength,jdbcType=INTEGER},
-      uncles_count = #{unclesCount,jdbcType=INTEGER}
-    where block_hash = #{blockHash,jdbcType=BLOB}
-  </update>
+    </sql>
+    <select id="selectByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from mercury_block
+        where block_hash = #{blockHash,jdbcType=BLOB}
+    </select>
+
+    <select id="selectByBlockNumbers" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from mercury_block
+        where block_number in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
+        delete
+        from mercury_block
+        where block_hash = #{blockHash,jdbcType=BLOB}
+    </delete>
+
+
+    <insert id="batchInsert"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        insert into mercury_block (block_hash, block_number, version,
+        compact_target, block_timestamp, epoch_number,
+        epoch_index, epoch_length, uncles_count,
+        parent_hash, transactions_root, proposals_hash,
+        uncles_hash, uncles, dao, nonce,
+        proposals)
+        values
+        <foreach collection="list" separator="," index="index" item="item">
+            (#{item.blockHash,jdbcType=BLOB}, #{item.blockNumber,jdbcType=INTEGER},
+            #{item.version,jdbcType=SMALLINT},
+            #{item.compactTarget,jdbcType=INTEGER}, #{item.blockTimestamp,jdbcType=BIGINT},
+            #{item.epochNumber,jdbcType=INTEGER},
+            #{item.epochIndex,jdbcType=INTEGER}, #{item.epochLength,jdbcType=INTEGER},
+            #{item.unclesCount,jdbcType=INTEGER},
+            #{item.parentHash,jdbcType=BLOB}, #{item.transactionsRoot,jdbcType=BLOB},
+            #{item.proposalsHash,jdbcType=BLOB},
+            #{item.unclesHash,jdbcType=BLOB}, #{item.uncles,jdbcType=BLOB},
+            #{item.dao,jdbcType=BLOB},
+            #{item.nonce,jdbcType=BLOB},
+            #{item.proposals,jdbcType=BLOB})
+        </foreach>
+    </insert>
+
+
+    <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        insert into mercury_block (block_hash, block_number, version,
+                                   compact_target, block_timestamp, epoch_number,
+                                   epoch_index, epoch_length, uncles_count,
+                                   parent_hash, transactions_root, proposals_hash,
+                                   uncles_hash, uncles, dao, nonce,
+                                   proposals)
+        values (#{blockHash,jdbcType=BLOB}, #{blockNumber,jdbcType=INTEGER},
+                #{version,jdbcType=SMALLINT},
+                #{compactTarget,jdbcType=INTEGER}, #{blockTimestamp,jdbcType=BIGINT},
+                #{epochNumber,jdbcType=INTEGER},
+                #{epochIndex,jdbcType=INTEGER}, #{epochLength,jdbcType=INTEGER},
+                #{unclesCount,jdbcType=INTEGER},
+                #{parentHash,jdbcType=BLOB}, #{transactionsRoot,jdbcType=BLOB},
+                #{proposalsHash,jdbcType=BLOB},
+                #{unclesHash,jdbcType=BLOB}, #{uncles,jdbcType=BLOB}, #{dao,jdbcType=BLOB},
+                #{nonce,jdbcType=BLOB},
+                #{proposals,jdbcType=BLOB})
+    </insert>
+    <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        insert into mercury_block
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blockHash != null">
+                block_hash,
+            </if>
+            <if test="blockNumber != null">
+                block_number,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="compactTarget != null">
+                compact_target,
+            </if>
+            <if test="blockTimestamp != null">
+                block_timestamp,
+            </if>
+            <if test="epochNumber != null">
+                epoch_number,
+            </if>
+            <if test="epochIndex != null">
+                epoch_index,
+            </if>
+            <if test="epochLength != null">
+                epoch_length,
+            </if>
+            <if test="unclesCount != null">
+                uncles_count,
+            </if>
+            <if test="parentHash != null">
+                parent_hash,
+            </if>
+            <if test="transactionsRoot != null">
+                transactions_root,
+            </if>
+            <if test="proposalsHash != null">
+                proposals_hash,
+            </if>
+            <if test="unclesHash != null">
+                uncles_hash,
+            </if>
+            <if test="uncles != null">
+                uncles,
+            </if>
+            <if test="dao != null">
+                dao,
+            </if>
+            <if test="nonce != null">
+                nonce,
+            </if>
+            <if test="proposals != null">
+                proposals,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blockHash != null">
+                #{blockHash,jdbcType=BLOB},
+            </if>
+            <if test="blockNumber != null">
+                #{blockNumber,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=SMALLINT},
+            </if>
+            <if test="compactTarget != null">
+                #{compactTarget,jdbcType=INTEGER},
+            </if>
+            <if test="blockTimestamp != null">
+                #{blockTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="epochNumber != null">
+                #{epochNumber,jdbcType=INTEGER},
+            </if>
+            <if test="epochIndex != null">
+                #{epochIndex,jdbcType=INTEGER},
+            </if>
+            <if test="epochLength != null">
+                #{epochLength,jdbcType=INTEGER},
+            </if>
+            <if test="unclesCount != null">
+                #{unclesCount,jdbcType=INTEGER},
+            </if>
+            <if test="parentHash != null">
+                #{parentHash,jdbcType=BLOB},
+            </if>
+            <if test="transactionsRoot != null">
+                #{transactionsRoot,jdbcType=BLOB},
+            </if>
+            <if test="proposalsHash != null">
+                #{proposalsHash,jdbcType=BLOB},
+            </if>
+            <if test="unclesHash != null">
+                #{unclesHash,jdbcType=BLOB},
+            </if>
+            <if test="uncles != null">
+                #{uncles,jdbcType=BLOB},
+            </if>
+            <if test="dao != null">
+                #{dao,jdbcType=BLOB},
+            </if>
+            <if test="nonce != null">
+                #{nonce,jdbcType=BLOB},
+            </if>
+            <if test="proposals != null">
+                #{proposals,jdbcType=BLOB},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        update mercury_block
+        <set>
+            <if test="blockNumber != null">
+                block_number = #{blockNumber,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=SMALLINT},
+            </if>
+            <if test="compactTarget != null">
+                compact_target = #{compactTarget,jdbcType=INTEGER},
+            </if>
+            <if test="blockTimestamp != null">
+                block_timestamp = #{blockTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="epochNumber != null">
+                epoch_number = #{epochNumber,jdbcType=INTEGER},
+            </if>
+            <if test="epochIndex != null">
+                epoch_index = #{epochIndex,jdbcType=INTEGER},
+            </if>
+            <if test="epochLength != null">
+                epoch_length = #{epochLength,jdbcType=INTEGER},
+            </if>
+            <if test="unclesCount != null">
+                uncles_count = #{unclesCount,jdbcType=INTEGER},
+            </if>
+            <if test="parentHash != null">
+                parent_hash = #{parentHash,jdbcType=BLOB},
+            </if>
+            <if test="transactionsRoot != null">
+                transactions_root = #{transactionsRoot,jdbcType=BLOB},
+            </if>
+            <if test="proposalsHash != null">
+                proposals_hash = #{proposalsHash,jdbcType=BLOB},
+            </if>
+            <if test="unclesHash != null">
+                uncles_hash = #{unclesHash,jdbcType=BLOB},
+            </if>
+            <if test="uncles != null">
+                uncles = #{uncles,jdbcType=BLOB},
+            </if>
+            <if test="dao != null">
+                dao = #{dao,jdbcType=BLOB},
+            </if>
+            <if test="nonce != null">
+                nonce = #{nonce,jdbcType=BLOB},
+            </if>
+            <if test="proposals != null">
+                proposals = #{proposals,jdbcType=BLOB},
+            </if>
+        </set>
+        where block_hash = #{blockHash,jdbcType=BLOB}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        update mercury_block
+        set block_number      = #{blockNumber,jdbcType=INTEGER},
+            version           = #{version,jdbcType=SMALLINT},
+            compact_target    = #{compactTarget,jdbcType=INTEGER},
+            block_timestamp   = #{blockTimestamp,jdbcType=BIGINT},
+            epoch_number      = #{epochNumber,jdbcType=INTEGER},
+            epoch_index       = #{epochIndex,jdbcType=INTEGER},
+            epoch_length      = #{epochLength,jdbcType=INTEGER},
+            uncles_count      = #{unclesCount,jdbcType=INTEGER},
+            parent_hash       = #{parentHash,jdbcType=BLOB},
+            transactions_root = #{transactionsRoot,jdbcType=BLOB},
+            proposals_hash    = #{proposalsHash,jdbcType=BLOB},
+            uncles_hash       = #{unclesHash,jdbcType=BLOB},
+            uncles            = #{uncles,jdbcType=BLOB},
+            dao               = #{dao,jdbcType=BLOB},
+            nonce             = #{nonce,jdbcType=BLOB},
+            proposals         = #{proposals,jdbcType=BLOB}
+        where block_hash = #{blockHash,jdbcType=BLOB}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        update mercury_block
+        set block_number    = #{blockNumber,jdbcType=INTEGER},
+            version         = #{version,jdbcType=SMALLINT},
+            compact_target  = #{compactTarget,jdbcType=INTEGER},
+            block_timestamp = #{blockTimestamp,jdbcType=BIGINT},
+            epoch_number    = #{epochNumber,jdbcType=INTEGER},
+            epoch_index     = #{epochIndex,jdbcType=INTEGER},
+            epoch_length    = #{epochLength,jdbcType=INTEGER},
+            uncles_count    = #{unclesCount,jdbcType=INTEGER}
+        where block_hash = #{blockHash,jdbcType=BLOB}
+    </update>
 </mapper>

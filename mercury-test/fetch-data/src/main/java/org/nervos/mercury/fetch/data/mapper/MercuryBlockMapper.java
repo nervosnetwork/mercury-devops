@@ -1,20 +1,28 @@
 package org.nervos.mercury.fetch.data.mapper;
 
 import org.nervos.mercury.fetch.data.entity.MercuryBlock;
+import org.nervos.mercury.fetch.data.entity.MercuryCell;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
 
+import java.util.List;
+
 public interface MercuryBlockMapper {
-    int deleteByPrimaryKey(HexBytes blockHash);
 
-    int insert(MercuryBlock record);
+  int deleteByPrimaryKey(HexBytes blockHash);
 
-    int insertSelective(MercuryBlock record);
+  void batchInsert(List<MercuryCell> cells);
 
-    MercuryBlock selectByPrimaryKey(HexBytes blockHash);
+  int insert(MercuryBlock record);
 
-    int updateByPrimaryKeySelective(MercuryBlock record);
+  int insertSelective(MercuryBlock record);
 
-    int updateByPrimaryKeyWithBLOBs(MercuryBlock record);
+  List<MercuryBlock> selectByBlockNumbers(List<Integer> blockNumbers);
 
-    int updateByPrimaryKey(MercuryBlock record);
+  MercuryBlock selectByPrimaryKey(HexBytes blockHash);
+
+  int updateByPrimaryKeySelective(MercuryBlock record);
+
+  int updateByPrimaryKeyWithBLOBs(MercuryBlock record);
+
+  int updateByPrimaryKey(MercuryBlock record);
 }

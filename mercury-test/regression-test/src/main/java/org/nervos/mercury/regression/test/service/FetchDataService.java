@@ -1,7 +1,9 @@
 package org.nervos.mercury.regression.test.service;
 
 import org.nervos.ckb.utils.address.AddressParser;
+import org.nervos.mercury.fetch.data.entity.MercuryBlock;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
+import org.nervos.mercury.fetch.data.mapper.MercuryBlockMapper;
 import org.nervos.mercury.fetch.data.mapper.MercuryCellMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,17 @@ public class FetchDataService {
           "ckt1qyqg6y6utyjqhc3znvv7as97tgqxkd9nkr9ssuxft0");
 
   @Autowired private MercuryCellMapper cellMapper;
+  @Autowired private MercuryBlockMapper blockMapper;
 
   public void fetchData() {
     List<Integer> blockNumbers = this.getBlockNumbersByAddresses();
+    this.save(blockNumbers);
     System.out.println(blockNumbers);
+  }
+
+  private void save(List<Integer> blockNumbers) {
+    List<MercuryBlock> mercuryBlocks = blockMapper.selectByBlockNumbers(blockNumbers);
+    System.out.println(mercuryBlocks);
   }
 
   private List<Integer> getBlockNumbersByAddresses() {
