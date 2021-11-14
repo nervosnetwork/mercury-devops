@@ -10,7 +10,7 @@ public interface MercuryBlockMapper {
 
   int deleteByPrimaryKey(HexBytes blockHash);
 
-  void batchInsert(List<MercuryCell> cells);
+  void batchInsert(List<MercuryBlock> blocks);
 
   int insert(MercuryBlock record);
 

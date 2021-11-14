@@ -52,6 +52,19 @@
         where lock_hash = #{lockHash,jdbcType=BLOB}
     </select>
 
+    <select id="selectByBlockNumbers" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from mercury_cell
+        where block_number in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -89,6 +102,36 @@
                 #{consumedTxHash,jdbcType=BLOB},
                 #{since,jdbcType=BLOB})
     </insert>
+
+    <insert id="batchInsert"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryBlock">
+        insert into mercury_cell (id, output_index, tx_index,
+        block_number, epoch_number, epoch_index,
+        epoch_length, capacity, lock_script_type,
+        type_script_type, consumed_block_number, consumed_tx_index,
+        input_index, tx_hash, block_hash,
+        lock_hash, lock_code_hash, lock_args,
+        type_hash, type_code_hash, type_args,
+        data, consumed_block_hash, consumed_tx_hash,
+        since)
+        values
+        <foreach collection="list" separator="," index="index" item="item">
+            (#{item.id,jdbcType=BIGINT}, #{item.outputIndex,jdbcType=INTEGER}, #{item.txIndex,jdbcType=INTEGER},
+            #{item.blockNumber,jdbcType=INTEGER}, #{item.epochNumber,jdbcType=INTEGER},
+            #{item.epochIndex,jdbcType=INTEGER},
+            #{item.epochLength,jdbcType=INTEGER}, #{item.capacity,jdbcType=BIGINT},
+            #{item.lockScriptType,jdbcType=SMALLINT},
+            #{item.typeScriptType,jdbcType=SMALLINT}, #{item.consumedBlockNumber,jdbcType=BIGINT},
+            #{item.consumedTxIndex,jdbcType=INTEGER},
+            #{item.inputIndex,jdbcType=INTEGER}, #{item.txHash,jdbcType=BLOB}, #{item.blockHash,jdbcType=BLOB},
+            #{item.lockHash,jdbcType=BLOB}, #{item.lockCodeHash,jdbcType=BLOB}, #{item.lockArgs,jdbcType=BLOB},
+            #{item.typeHash,jdbcType=BLOB}, #{item.typeCodeHash,jdbcType=BLOB}, #{item.typeArgs,jdbcType=BLOB},
+            #{item.data,jdbcType=BLOB}, #{item.consumedBlockHash,jdbcType=BLOB},
+            #{item.consumedTxHash,jdbcType=BLOB},
+            #{item.since,jdbcType=BLOB})
+        </foreach>
+    </insert>
+
     <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryCell">
         insert into mercury_cell
         <trim prefix="(" suffix=")" suffixOverrides=",">

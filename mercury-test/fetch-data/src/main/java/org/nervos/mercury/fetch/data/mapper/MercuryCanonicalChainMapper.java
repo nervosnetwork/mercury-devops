@@ -2,16 +2,22 @@ package org.nervos.mercury.fetch.data.mapper;
 
 import org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain;
 
+import java.util.List;
+
 public interface MercuryCanonicalChainMapper {
-    int deleteByPrimaryKey(Integer blockNumber);
+  int deleteByPrimaryKey(Integer blockNumber);
 
-    int insert(MercuryCanonicalChain record);
+  int insert(MercuryCanonicalChain record);
 
-    int insertSelective(MercuryCanonicalChain record);
+  int batchInsert(List<MercuryCanonicalChain> mercuryCanonicalChains);
 
-    MercuryCanonicalChain selectByPrimaryKey(Integer blockNumber);
+  int insertSelective(MercuryCanonicalChain record);
 
-    int updateByPrimaryKeySelective(MercuryCanonicalChain record);
+  MercuryCanonicalChain selectByPrimaryKey(Integer blockNumber);
 
-    int updateByPrimaryKeyWithBLOBs(MercuryCanonicalChain record);
+  List<MercuryCanonicalChain> selectByBlockNumbers(List<Integer> blockNumbers);
+
+  int updateByPrimaryKeySelective(MercuryCanonicalChain record);
+
+  int updateByPrimaryKeyWithBLOBs(MercuryCanonicalChain record);
 }

@@ -2,18 +2,24 @@ package org.nervos.mercury.fetch.data.mapper;
 
 import org.nervos.mercury.fetch.data.entity.MercuryLiveCell;
 
+import java.util.List;
+
 public interface MercuryLiveCellMapper {
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(MercuryLiveCell record);
+  int insert(MercuryLiveCell record);
 
-    int insertSelective(MercuryLiveCell record);
+  int insertSelective(MercuryLiveCell record);
 
-    MercuryLiveCell selectByPrimaryKey(Long id);
+  void batchInsert(List<MercuryLiveCell> cells);
 
-    int updateByPrimaryKeySelective(MercuryLiveCell record);
+  List<MercuryLiveCell> selectByBlockNumbers(List<Integer> blockNumbers);
 
-    int updateByPrimaryKeyWithBLOBs(MercuryLiveCell record);
+  MercuryLiveCell selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKey(MercuryLiveCell record);
+  int updateByPrimaryKeySelective(MercuryLiveCell record);
+
+  int updateByPrimaryKeyWithBLOBs(MercuryLiveCell record);
+
+  int updateByPrimaryKey(MercuryLiveCell record);
 }

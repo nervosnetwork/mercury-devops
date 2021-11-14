@@ -3,18 +3,24 @@ package org.nervos.mercury.fetch.data.mapper;
 import org.nervos.mercury.fetch.data.entity.MercuryScript;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
 
+import java.util.List;
+
 public interface MercuryScriptMapper {
-    int deleteByPrimaryKey(HexBytes scriptHash);
+  int deleteByPrimaryKey(HexBytes scriptHash);
 
-    int insert(MercuryScript record);
+  int insert(MercuryScript record);
 
-    int insertSelective(MercuryScript record);
+  void batchInsert(List<MercuryScript> scripts);
 
-    MercuryScript selectByPrimaryKey(HexBytes scriptHash);
+  int insertSelective(MercuryScript record);
 
-    int updateByPrimaryKeySelective(MercuryScript record);
+  MercuryScript selectByPrimaryKey(HexBytes scriptHash);
 
-    int updateByPrimaryKeyWithBLOBs(MercuryScript record);
+  List<MercuryScript> selectByScriptHashes(List<HexBytes> scriptHashes);
 
-    int updateByPrimaryKey(MercuryScript record);
+  int updateByPrimaryKeySelective(MercuryScript record);
+
+  int updateByPrimaryKeyWithBLOBs(MercuryScript record);
+
+  int updateByPrimaryKey(MercuryScript record);
 }
