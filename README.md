@@ -97,6 +97,8 @@ net_type: "testnet"
 # mainnet: "devtools/config/mainnet_config.toml"
 # testnet: "devtools/config/testnet_config.toml"
 kill_name: "devtools/config/testnet_config.toml"
+# 数据库密码配置
+db_password: "123456"
 
 ```
 
