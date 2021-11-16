@@ -24,7 +24,11 @@
       shell: cp -r templates/docker-compose-main.yml.j2  {{ deploy_path }}/docker-compose.yml
       become: yes
       become_method: sudo
-      when: net_type == "mainnet"     
+      when: net_type == "mainnet"   
+    - name: set pgsql password
+      shell: sed -i "s/db_password/{{ db_password }}/g" "{{ deploy_path }}/docker-compose.yml"
+      become: yes
+      become_method: sudo  
 
     - name: Copy the mercury configuration file for the test network
       shell: cp -r templates/testnet_config.toml.j2  {{ deploy_path }}/devtools/config/testnet_config.toml
@@ -35,12 +39,17 @@
       shell: cp -r templates/mainnet_config.toml.j2  {{ deploy_path }}/devtools/config/mainnet_config.toml
       become: yes
       become_method: sudo
-      when: net_type == "mainnet"    
-
-    - name: set pgsql exporter ip:port
-      shell: sed -i "s/db_password/{{ db_password }}/g" "{{ deploy_path }}/docker-compose.yml"
+      when: net_type == "mainnet"   
+    - name: set pgsql password
+      shell: sed -i "s/db_password/{{ db_password }}/g" "{{ deploy_path }}/devtools/config/testnet_config.toml"
       become: yes
-      become_method: sudo
+      become_method: sudo  
+      when: net_type == "testnet"
+    - name: set pgsql password
+      shell: sed -i "s/db_password/{{ db_password }}/g" "{{ deploy_path }}/devtools/config/mainnet_config.toml"
+      become: yes
+      become_method: sudo   
+      when: net_type == "mainnet"
       
     - name: copy pgsql config
       shell: cp -r templates/my-postgres.conf  {{ deploy_path }}/devtools/my-postgres.conf
