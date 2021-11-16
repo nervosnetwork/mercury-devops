@@ -36,6 +36,11 @@
       become: yes
       become_method: sudo
       when: net_type == "mainnet"    
+
+    - name: set pgsql exporter ip:port
+      shell: sed -i "s/db_password/{{ db_password }}/g" "{{ deploy_path }}/docker-compose.yml"
+      become: yes
+      become_method: sudo
       
     - name: copy pgsql config
       shell: cp -r templates/my-postgres.conf  {{ deploy_path }}/devtools/my-postgres.conf
