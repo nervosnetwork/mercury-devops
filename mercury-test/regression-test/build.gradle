@@ -12,7 +12,7 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     compile project(":fetch-data")
-    compile("org.springframework.boot:spring-boot-starter-web") {
+    compile("org.springframework.boot:spring-boot-starter") {
         exclude(group: "com.squareup.okhttp3")
 
     }
