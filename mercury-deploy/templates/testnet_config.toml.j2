@@ -1,11 +1,5 @@
-center_id = 0
-
-machine_id = 0
-
-indexer_mode = true
-
-need_sync = true
-
+sync_mode = true
+allow_parallel_sync  = true
 rpc_thread_num = 3
 
 flush_tx_pool_cache_interval = 300
@@ -17,6 +11,8 @@ cheque_since = 6
 
 
 [db_config]
+center_id = 0
+machine_id = 0
 max_connections = 1000
 db_type = "postgres"
 db_host = "postgres-test"
@@ -29,7 +25,7 @@ db_log_level = "WARN"
 
 [log_config]
 log_level = "INFO"
-use_split_file = false
+auto_split_log_file = false
 log_path = "./free-space/testnet/log"
 
 
@@ -42,7 +38,7 @@ listen_uri = "0.0.0.0:8116"
 
 [sync_config]
 sync_block_batch_size = 1000
-max_task_count = 100
+max_task_number = 100
 
 
 [[builtin_scripts]]
