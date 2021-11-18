@@ -1,2 +1,2 @@
 deploy: 
-	ansible-playbook deploy.yml
+	screen ansible-playbook deploy.yml
