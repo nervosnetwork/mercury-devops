@@ -32,10 +32,10 @@
   become: yes
   become_method: sudo
   
-- name: set pgsql exporter ip:port
-  shell: sed -i "s/postgres_exporter_address/{{ postgres_exporter_address }}/g" "{{ monitor_dir }}/config/promethues/prometheus.yml"
-  become: yes
-  become_method: sudo
+# - name: set pgsql exporter ip:port
+#   shell: sed -i "s/postgres_exporter_address/{{ postgres_exporter_address }}/g" "{{ monitor_dir }}/config/promethues/prometheus.yml"
+#   become: yes
+#   become_method: sudo
 
 - name: start 
   shell: "cd {{ monitor_dir }} && docker-compose up -d"
