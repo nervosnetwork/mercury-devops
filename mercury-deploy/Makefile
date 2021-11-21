@@ -1,2 +1,2 @@
 deploy: 
-	screen ansible-playbook deploy.yml
+	nohup ansible-playbook deploy.yml &
