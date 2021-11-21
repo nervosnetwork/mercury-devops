@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryLiveCellMapper">
     <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -71,9 +72,12 @@
                                        type_hash, type_code_hash, type_args,
                                        data)
         values (#{id,jdbcType=BIGINT}, #{outputIndex,jdbcType=INTEGER}, #{txIndex,jdbcType=INTEGER},
-                #{blockNumber,jdbcType=INTEGER}, #{epochNumber,jdbcType=INTEGER}, #{epochIndex,jdbcType=INTEGER},
-                #{epochLength,jdbcType=INTEGER}, #{capacity,jdbcType=BIGINT}, #{lockScriptType,jdbcType=SMALLINT},
-                #{typeScriptType,jdbcType=SMALLINT}, #{txHash,jdbcType=BLOB}, #{blockHash,jdbcType=BLOB},
+                #{blockNumber,jdbcType=INTEGER}, #{epochNumber,jdbcType=INTEGER},
+                #{epochIndex,jdbcType=INTEGER},
+                #{epochLength,jdbcType=INTEGER}, #{capacity,jdbcType=BIGINT},
+                #{lockScriptType,jdbcType=SMALLINT},
+                #{typeScriptType,jdbcType=SMALLINT}, #{txHash,jdbcType=BLOB},
+                #{blockHash,jdbcType=BLOB},
                 #{lockHash,jdbcType=BLOB}, #{lockCodeHash,jdbcType=BLOB}, #{lockArgs,jdbcType=BLOB},
                 #{typeHash,jdbcType=BLOB}, #{typeCodeHash,jdbcType=BLOB}, #{typeArgs,jdbcType=BLOB},
                 #{data,jdbcType=BLOB})
@@ -89,19 +93,67 @@
         data)
         values
         <foreach collection="list" separator="," index="index" item="item">
-            (#{item.id,jdbcType=BIGINT}, #{item.outputIndex,jdbcType=INTEGER}, #{item.txIndex,jdbcType=INTEGER},
+            (#{item.id,jdbcType=BIGINT}, #{item.outputIndex,jdbcType=INTEGER},
+            #{item.txIndex,jdbcType=INTEGER},
             #{item.blockNumber,jdbcType=INTEGER}, #{item.epochNumber,jdbcType=INTEGER},
             #{item.epochIndex,jdbcType=INTEGER},
             #{item.epochLength,jdbcType=INTEGER}, #{item.capacity,jdbcType=BIGINT},
             #{item.lockScriptType,jdbcType=SMALLINT},
-            #{item.typeScriptType,jdbcType=SMALLINT}, #{item.txHash,jdbcType=BLOB}, #{item.blockHash,jdbcType=BLOB},
-            #{item.lockHash,jdbcType=BLOB}, #{item.lockCodeHash,jdbcType=BLOB}, #{item.lockArgs,jdbcType=BLOB},
-            #{item.typeHash,jdbcType=BLOB}, #{item.typeCodeHash,jdbcType=BLOB}, #{item.typeArgs,jdbcType=BLOB},
+            #{item.typeScriptType,jdbcType=SMALLINT}, #{item.txHash,jdbcType=BLOB},
+            #{item.blockHash,jdbcType=BLOB},
+            #{item.lockHash,jdbcType=BLOB}, #{item.lockCodeHash,jdbcType=BLOB},
+            #{item.lockArgs,jdbcType=BLOB},
+            #{item.typeHash,jdbcType=BLOB}, #{item.typeCodeHash,jdbcType=BLOB},
+            #{item.typeArgs,jdbcType=BLOB},
             #{item.data,jdbcType=BLOB})
         </foreach>
     </insert>
 
-    <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
+    <insert id="insertByCellTable">
+        INSERT INTO mercury_live_cell (ID,
+                                       tx_hash,
+                                       output_index,
+                                       tx_index,
+                                       block_hash,
+                                       block_number,
+                                       epoch_number,
+                                       epoch_index,
+                                       epoch_length,
+                                       capacity,
+                                       lock_hash,
+                                       lock_code_hash,
+                                       lock_args,
+                                       lock_script_type,
+                                       type_hash,
+                                       type_code_hash,
+                                       type_args,
+                                       type_script_type,
+                                       DATA)
+        SELECT cell.ID,
+               cell.tx_hash,
+               cell.output_index,
+               cell.tx_index,
+               cell.block_hash,
+               cell.block_number,
+               cell.epoch_number,
+               cell.epoch_index,
+               cell.epoch_length,
+               cell.capacity,
+               cell.lock_hash,
+               cell.lock_code_hash,
+               cell.lock_args,
+               cell.lock_script_type,
+               cell.type_hash,
+               cell.type_code_hash,
+               cell.type_args,
+               cell.type_script_type,
+               cell.DATA
+        FROM mercury_cell AS cell
+        WHERE cell.consumed_block_number IS NULL
+    </insert>
+
+    <insert id="insertSelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
         insert into mercury_live_cell
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -222,7 +274,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
         update mercury_live_cell
         <set>
             <if test="outputIndex != null">
@@ -282,7 +335,8 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
         update mercury_live_cell
         set output_index     = #{outputIndex,jdbcType=INTEGER},
             tx_index         = #{txIndex,jdbcType=INTEGER},
@@ -304,7 +358,8 @@
             data             = #{data,jdbcType=BLOB}
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
+    <update id="updateByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryLiveCell">
         update mercury_live_cell
         set output_index     = #{outputIndex,jdbcType=INTEGER},
             tx_index         = #{txIndex,jdbcType=INTEGER},

@@ -13,6 +13,8 @@ public interface MercuryLiveCellMapper {
 
   void batchInsert(List<MercuryLiveCell> cells);
 
+  void insertByCellTable();
+
   List<MercuryLiveCell> selectByBlockNumbers(List<Integer> blockNumbers);
 
   MercuryLiveCell selectByPrimaryKey(Long id);

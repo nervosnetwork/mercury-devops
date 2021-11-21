@@ -1,10 +1,20 @@
 package org.nervos.mercury.regression.test.service;
 
 import com.google.common.collect.Lists;
+
 import org.nervos.ckb.utils.address.AddressParser;
-import org.nervos.mercury.fetch.data.entity.*;
+import org.nervos.mercury.fetch.data.entity.MercuryBlock;
+import org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain;
+import org.nervos.mercury.fetch.data.entity.MercuryCell;
+import org.nervos.mercury.fetch.data.entity.MercuryScript;
+import org.nervos.mercury.fetch.data.entity.MercuryTransaction;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
-import org.nervos.mercury.fetch.data.mapper.*;
+import org.nervos.mercury.fetch.data.mapper.MercuryBlockMapper;
+import org.nervos.mercury.fetch.data.mapper.MercuryCanonicalChainMapper;
+import org.nervos.mercury.fetch.data.mapper.MercuryCellMapper;
+import org.nervos.mercury.fetch.data.mapper.MercuryLiveCellMapper;
+import org.nervos.mercury.fetch.data.mapper.MercuryScriptMapper;
+import org.nervos.mercury.fetch.data.mapper.MercuryTransactionMapper;
 import org.nervos.mercury.regression.test.db.route.DbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,11 +93,13 @@ public class FetchDataService {
     List<List<MercuryCell>> cells = Lists.partition(mercuryCells, 500);
     cells.forEach(x -> this.cellMapper.batchInsert(x));
 
-    DbContextHolder.checkoutRawDataSource();
-    List<MercuryLiveCell> mercuryLiveCells = this.liveCellMapper.selectByBlockNumbers(blockNumbers);
-    DbContextHolder.checkoutTestDataSource();
-    List<List<MercuryLiveCell>> liveCells = Lists.partition(mercuryLiveCells, 500);
-    liveCells.forEach(x -> this.liveCellMapper.batchInsert(x));
+    //    DbContextHolder.checkoutRawDataSource();
+    //    List<MercuryLiveCell> mercuryLiveCells =
+    // this.liveCellMapper.selectByBlockNumbers(blockNumbers);
+    //    DbContextHolder.checkoutTestDataSource();
+    //    List<List<MercuryLiveCell>> liveCells = Lists.partition(mercuryLiveCells, 500);
+    //    liveCells.forEach(x -> this.liveCellMapper.batchInsert(x));
+    this.liveCellMapper.insertByCellTable();
 
     List<HexBytes> scriptHashes =
         Stream.concat(
