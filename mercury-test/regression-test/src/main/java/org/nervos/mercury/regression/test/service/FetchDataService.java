@@ -17,6 +17,7 @@ import org.nervos.mercury.fetch.data.mapper.MercuryScriptMapper;
 import org.nervos.mercury.fetch.data.mapper.MercuryTransactionMapper;
 import org.nervos.mercury.regression.test.db.route.DbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -27,6 +28,9 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 public class FetchDataService {
+
+  @Value("${block.height}")
+  private Integer blockHeight;
 
   private static final List<String> ADDRESSES =
       Arrays.asList(
@@ -126,6 +130,7 @@ public class FetchDataService {
                         HexBytes.newHexBytes(AddressParser.parse(x).script.computeHash()))
                     .stream())
         .distinct()
+        .filter(x -> x <= this.blockHeight)
         .collect(toList());
   }
 }
