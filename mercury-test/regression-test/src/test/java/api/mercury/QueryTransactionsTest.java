@@ -48,7 +48,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithCkb", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithCkb", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -67,7 +67,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithUdt", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithUdt", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -86,7 +86,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithAll", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithAll", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -106,7 +106,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsView", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsView", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -126,7 +126,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsInfo", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsInfo", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -150,7 +150,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsCellbase", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsCellbase", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -174,7 +174,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsDao", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsDao", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -197,7 +197,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithFromBlockAndToBlock", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithFromBlockAndToBlock", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -216,7 +216,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithLimit", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithLimit", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -236,7 +236,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithOrder", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithOrder", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -256,7 +256,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithTotalCount", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithTotalCount", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -319,7 +319,7 @@ public class QueryTransactionsTest {
               RpcMethods.QUERY_TRANSACTIONS,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testQueryTransactionsWithPage2", builder.build(), blockInfo);
+      cw.write("testQueryTransactionsWithPage2", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();

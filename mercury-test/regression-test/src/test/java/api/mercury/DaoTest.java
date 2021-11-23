@@ -60,7 +60,7 @@ public class DaoTest {
               RpcMethods.BUILD_DAO_DEPOSIT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw1.write("testDepositWithAddress", builder.build(), blockInfo);
+      cw1.write("testDepositWithAddress", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -84,7 +84,7 @@ public class DaoTest {
               RpcMethods.BUILD_DAO_DEPOSIT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw1.write("testDepositWithIdentity", builder.build(), blockInfo);
+      cw1.write("testDepositWithIdentity", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -106,7 +106,7 @@ public class DaoTest {
               RpcMethods.BUILD_DAO_DEPOSIT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw2.write("testWithdraw", builder.build(), blockInfo);
+      cw2.write("testWithdraw", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -128,7 +128,7 @@ public class DaoTest {
               RpcMethods.BUILD_DAO_DEPOSIT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw3.write("testClaim", builder.build(), blockInfo);
+      cw3.write("testClaim", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();

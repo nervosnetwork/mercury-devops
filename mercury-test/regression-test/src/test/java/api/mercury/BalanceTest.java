@@ -47,7 +47,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getCkbBalance", builder.build(), balance);
+      cw.write("getCkbBalance", builder.build(), balance, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -64,7 +64,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getSudtBalance", builder.build(), balance);
+      cw.write("getSudtBalance", builder.build(), balance, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -82,7 +82,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getAllBalance", builder.build(), balance);
+      cw.write("getAllBalance", builder.build(), balance, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -101,7 +101,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getBalanceByAddress", builder.build(), balance);
+      cw.write("getBalanceByAddress", builder.build(), balance, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -120,7 +120,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getBalanceByIdentity", builder.build(), balance);
+      cw.write("getBalanceByIdentity", builder.build(), balance, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -196,7 +196,7 @@ public class BalanceTest {
       JsonElement balance =
           rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("getBalanceByRecordByAddress", builder.build(), balance);
+      cw.write("getBalanceByRecordByAddress", builder.build(), balance, null);
     } catch (Exception e) {
       e.printStackTrace();
     }

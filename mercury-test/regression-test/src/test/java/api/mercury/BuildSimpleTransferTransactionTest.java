@@ -32,11 +32,11 @@ public class BuildSimpleTransferTransactionTest {
 
   @Test
   void testCkbInsufficientBalanceToPayTheFee1() {
+    SimpleTransferPayloadBuilder builder = new SimpleTransferPayloadBuilder();
     try {
       AddressTools.AddressGenerateResult from = AddressTools.generateShortAddress(Network.TESTNET);
       AddressTools.AddressGenerateResult to = AddressTools.generateShortAddress(Network.TESTNET);
 
-      SimpleTransferPayloadBuilder builder = new SimpleTransferPayloadBuilder();
       builder.addFrom(from.address);
       builder.addTo(new ToInfo(to.address, AmountUtils.ckbToShannon(100)));
       builder.assetInfo(AssetInfo.newCkbAsset());
@@ -46,20 +46,18 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testCkbInsufficientBalanceToPayTheFee1", builder.build(), blockInfo);
-
     } catch (Exception e) {
-      e.printStackTrace();
+      cw.write("testCkbInsufficientBalanceToPayTheFee1", builder.build(), null, e.getMessage());
       //      assertEquals(true, e.getMessage().contains("token is not enough"));
     }
   }
 
   @Test
   void testCkbInsufficientBalanceToPayTheFee2() {
+    SimpleTransferPayloadBuilder builder = new SimpleTransferPayloadBuilder();
     try {
       AddressTools.AddressGenerateResult from = AddressTools.generateShortAddress(Network.TESTNET);
 
-      SimpleTransferPayloadBuilder builder = new SimpleTransferPayloadBuilder();
       builder.addFrom(from.address);
       builder.addTo(new ToInfo(AddressWithKeyHolder.testAddress4(), AmountUtils.ckbToShannon(100)));
       builder.assetInfo(AssetInfo.newCkbAsset());
@@ -69,10 +67,8 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testCkbInsufficientBalanceToPayTheFee2", builder.build(), blockInfo);
-
     } catch (Exception e) {
-      e.printStackTrace();
+      cw.write("testCkbInsufficientBalanceToPayTheFee2", builder.build(), null, e.getMessage());
       //      assertEquals(true, e.getMessage().contains("token is not enough"));
     }
   }
@@ -94,7 +90,7 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testSourceByClaimable", builder.build(), blockInfo);
+      cw.write("testSourceByClaimable", builder.build(), blockInfo, null);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -119,7 +115,7 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testSourceByChequeCell", builder.build(), blockInfo);
+      cw.write("testSourceByChequeCell", builder.build(), blockInfo, null);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -142,7 +138,7 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testSourceByFree", builder.build(), blockInfo);
+      cw.write("testSourceByFree", builder.build(), blockInfo, null);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -168,7 +164,7 @@ public class BuildSimpleTransferTransactionTest {
               RpcMethods.BUILD_SIMPLE_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testModeByHoldyTo", builder.build(), blockInfo);
+      cw.write("testModeByHoldyTo", builder.build(), blockInfo, null);
 
     } catch (Exception e) {
       e.printStackTrace();

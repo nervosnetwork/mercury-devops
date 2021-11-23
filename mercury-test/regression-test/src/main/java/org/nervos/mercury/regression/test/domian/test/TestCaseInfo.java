@@ -10,13 +10,16 @@ public class TestCaseInfo {
 
   private String name;
   private JsonElement reqParams;
-  private JsonObject resp;
+  private JsonElement resp;
   private String methodName;
+  private String msg;
 
   public TestCaseInfo(String name, JsonObject caseInfo, String methodName) {
     this.name = name;
     this.reqParams = caseInfo.get("req");
-    this.resp = caseInfo.getAsJsonObject("resp");
+    this.resp = caseInfo.get("resp").isJsonNull() ? null : caseInfo.getAsJsonObject("resp");
     this.methodName = methodName;
+    this.msg =
+        caseInfo.get("msg").isJsonNull() ? null : caseInfo.getAsJsonPrimitive("msg").getAsString();
   }
 }

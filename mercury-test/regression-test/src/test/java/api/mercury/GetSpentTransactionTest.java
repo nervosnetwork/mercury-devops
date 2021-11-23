@@ -39,7 +39,7 @@ public class GetSpentTransactionTest {
               RpcMethods.GET_SPENT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testGetSpentTransactionView", builder.build(), blockInfo);
+      cw.write("testGetSpentTransactionView", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -60,7 +60,7 @@ public class GetSpentTransactionTest {
               RpcMethods.GET_SPENT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testGetSpentTransactionInfo", builder.build(), blockInfo);
+      cw.write("testGetSpentTransactionInfo", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }

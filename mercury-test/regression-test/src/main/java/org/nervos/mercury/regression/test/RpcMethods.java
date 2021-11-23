@@ -22,8 +22,9 @@ public interface RpcMethods {
   List<String> RPC_METHODS =
       Arrays.asList(
           //          "build_dao_claim_transaction",
-          "build_dao_deposit_transaction",
           //          "build_dao_withdraw_transaction",
+          //          "register_address"
+          "build_dao_deposit_transaction",
           "build_simple_transfer_transaction",
           "build_transfer_transaction",
           "get_balance",
@@ -31,8 +32,5 @@ public interface RpcMethods {
           "build_adjust_account_transaction",
           "get_spent_transaction",
           "query_transactions",
-          "get_transaction_info"
-          //          ,
-          //          "register_address"
-          );
+          "get_transaction_info");
 }

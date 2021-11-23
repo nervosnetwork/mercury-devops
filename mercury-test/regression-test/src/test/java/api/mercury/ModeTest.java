@@ -63,7 +63,7 @@ public class ModeTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("transferCompletionCkbWithFree", builder.build(), blockInfo);
+      cw.write("transferCompletionCkbWithFree", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -90,7 +90,7 @@ public class ModeTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("transferCompletionSudtWithFree", builder.build(), blockInfo);
+      cw.write("transferCompletionSudtWithFree", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -152,7 +152,7 @@ public class ModeTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("transferCompletionSudtWithHoldByTo", builder.build(), blockInfo);
+      cw.write("transferCompletionSudtWithHoldByTo", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();

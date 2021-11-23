@@ -17,7 +17,7 @@ public class CaseWriter {
     this.path = path;
   }
 
-  public <T, R> void write(String name, T t, R r) {
+  public <T, R> void write(String name, T t, R r, String msg) {
     Path path =
         Paths.get(
             this.path
@@ -29,7 +29,7 @@ public class CaseWriter {
                 .concat(".json"));
 
     try {
-      CaseInfo<T, R> caseInfo = new CaseInfo<>(this.methodName, t, r);
+      CaseInfo<T, R> caseInfo = new CaseInfo<>(this.methodName, t, r, msg);
       Files.write(path, GsonFactory.newGson().toJson(caseInfo).getBytes());
     } catch (IOException e) {
       e.printStackTrace();
@@ -40,11 +40,13 @@ public class CaseWriter {
     public String methodName;
     public T req;
     public R resp;
+    public String msg;
 
-    public CaseInfo(String methodName, T req, R resp) {
+    public CaseInfo(String methodName, T req, R resp, String msg) {
       this.methodName = methodName;
       this.req = req;
       this.resp = resp;
+      this.msg = msg;
     }
   }
 }

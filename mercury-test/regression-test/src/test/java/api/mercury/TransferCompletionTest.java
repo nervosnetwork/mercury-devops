@@ -58,7 +58,7 @@ public class TransferCompletionTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testSingleFromSingleTo", builder.build(), blockInfo);
+      cw.write("testSingleFromSingleTo", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -86,7 +86,7 @@ public class TransferCompletionTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testSingleFromMultiTo", builder.build(), blockInfo);
+      cw.write("testSingleFromMultiTo", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -116,7 +116,7 @@ public class TransferCompletionTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testMultiFromSingleTo", builder.build(), blockInfo);
+      cw.write("testMultiFromSingleTo", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -149,7 +149,7 @@ public class TransferCompletionTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testPayFee", builder.build(), blockInfo);
+      cw.write("testPayFee", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -181,7 +181,7 @@ public class TransferCompletionTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testChange", builder.build(), blockInfo);
+      cw.write("testChange", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();

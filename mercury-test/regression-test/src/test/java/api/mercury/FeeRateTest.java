@@ -58,7 +58,7 @@ public class FeeRateTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("defaultFeeRate", builder.build(), blockInfo);
+      cw.write("defaultFeeRate", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -87,7 +87,7 @@ public class FeeRateTest {
               RpcMethods.BUILD_TRANSFER_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("customizedFeeRate", builder.build(), blockInfo);
+      cw.write("customizedFeeRate", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();

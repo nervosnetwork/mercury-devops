@@ -37,7 +37,7 @@ public class BlockInfoTest {
           rpc.post(
               RpcMethods.GET_BLOCK_INFO, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testGetBlockInfoWithBlockNumber", builder.build(), blockInfo);
+      cw.write("testGetBlockInfoWithBlockNumber", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -56,7 +56,7 @@ public class BlockInfoTest {
           rpc.post(
               RpcMethods.GET_BLOCK_INFO, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testGetBlockInfoWithBlockHash", builder.build(), blockInfo);
+      cw.write("testGetBlockInfoWithBlockHash", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -76,7 +76,7 @@ public class BlockInfoTest {
           rpc.post(
               RpcMethods.GET_BLOCK_INFO, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testGetBlockInfoWithBlockHashAndBlockNumber", builder.build(), blockInfo);
+      cw.write("testGetBlockInfoWithBlockHashAndBlockNumber", builder.build(), blockInfo, null);
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -57,7 +57,7 @@ public class BuildAdjustAccountTest {
               RpcMethods.BUILD_ADJUST_ACCOUNT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testCreateAsset", builder.build(), blockInfo);
+      cw.write("testCreateAsset", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -79,7 +79,7 @@ public class BuildAdjustAccountTest {
               RpcMethods.BUILD_ADJUST_ACCOUNT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testAdjustAssetAccountWithUdt", builder.build(), blockInfo);
+      cw.write("testAdjustAssetAccountWithUdt", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -102,7 +102,7 @@ public class BuildAdjustAccountTest {
               RpcMethods.BUILD_ADJUST_ACCOUNT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testAdjustAssetPayFrom", builder.build(), blockInfo);
+      cw.write("testAdjustAssetPayFrom", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -125,7 +125,7 @@ public class BuildAdjustAccountTest {
               RpcMethods.BUILD_ADJUST_ACCOUNT_TRANSACTION,
               g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
-      cw.write("testAdjustAssetExtraCkb", builder.build(), blockInfo);
+      cw.write("testAdjustAssetExtraCkb", builder.build(), blockInfo, null);
 
     } catch (IOException e) {
       e.printStackTrace();
