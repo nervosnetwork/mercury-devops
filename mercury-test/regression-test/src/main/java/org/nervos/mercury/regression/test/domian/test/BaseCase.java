@@ -24,7 +24,10 @@ public class BaseCase {
       Reporter.log("req: ".concat(aCase.getReqParams().toString()));
 
       JsonElement resp = RpcFactory.getRpc().post(aCase.getMethodName(), aCase.getReqParams());
-      JsonAssertions.assertThatJson(resp).when(IGNORING_ARRAY_ORDER).isEqualTo(aCase.getResp());
+      JsonAssertions.assertThatJson(resp)
+          .when(IGNORING_ARRAY_ORDER)
+          .whenIgnoringPaths("tx_view.hash")
+          .isEqualTo(aCase.getResp());
     } catch (Exception e) {
       Reporter.log("error: ".concat(ExceptionUtils.getStackTrace(e)));
       throw e;

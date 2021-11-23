@@ -1,6 +1,8 @@
 package api.mercury;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.OutPoint;
@@ -14,9 +16,9 @@ import org.nervos.mercury.GsonFactory;
 import org.nervos.mercury.model.GetBalancePayloadBuilder;
 import org.nervos.mercury.model.common.AssetInfo;
 import org.nervos.mercury.model.req.item.ItemFactory;
-import org.nervos.mercury.model.resp.GetBalanceResponse;
 import org.nervos.mercury.regression.test.RpcMethods;
 import org.nervos.mercury.regression.test.domian.cases.CaseWriter;
+import org.nervos.mercury.regression.test.domian.rpc.RpcService;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -27,6 +29,8 @@ import constant.UdtHolder;
 
 public class BalanceTest {
   Gson g = GsonFactory.newGson();
+  RpcService rpc = new RpcService("http://127.0.0.1:8116");
+
   CaseWriter cw =
       new CaseWriter(
           RpcMethods.GET_BALANCE,
@@ -40,7 +44,8 @@ public class BalanceTest {
       builder.item(ItemFactory.newIdentityItemByCkb(AddressWithKeyHolder.testPubKey4()));
       builder.addAssetInfo(AssetInfo.newCkbAsset());
 
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
       cw.write("getCkbBalance", builder.build(), balance);
 
@@ -56,7 +61,8 @@ public class BalanceTest {
     builder.addAssetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
 
     try {
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
 
       cw.write("getSudtBalance", builder.build(), balance);
     } catch (IOException e) {
@@ -73,7 +79,9 @@ public class BalanceTest {
     System.out.println(g.toJson(builder.build()));
 
     try {
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
+
       cw.write("getAllBalance", builder.build(), balance);
     } catch (IOException e) {
       e.printStackTrace();
@@ -90,7 +98,9 @@ public class BalanceTest {
 
       System.out.println(g.toJson(builder.build()));
 
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
+
       cw.write("getBalanceByAddress", builder.build(), balance);
     } catch (IOException e) {
       e.printStackTrace();
@@ -107,7 +117,9 @@ public class BalanceTest {
 
       System.out.println(g.toJson(builder.build()));
 
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
+
       cw.write("getBalanceByIdentity", builder.build(), balance);
     } catch (IOException e) {
       e.printStackTrace();
@@ -181,7 +193,9 @@ public class BalanceTest {
 
       System.out.println(g.toJson(builder.build()));
 
-      GetBalanceResponse balance = ApiFactory.getApi().getBalance(builder.build());
+      JsonElement balance =
+          rpc.post(RpcMethods.GET_BALANCE, g.fromJson(g.toJson(builder.build()), JsonObject.class));
+
       cw.write("getBalanceByRecordByAddress", builder.build(), balance);
     } catch (Exception e) {
       e.printStackTrace();
