@@ -2,6 +2,7 @@ package api.mercury;
 
 import com.google.gson.Gson;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.mercury.GsonFactory;
 import org.nervos.mercury.model.resp.info.DBInfo;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 import constant.ApiFactory;
 
+@Disabled
 public class InfoTest {
   Gson g = GsonFactory.newGson();
   RpcService rpc = new RpcService("http://127.0.0.1:8116");

@@ -51,5 +51,7 @@ public class TestNgRunner implements TestRunner {
   }
 
   @Override
-  public void exit() {}
+  public Boolean status() {
+    return this.ng.getStatus() == 0 ? Boolean.TRUE : Boolean.FALSE;
+  }
 }

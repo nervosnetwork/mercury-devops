@@ -5,5 +5,5 @@ public interface TestRunner {
   //    void addSuite(String name, List<Class> classes);
   void addSuite(TestSuiteInfo info);
 
-  void exit();
+  Boolean status();
 }

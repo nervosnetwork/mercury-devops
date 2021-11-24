@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.Script;
 import org.nervos.ckb.utils.address.AddressTools;
@@ -25,6 +26,7 @@ import constant.AddressWithKeyHolder;
 import constant.UdtHolder;
 
 /** @author zjh @Created Date: 2021/7/26 @Description: @Modify by: */
+@Disabled
 public class QueryTransactionsTest {
 
   Gson g = GsonFactory.newGson();

@@ -30,5 +30,10 @@ public class Application {
     TestRunner runner = new TestNgRunner();
     testSuiteInfos.forEach(x -> runner.addSuite(x));
     runner.run();
+    if (runner.status()) {
+      System.exit(0);
+    } else {
+      System.exit(1);
+    }
   }
 }

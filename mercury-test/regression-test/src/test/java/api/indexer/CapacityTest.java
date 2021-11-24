@@ -2,6 +2,7 @@ package api.indexer;
 
 import com.google.gson.Gson;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.Script;
 import org.nervos.indexer.model.ScriptType;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 import constant.ApiFactory;
 
+@Disabled
 public class CapacityTest {
   Gson g = GsonFactory.newGson();
 

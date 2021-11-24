@@ -1,5 +1,6 @@
 package api.mercury;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.utils.address.AddressTools;
 
@@ -11,6 +12,7 @@ import constant.AddressWithKeyHolder;
 import constant.ApiFactory;
 
 /** @author zjh @Created Date: 2021/7/24 @Description: @Modify by: */
+@Disabled
 public class RegisterAddressTest {
 
   @Test

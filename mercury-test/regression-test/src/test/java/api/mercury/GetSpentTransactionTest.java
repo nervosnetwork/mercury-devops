@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.OutPoint;
 import org.nervos.mercury.GsonFactory;
@@ -15,6 +16,7 @@ import org.nervos.mercury.regression.test.domian.rpc.RpcService;
 
 import java.io.IOException;
 
+@Disabled
 public class GetSpentTransactionTest {
   Gson g = GsonFactory.newGson();
   RpcService rpc = new RpcService("http://127.0.0.1:8116");

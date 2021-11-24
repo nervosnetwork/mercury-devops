@@ -2,6 +2,7 @@ package api.mercury;
 
 import com.google.gson.Gson;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.transaction.Transaction;
 import org.nervos.mercury.GsonFactory;
@@ -30,6 +31,7 @@ import constant.ApiFactory;
 import constant.UdtHolder;
 import utils.SignUtils;
 
+@Disabled
 public class SourceTest {
   private String senderAddress = AddressWithKeyHolder.testAddress1();
   private String chequeCellReceiverAddress = AddressWithKeyHolder.testAddress2();
