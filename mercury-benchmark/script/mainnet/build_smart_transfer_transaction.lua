@@ -1,5 +1,5 @@
 wrk.method = "POST"
-wrk.body   = "{\"jsonrpc\":\"2.0\",\"method\":\"build_smart_transfer_transaction\",\"params\":[{\"asset_info\":{\"asset_type\":\"UDT\",\"udt_hash\":\"0x38928268eaffd58e25605a923cf61602e914cb8365ba00131ec0bc004cc753d1\"},\"from\":[\"ckb1qyq8ze8534a9hu3fs9n03kqms84yayywz6ksflfvpk\"],\"to\":[{\"address\":\"ckb1qyqdmeuqrsrnm7e5vnrmruzmsp4m9wacf6vsxasryq\",\"amount\":\"20\"}],\"fee_rate\":1000}],\"id\":100}"
+wrk.body   = "{\"jsonrpc\":\"2.0\",\"method\":\"build_simple_transfer_transaction\",\"params\":[{\"asset_info\":{\"asset_type\":\"UDT\",\"udt_hash\":\"0x613c88b598885bdec6dcc3d3687db5ae6be9a64e96e516c08e0bebe233d23304\"},\"from\":[\"ckb1qyq8jy6e6hu89lzwwgv9qdx6p0kttl4uax9srq9shl\"],\"to\":[{\"address\":\"ckt1qyq27z6pccncqlaamnh8ttapwn260egnt67ss2cwvz\",\"amount\":\"20\"}],\"fee_rate\":1000}],\"id\":100}"
 wrk.headers["Content-Type"] = "application/json"
 
 function response(status, headers, body)

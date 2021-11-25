@@ -1,5 +1,5 @@
 wrk.method = "POST"
-wrk.body   = "{\"jsonrpc\":\"2.0\",\"method\":\"build_withdraw_transaction\",\"params\":[{\"from\":{\"Address\":\"ckb1qyq8ze8534a9hu3fs9n03kqms84yayywz6ksflfvpk\"},\"pay_fee\":\"ckb1qyq8ze8534a9hu3fs9n03kqms84yayywz6ksflfvpk\",\"fee_rate\":1000}],\"id\":100}"
+wrk.body   = "{\"jsonrpc\":\"2.0\",\"method\":\"build_dao_withdraw_transaction\",\"params\":[{\"from\":{\"type\":\"Address\",\"value\":\"ckb1qyq8jy6e6hu89lzwwgv9qdx6p0kttl4uax9srq9shl\"},\"fee_rate\":1000}],\"id\":100}"
 wrk.headers["Content-Type"] = "application/json"
 
 function response(status, headers, body)
