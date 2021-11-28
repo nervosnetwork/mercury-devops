@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BuildUtils {
     public static void transferFreeCkb(String fromAddress, String toAddress, BigInteger amount) throws IOException{
+        System.out.println("from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " free CKB");
         TransferPayloadBuilder builder = new TransferPayloadBuilder();
         builder.assetInfo(AssetInfo.newCkbAsset());
         builder.from(From.newFrom(Arrays.asList(ItemFactory.newIdentityItemByAddress(fromAddress)), Source.Free));
@@ -49,7 +50,7 @@ public class BuildUtils {
         TransactionCompletionResponse s = ApiFactory.getApi().buildTransferTransaction(builder.build());
         Transaction tx = SignUtils.sign(s);
         String txHash = ApiFactory.getApi().sendTransaction(tx);
-        System.out.println("tx_hash: " + txHash + ", from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " free CKB");
+        System.out.println("tx_hash: " + txHash);
         BuildUtils.ensureBeOnChain(txHash);
     }
 
@@ -58,6 +59,7 @@ public class BuildUtils {
     }
 
     public static void transferFreeUdt(String fromAddress, String toAddress, BigInteger amount) throws IOException {
+        System.out.println("from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " free UDT");
         BuildUtils.ensureOneAcp(toAddress);
         TransferPayloadBuilder builder = new TransferPayloadBuilder();
         builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
@@ -68,7 +70,7 @@ public class BuildUtils {
         TransactionCompletionResponse s = ApiFactory.getApi().buildTransferTransaction(builder.build());
         Transaction tx = SignUtils.sign(s);
         String txHash = ApiFactory.getApi().sendTransaction(tx);
-        System.out.println("tx_hash: " + txHash + ", from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " free UDT");
+        System.out.println("tx_hash: " + txHash);
         BuildUtils.ensureBeOnChain(txHash);
     }
 
@@ -77,6 +79,7 @@ public class BuildUtils {
     }
 
     public static void generateClaimableUdt(String fromAddress, String toAddress, BigInteger amount) throws IOException {
+        System.out.println("from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " generate claimable UDT");
         TransferPayloadBuilder builder = new TransferPayloadBuilder();
         builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
         builder.from(From.newFrom(Arrays.asList(ItemFactory.newIdentityItemByAddress(fromAddress)), Source.Free));
@@ -86,7 +89,7 @@ public class BuildUtils {
         TransactionCompletionResponse s = ApiFactory.getApi().buildTransferTransaction(builder.build());
         Transaction tx = SignUtils.sign(s);
         String txHash = ApiFactory.getApi().sendTransaction(tx);
-        System.out.println("tx_hash: " + txHash + ", from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " generate claimable UDT");
+        System.out.println("tx_hash: " + txHash);
         BuildUtils.ensureBeOnChain(txHash);
     }
 
@@ -96,6 +99,7 @@ public class BuildUtils {
 
     public static void consumeClaimableUdt(String fromAddress, String toAddress, BigInteger amount) throws IOException {
         BuildUtils.ensureOneAcp(toAddress);
+        System.out.println("from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " consumed claimable UDT");
         TransferPayloadBuilder builder = new TransferPayloadBuilder();
         builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
         builder.from(From.newFrom(Arrays.asList(ItemFactory.newIdentityItemByAddress(fromAddress)), Source.Claimable));
@@ -105,7 +109,7 @@ public class BuildUtils {
         TransactionCompletionResponse s = ApiFactory.getApi().buildTransferTransaction(builder.build());
         Transaction tx = SignUtils.sign(s);
         String txHash = ApiFactory.getApi().sendTransaction(tx);
-        System.out.println("tx_hash: " + txHash + ", from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " consumed claimable UDT");
+        System.out.println("tx_hash: " + txHash);
         BuildUtils.ensureBeOnChain(txHash);
     }
 
@@ -114,6 +118,7 @@ public class BuildUtils {
     }
 
     public static void adjustAcpNumber(String fromAddress, String target_address, int amount) throws IOException {
+        System.out.println("address " + target_address + " create " + amount + " acp cell, acp address: " + AddressTools.generateAcpAddress(target_address));
         AdjustAccountPayloadBuilder builder = new AdjustAccountPayloadBuilder();
         builder.item(ItemFactory.newIdentityItemByAddress(target_address));
         builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
@@ -126,7 +131,7 @@ public class BuildUtils {
         }
         Transaction tx = SignUtils.sign(s);
         String txHash = ApiFactory.getApi().sendTransaction(tx);
-        System.out.println("tx_hash: " + txHash + ", address " + target_address + " create " + amount + " acp cell");
+        System.out.println("tx_hash: " + txHash);
         BuildUtils.ensureBeOnChain(txHash);
     }
 
@@ -208,11 +213,14 @@ public class BuildUtils {
                 freeBalance = freeBalance.add(balance.free);
             }
         }
+        System.out.println("Address " + address + " has " + freeBalance + " free CKB");
         if(freeBalance.compareTo(freeAmount) == 1) {
             BigInteger transferAmount = freeBalance.subtract(freeAmount);
+            System.out.println("Address " + address + " reduce " + transferAmount + " CKB");
             BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), transferAmount);
         } else if(freeBalance.compareTo(freeAmount) == -1) {
             BigInteger transferAmount = freeAmount.subtract(freeBalance);
+            System.out.println("Address " + address + " add " + transferAmount + " CKB");
             BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress0(), address, transferAmount);
         }
     }
@@ -235,11 +243,14 @@ public class BuildUtils {
                 freeBalance = freeBalance.add(balance.free);
             }
         }
+        System.out.println("Address " + address + " has " + freeBalance + " free UDT");
         if(freeBalance.compareTo(freeAmount) == 1) {
             BigInteger transferAmount = freeBalance.subtract(freeAmount);
+            System.out.println("Address " + address + " reduce " + transferAmount + " UDT");
             BuildUtils.transferFreeUdt(address, AddressWithKeyHolder.testAddress0(), transferAmount);
         } else if(freeBalance.compareTo(freeAmount) == -1) {
             BigInteger transferAmount = freeAmount.subtract(freeBalance);
+            System.out.println("Address " + address + " add " + transferAmount + " UDT");
             BuildUtils.transferFreeUdt(AddressWithKeyHolder.testAddress0(), address, transferAmount);
         }
     }
