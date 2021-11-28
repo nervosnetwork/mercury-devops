@@ -129,4 +129,8 @@ public class AddressWithKeyHolder {
   public static String put(String addr, String priKey) {
     return addressWithKey.put(addr, priKey);
   }
+
+  public static String putPubKey(String addr, String pubKey) {
+    return addressWithPubKey.put(addr, pubKey);
+  }
 }

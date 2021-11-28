@@ -16,6 +16,7 @@ public class SignUtils {
     Secp256k1SighashBuilder signBuilder = new Secp256k1SighashBuilder(s.txView);
 
     for (MercuryScriptGroup sg : scriptGroups) {
+      System.out.println(sg.getAddress() + " signing transaction");
       signBuilder.sign(sg, AddressWithKeyHolder.getKey(sg.getAddress()));
     }
 
