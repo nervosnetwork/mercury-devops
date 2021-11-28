@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PrepareTransfer {
 
-    static public String testAddressesPath = "./src/test/java/test-addresses/PrepareTransferTestAddresses.json";
+    static public String testAddressesPath = "./src/test/java/test-addresses/TransferTestAddresses.json";
     static public ArrayList<AddressTools.AddressGenerateResult> testAddresses = BuildUtils.readTestAddresses(PrepareTransfer.testAddressesPath);
 
     @Test
