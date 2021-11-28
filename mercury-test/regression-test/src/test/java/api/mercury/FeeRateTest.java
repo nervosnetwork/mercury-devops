@@ -44,7 +44,7 @@ public class FeeRateTest {
     builder.from(
         From.newFrom(
             Arrays.asList(
-                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress0())),
+                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress1())),
             Source.Free));
     builder.to(
         To.newTo(
@@ -74,7 +74,7 @@ public class FeeRateTest {
     builder.from(
         From.newFrom(
             Arrays.asList(
-                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress0())),
+                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress1())),
             Source.Free));
     builder.to(
         To.newTo(

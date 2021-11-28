@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.transaction.Transaction;
 import org.nervos.ckb.utils.AmountUtils;
@@ -31,7 +30,7 @@ import constant.AddressWithKeyHolder;
 import constant.UdtHolder;
 import utils.SignUtils;
 
-@Disabled
+// @Disabled
 public class ModeTest {
 
   Gson g = GsonFactory.newGson();
@@ -48,7 +47,7 @@ public class ModeTest {
     builder.assetInfo(AssetInfo.newCkbAsset());
     builder.from(
         From.newFrom(
-            Arrays.asList(ItemFactory.newAddressItem(AddressWithKeyHolder.testAddress0())),
+            Arrays.asList(ItemFactory.newAddressItem(AddressWithKeyHolder.testAddress1())),
             Source.Free));
 
     builder.to(
@@ -79,7 +78,7 @@ public class ModeTest {
     builder.from(
         From.newFrom(
             Arrays.asList(
-                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress1())),
+                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress3())),
             Source.Free));
     builder.to(
         To.newTo(
@@ -131,18 +130,17 @@ public class ModeTest {
   @Test
   void transferCompletionSudtWithHoldByTo() {
     TransferPayloadBuilder builder = new TransferPayloadBuilder();
-    builder.assetInfo(AssetInfo.newCkbAsset());
     builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
     builder.from(
         From.newFrom(
             Arrays.asList(
-                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress1())),
+                ItemFactory.newIdentityItemByAddress(AddressWithKeyHolder.testAddress2())),
             Source.Free));
     builder.to(
         To.newTo(
             Arrays.asList(
                 new ToInfo(
-                    AddressTools.generateAcpAddress(AddressWithKeyHolder.testAddress4()),
+                    AddressTools.generateAcpAddress(AddressWithKeyHolder.testAddress3()),
                     new BigInteger("100"))),
             Mode.HoldByTo));
 

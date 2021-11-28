@@ -151,11 +151,8 @@ public class BuildSimpleTransferTransactionTest {
   void testModeByHoldyTo() {
 
     SimpleTransferPayloadBuilder builder = new SimpleTransferPayloadBuilder();
-    builder.addFrom(AddressWithKeyHolder.testAddress1());
-    builder.addTo(
-        new ToInfo(
-            AddressTools.generateAcpAddress(AddressWithKeyHolder.testAddress4()),
-            new BigInteger("20")));
+    builder.addFrom(AddressWithKeyHolder.testAddress2());
+    builder.addTo(new ToInfo(AddressWithKeyHolder.testAddress4(), new BigInteger("20")));
     builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
 
     System.out.println(g.toJson(builder.build()));
