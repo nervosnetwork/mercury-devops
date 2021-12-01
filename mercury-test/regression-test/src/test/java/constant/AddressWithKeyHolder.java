@@ -10,11 +10,11 @@ public class AddressWithKeyHolder {
   private static Map<String, String> addressWithPubKey = new HashMap<>(8);
 
   //// 0xa3b8598e1d53e6c5e89e8acb6b4c34d3adb13f2b
-  private static String TEST_ADDRESS0 = "ckt1qyq28wze3cw48ek9az0g4jmtfs6d8td38u4s6hp2s0";
+  private static String TEST_ADDRESS0 = "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqdrhpvcu82numz73852ed45cdxn4kcn72cr4338a";
   private static String TEST_PUBKEY0 = "0xa3b8598e1d53e6c5e89e8acb6b4c34d3adb13f2b";
 
   //// 0xaf0b41c627807fbddcee75afa174d5a7e5135ebd
-  private static String TEST_ADDRESS1 = "ckt1qyq27z6pccncqlaamnh8ttapwn260egnt67ss2cwvz";
+  private static String TEST_ADDRESS1 = "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqd0pdquvfuq077aemn447shf4d8u5f4a0glzz2g4";
   private static String TEST_PUBKEY1 = "0xaf0b41c627807fbddcee75afa174d5a7e5135ebd";
 
   //// 0x05a1fabfa84db9e538e2e7fe3ca9adf849f55ce0

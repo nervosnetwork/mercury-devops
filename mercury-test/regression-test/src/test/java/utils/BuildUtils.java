@@ -8,8 +8,10 @@ import constant.UdtHolder;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.address.Network;
 import org.nervos.ckb.crypto.secp256k1.ECKeyPair;
+import org.nervos.ckb.type.Header;
 import org.nervos.ckb.type.Script;
 import org.nervos.ckb.type.transaction.Transaction;
+import org.nervos.ckb.type.transaction.TransactionWithStatus;
 import org.nervos.ckb.utils.AmountUtils;
 import org.nervos.ckb.utils.Numeric;
 import org.nervos.ckb.utils.address.AddressTools;
@@ -17,6 +19,7 @@ import org.nervos.indexer.model.ScriptType;
 import org.nervos.indexer.model.SearchKeyBuilder;
 import org.nervos.indexer.model.resp.CellResponse;
 import org.nervos.indexer.model.resp.CellsResponse;
+import org.nervos.indexer.model.resp.TipResponse;
 import org.nervos.mercury.model.*;
 import org.nervos.mercury.model.common.AssetInfo;
 import org.nervos.mercury.model.common.AssetType;
@@ -24,7 +27,6 @@ import org.nervos.mercury.model.req.*;
 import org.nervos.mercury.model.req.item.ItemFactory;
 import org.nervos.mercury.model.resp.*;
 import org.nervos.mercury.regression.test.domian.GsonFactory;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 import prepare.PrepareTransfer;
 
 import java.io.IOException;
@@ -142,18 +144,21 @@ public class BuildUtils {
     public static void ensureBeOnChain(String txHash) throws IOException {
         String status = "";
         int index = 0;
+        System.out.println(index + " try get " + txHash + " status");
         while (!status.equals("committed")) {
-            if(index >= 90) {
-                throw new IOException("3 minutes failed to be on chain, " + txHash + " may lost");
+            if(index >= 900) {
+                throw new IOException("30 minutes failed to be on chain, " + txHash + " may lost");
             }
             try {
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(index + " try get " + txHash + " status");
                 index++;
-                GetTransactionInfoResponse transactionInfo = ApiFactory.getApi().getTransactionInfo(txHash);
-                status = transactionInfo.status;
-                System.out.println(txHash + " status: " + status);
+                TransactionWithStatus txWithStatus = ApiFactory.getApi().getTransaction(txHash);
+                status = txWithStatus.txStatus.status;
+                BigInteger rpcTipBlockNumber = BuildUtils.getRpcTipBlockNumber();
+                BigInteger mercuryTipBlockNumber = BuildUtils.getMercuryTipBlockNumber();
+                System.out.println(txHash + " rpc status: " + status + ", tip block number: rpc-" + rpcTipBlockNumber + ", mercury-" + mercuryTipBlockNumber);
+                TimeUnit.SECONDS.sleep(2);
             } catch (Exception e) {
+                e.printStackTrace();
                 continue;
             }
         }
@@ -214,12 +219,19 @@ public class BuildUtils {
             }
         }
         System.out.println("Address " + address + " has " + freeBalance + " free CKB");
+        BigInteger transferAmount = freeBalance.subtract(freeAmount).abs();
+        // if transfer amount less than minimum CKB, then clear CKB first, then send freeAmount again
+        if(transferAmount.compareTo(BigInteger.ZERO) != 0 && transferAmount.compareTo(AmountUtils.ckbToShannon(61))  == -1) {
+            System.out.println("Address " + address + " clear " + freeBalance + " CKB, because transfer amount " + transferAmount + " less than minimum transferable CKB");
+            BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), freeBalance);
+            BuildUtils.ensureCkbFreeBalance(address, freeAmount);
+            return;
+        }
+
         if(freeBalance.compareTo(freeAmount) == 1) {
-            BigInteger transferAmount = freeBalance.subtract(freeAmount);
             System.out.println("Address " + address + " reduce " + transferAmount + " CKB");
             BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), transferAmount);
         } else if(freeBalance.compareTo(freeAmount) == -1) {
-            BigInteger transferAmount = freeAmount.subtract(freeBalance);
             System.out.println("Address " + address + " add " + transferAmount + " CKB");
             BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress0(), address, transferAmount);
         }
@@ -289,6 +301,13 @@ public class BuildUtils {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void testGetMercuryTip() throws IOException {
+        GetBlockInfoPayloadBuilder builder = new GetBlockInfoPayloadBuilder();
+        BlockInfoResponse blockInfo = ApiFactory.getApi().getBlockInfo(builder.build());
+        System.out.println(blockInfo.blockNumber);
     }
 
     public static List<CellResponse> getDaoCells(String lockArgs) throws IOException {
@@ -411,8 +430,21 @@ public class BuildUtils {
         }
     }
 
+    public static BigInteger getRpcTipBlockNumber() throws IOException {
+        Header header = ApiFactory.getApi().getTipHeader();
+        return new BigInteger(header.number.substring(2), 16);
+    }
+
+    public static BigInteger getMercuryTipBlockNumber() throws IOException {
+        GetBlockInfoPayloadBuilder builder = new GetBlockInfoPayloadBuilder();
+        TipResponse tip = ApiFactory.getApi().getTip();
+        return new BigInteger(tip.blockNumber.substring(2), 16);
+    }
+
     public static BigInteger getTipEpochNumber() throws IOException {
-        String epoch = ApiFactory.getApi().getTipHeader().epoch;
+        Header header = ApiFactory.getApi().getTipHeader();
+        System.out.println(new BigInteger(header.number.substring(2), 16));
+        String epoch = header.epoch;
         return new BigInteger(epoch.substring(epoch.length() - 6), 16);
     }
 
@@ -437,5 +469,10 @@ public class BuildUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void supplyCkb() throws IOException{
+        BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress2(), AddressWithKeyHolder.testAddress0(), AmountUtils.ckbToShannon(1000));
     }
 }
