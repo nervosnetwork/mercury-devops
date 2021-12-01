@@ -1,0 +1,3 @@
+mercury_repo: "https://github.com/nervosnetwork/mercury.git"
+mercury_version: "dev"
+db_password: "123456"

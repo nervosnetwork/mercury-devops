@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    privileged: true
+    ports:
+      - 8432:5432
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: mercury
+      PGDATA: /var/lib/postgresql/data/pgdata
+      entrypoint: /entrypoint.sh
+    volumes:
+      #      - ./pg_data/data:/var/lib/postgresql/data/pgdata
+      - ./config/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+      - ./config/my-postgres.conf:/etc/postgresql/postgresql.conf
+    networks:
+      - mercury-test-net
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
+  mercury:
+    container_name: mercury
+    restart: always
+    image: nervos/mercury:v0.2.0-test
+    ports:
+      - 8116:8116
+    #    volumes:
+    #      - ./devtools/config:/app/devtools/config
+    #      - ./free-space:/app/free-space
+    depends_on:
+      - postgres
+    networks:
+      - mercury-test-net
+    command: ./mercury -c devtools/config/testnet_config.toml
+
+  mercury-test:
+    container_name: mercury-test
+    restart: always
+    image: nervos/mercury-test:v0.1.0
+    ports:
+      - 8080:8080
+    volumes:
+      - ./test-output:/app/test-output
+    networks:
+      - mercury-test-net
+    command: java -jar -Dtest.data.source.url=jdbc:postgresql://postgres:5432/mercury mercury-test-0.1.0.jar
+
+
+networks:
+  mercury-test-net:

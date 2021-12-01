@@ -5,6 +5,9 @@ import org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain;
 import java.util.List;
 
 public interface MercuryCanonicalChainMapper {
+
+  void emptyTable();
+
   int deleteByPrimaryKey(Integer blockNumber);
 
   int insert(MercuryCanonicalChain record);

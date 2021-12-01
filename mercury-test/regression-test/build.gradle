@@ -13,9 +13,8 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     compile project(":fetch-data")
-    compile("org.springframework.boot:spring-boot-starter") {
+    compile("org.springframework.boot:spring-boot-starter-web") {
         exclude(group: "com.squareup.okhttp3")
-
     }
     compile("org.springframework.boot:spring-boot-devtools") {
         exclude(group: "com.squareup.okhttp3")
@@ -36,6 +35,11 @@ dependencies {
 
     compile "com.squareup.okhttp3:okhttp:4.9.1"
     compile "com.squareup.okhttp3:logging-interceptor:4.9.1"
+
+    implementation "io.swagger:swagger-annotations:1.5.22"
+    implementation "io.swagger:swagger-models:1.5.22"
+    implementation "io.springfox:springfox-swagger2:2.9.2"
+    implementation "io.springfox:springfox-swagger-ui:2.9.2"
 
 
 }

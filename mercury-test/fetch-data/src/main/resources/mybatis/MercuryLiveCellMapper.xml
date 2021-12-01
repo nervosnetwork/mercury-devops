@@ -36,6 +36,10 @@
         , block_hash, lock_hash, lock_code_hash, lock_args, type_hash, type_code_hash,
     type_args, data
     </sql>
+
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_live_cell
+    </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

@@ -1,11 +1,12 @@
 package org.nervos.mercury.fetch.data.mapper;
 
-import org.nervos.mercury.fetch.data.entity.MercuryBlock;
 import org.nervos.mercury.fetch.data.entity.MercuryTransaction;
 
 import java.util.List;
 
 public interface MercuryTransactionMapper {
+
+  void emptyTable();
 
   int deleteByPrimaryKey(Long id);
 

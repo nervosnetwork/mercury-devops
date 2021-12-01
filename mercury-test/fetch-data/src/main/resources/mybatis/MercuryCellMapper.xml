@@ -44,6 +44,9 @@
     type_args, data, consumed_block_hash, consumed_tx_hash, since
     </sql>
 
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_cell
+    </update>
     <select id="selectBlockNumberByLockHash"
             parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
             resultType="java.lang.Integer">
@@ -116,16 +119,20 @@
         since)
         values
         <foreach collection="list" separator="," index="index" item="item">
-            (#{item.id,jdbcType=BIGINT}, #{item.outputIndex,jdbcType=INTEGER}, #{item.txIndex,jdbcType=INTEGER},
+            (#{item.id,jdbcType=BIGINT}, #{item.outputIndex,jdbcType=INTEGER},
+            #{item.txIndex,jdbcType=INTEGER},
             #{item.blockNumber,jdbcType=INTEGER}, #{item.epochNumber,jdbcType=INTEGER},
             #{item.epochIndex,jdbcType=INTEGER},
             #{item.epochLength,jdbcType=INTEGER}, #{item.capacity,jdbcType=BIGINT},
             #{item.lockScriptType,jdbcType=SMALLINT},
             #{item.typeScriptType,jdbcType=SMALLINT}, #{item.consumedBlockNumber,jdbcType=BIGINT},
             #{item.consumedTxIndex,jdbcType=INTEGER},
-            #{item.inputIndex,jdbcType=INTEGER}, #{item.txHash,jdbcType=BLOB}, #{item.blockHash,jdbcType=BLOB},
-            #{item.lockHash,jdbcType=BLOB}, #{item.lockCodeHash,jdbcType=BLOB}, #{item.lockArgs,jdbcType=BLOB},
-            #{item.typeHash,jdbcType=BLOB}, #{item.typeCodeHash,jdbcType=BLOB}, #{item.typeArgs,jdbcType=BLOB},
+            #{item.inputIndex,jdbcType=INTEGER}, #{item.txHash,jdbcType=BLOB},
+            #{item.blockHash,jdbcType=BLOB},
+            #{item.lockHash,jdbcType=BLOB}, #{item.lockCodeHash,jdbcType=BLOB},
+            #{item.lockArgs,jdbcType=BLOB},
+            #{item.typeHash,jdbcType=BLOB}, #{item.typeCodeHash,jdbcType=BLOB},
+            #{item.typeArgs,jdbcType=BLOB},
             #{item.data,jdbcType=BLOB}, #{item.consumedBlockHash,jdbcType=BLOB},
             #{item.consumedTxHash,jdbcType=BLOB},
             #{item.since,jdbcType=BLOB})

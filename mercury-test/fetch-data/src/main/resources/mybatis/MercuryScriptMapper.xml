@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryScriptMapper">
     <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryScript">
         <id column="script_hash" jdbcType="BLOB" property="scriptHash"/>
@@ -20,7 +21,12 @@
         script_hash_160
         , script_code_hash, script_args
     </sql>
-    <select id="selectByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
+
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_script
+    </update>
+    <select id="selectByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
             resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -41,7 +47,8 @@
             #{id}
         </foreach>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
+    <delete id="deleteByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes">
         delete
         from mercury_script
         where script_hash = #{scriptHash,jdbcType=BLOB}
@@ -49,8 +56,10 @@
     <insert id="insert" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
         insert into mercury_script (script_hash, script_type, script_args_len,
                                     script_hash_160, script_code_hash, script_args)
-        values (#{scriptHash,jdbcType=BLOB}, #{scriptType,jdbcType=SMALLINT}, #{scriptArgsLen,jdbcType=INTEGER},
-                #{scriptHash160,jdbcType=BLOB}, #{scriptCodeHash,jdbcType=BLOB}, #{scriptArgs,jdbcType=BLOB})
+        values (#{scriptHash,jdbcType=BLOB}, #{scriptType,jdbcType=SMALLINT},
+                #{scriptArgsLen,jdbcType=INTEGER},
+                #{scriptHash160,jdbcType=BLOB}, #{scriptCodeHash,jdbcType=BLOB},
+                #{scriptArgs,jdbcType=BLOB})
     </insert>
 
     <insert id="batchInsert"
@@ -62,7 +71,8 @@
         <foreach collection="list" separator="," index="index" item="item">
             (#{item.scriptHash,jdbcType=BLOB}, #{item.scriptType,jdbcType=SMALLINT},
             #{item.scriptArgsLen,jdbcType=INTEGER},
-            #{item.scriptHash160,jdbcType=BLOB}, #{item.scriptCodeHash,jdbcType=BLOB}, #{item.scriptArgs,jdbcType=BLOB}
+            #{item.scriptHash160,jdbcType=BLOB}, #{item.scriptCodeHash,jdbcType=BLOB},
+            #{item.scriptArgs,jdbcType=BLOB}
             )
         </foreach>
     </insert>
@@ -110,7 +120,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
         update mercury_script
         <set>
             <if test="scriptType != null">
@@ -131,7 +142,8 @@
         </set>
         where script_hash = #{scriptHash,jdbcType=BLOB}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
         update mercury_script
         set script_type      = #{scriptType,jdbcType=SMALLINT},
             script_args_len  = #{scriptArgsLen,jdbcType=INTEGER},
@@ -140,7 +152,8 @@
             script_args      = #{scriptArgs,jdbcType=BLOB}
         where script_hash = #{scriptHash,jdbcType=BLOB}
     </update>
-    <update id="updateByPrimaryKey" parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
+    <update id="updateByPrimaryKey"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryScript">
         update mercury_script
         set script_type     = #{scriptType,jdbcType=SMALLINT},
             script_args_len = #{scriptArgsLen,jdbcType=INTEGER}

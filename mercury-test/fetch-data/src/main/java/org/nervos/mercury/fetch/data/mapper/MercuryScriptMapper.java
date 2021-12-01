@@ -6,6 +6,8 @@ import org.nervos.mercury.fetch.data.entity.type.HexBytes;
 import java.util.List;
 
 public interface MercuryScriptMapper {
+  void emptyTable();
+
   int deleteByPrimaryKey(HexBytes scriptHash);
 
   int insert(MercuryScript record);

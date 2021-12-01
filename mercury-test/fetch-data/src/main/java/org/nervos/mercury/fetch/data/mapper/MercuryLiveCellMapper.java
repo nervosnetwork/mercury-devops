@@ -5,6 +5,9 @@ import org.nervos.mercury.fetch.data.entity.MercuryLiveCell;
 import java.util.List;
 
 public interface MercuryLiveCellMapper {
+
+  void emptyTable();
+
   int deleteByPrimaryKey(Long id);
 
   int insert(MercuryLiveCell record);

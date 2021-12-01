@@ -1,12 +1,13 @@
 package org.nervos.mercury.fetch.data.mapper;
 
 import org.nervos.mercury.fetch.data.entity.MercuryBlock;
-import org.nervos.mercury.fetch.data.entity.MercuryCell;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
 
 import java.util.List;
 
 public interface MercuryBlockMapper {
+
+  void emptyTable();
 
   int deleteByPrimaryKey(HexBytes blockHash);
 

@@ -34,6 +34,10 @@
         , transactions_root, proposals_hash, uncles_hash, uncles, dao, nonce,
     proposals
     </sql>
+
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_block
+    </update>
     <select id="selectByPrimaryKey"
             parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
             resultMap="ResultMapWithBLOBs">

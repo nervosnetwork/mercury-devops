@@ -1,0 +1,30 @@
+---
+- name: start mercury service
+  hosts: localhost
+  #become: yes
+  #become_method: sudo
+  vars_files:
+    - config.yml
+  tasks:
+    - name: Build mercury-test
+      shell: cd ../mercury-test && docker build -t nervos/mercury-test:v0.1.0 .
+    - name: Pull code
+      git:
+        repo: "{{ mercury_repo }}"
+        dest: ./mercury
+        version: "{{ mercury_version }}"
+        force: yes
+      # become: yes
+      # become_method: sudo
+    - name: Copy the mercury configuration file for the test network
+      shell: cp -r templates/testnet_config.toml.j2  ./mercury/devtools/config/testnet_config.toml
+      # become: yes
+      # become_method: sudo  
+    - name: Build mercury
+      shell: cd ./mercury && docker build -t nervos/mercury:v0.2.0-test .
+    - name: Clear build images
+      shell: docker rmi $(docker images | awk '/^<none>/ { print $3 }')
+      ignore_errors: yes
+    - name: Run test
+      shell: docker-compose up -d
+      ignore_errors: yes

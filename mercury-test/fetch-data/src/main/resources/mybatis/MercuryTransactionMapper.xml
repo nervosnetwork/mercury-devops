@@ -27,6 +27,10 @@
         tx_hash
         , block_hash, cell_deps, header_deps, witnesses
     </sql>
+
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_transaction
+    </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -62,11 +66,14 @@
         cell_deps, header_deps, witnesses)
         values
         <foreach collection="list" separator="," index="index" item="item">
-            (#{item.id,jdbcType=BIGINT}, #{item.txIndex,jdbcType=INTEGER}, #{item.inputCount,jdbcType=INTEGER},
+            (#{item.id,jdbcType=BIGINT}, #{item.txIndex,jdbcType=INTEGER},
+            #{item.inputCount,jdbcType=INTEGER},
             #{item.outputCount,jdbcType=INTEGER}, #{item.blockNumber,jdbcType=INTEGER},
             #{item.txTimestamp,jdbcType=BIGINT},
-            #{item.version,jdbcType=SMALLINT}, #{item.txHash,jdbcType=BLOB}, #{item.blockHash,jdbcType=BLOB},
-            #{item.cellDeps,jdbcType=BLOB}, #{item.headerDeps,jdbcType=BLOB}, #{item.witnesses,jdbcType=BLOB})
+            #{item.version,jdbcType=SMALLINT}, #{item.txHash,jdbcType=BLOB},
+            #{item.blockHash,jdbcType=BLOB},
+            #{item.cellDeps,jdbcType=BLOB}, #{item.headerDeps,jdbcType=BLOB},
+            #{item.witnesses,jdbcType=BLOB})
         </foreach>
     </insert>
 

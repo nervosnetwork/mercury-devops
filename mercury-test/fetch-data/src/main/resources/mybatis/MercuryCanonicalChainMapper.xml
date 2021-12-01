@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.nervos.mercury.fetch.data.mapper.MercuryCanonicalChainMapper">
     <resultMap id="BaseResultMap" type="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
         <id column="block_number" jdbcType="INTEGER" property="blockNumber"/>
@@ -14,7 +15,12 @@
     <sql id="Blob_Column_List">
         block_hash
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+
+    <update id="emptyTable">
+        TRUNCATE TABLE mercury_canonical_chain
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
@@ -52,7 +58,8 @@
             (#{item.blockNumber,jdbcType=INTEGER}, #{item.blockHash,jdbcType=BLOB})
         </foreach>
     </insert>
-    <insert id="insertSelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
+    <insert id="insertSelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
         insert into mercury_canonical_chain
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="blockNumber != null">
@@ -71,7 +78,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
         update mercury_canonical_chain
         <set>
             <if test="blockHash != null">
@@ -80,7 +88,8 @@
         </set>
         where block_number = #{blockNumber,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="org.nervos.mercury.fetch.data.entity.MercuryCanonicalChain">
         update mercury_canonical_chain
         set block_hash = #{blockHash,jdbcType=BLOB}
         where block_number = #{blockNumber,jdbcType=INTEGER}

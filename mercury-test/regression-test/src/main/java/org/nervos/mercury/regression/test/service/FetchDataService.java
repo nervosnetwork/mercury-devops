@@ -17,7 +17,6 @@ import org.nervos.mercury.fetch.data.mapper.MercuryScriptMapper;
 import org.nervos.mercury.fetch.data.mapper.MercuryTransactionMapper;
 import org.nervos.mercury.regression.test.db.route.DbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,9 +27,6 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 public class FetchDataService {
-
-  @Value("${block.height}")
-  private Integer blockHeight;
 
   private static final List<String> ADDRESSES =
       Arrays.asList(
@@ -50,13 +46,25 @@ public class FetchDataService {
   @Autowired private MercuryLiveCellMapper liveCellMapper;
   @Autowired private MercuryScriptMapper scriptMapper;
 
-  public void fetchData() {
+  public void fetchData(Integer blockHeight) {
+    DbContextHolder.checkoutTestDataSource();
+    this.emptyTables();
+
     DbContextHolder.checkoutRawDataSource();
 
-    List<Integer> blockNumbers = this.getBlockNumbersByAddresses();
+    List<Integer> blockNumbers = this.getBlockNumbersByAddresses(blockHeight);
     this.saveBlocks(blockNumbers);
     this.saveTransactions(blockNumbers);
     this.saveCells(blockNumbers);
+  }
+
+  private void emptyTables() {
+    this.blockMapper.emptyTable();
+    this.canonicalChainMapper.emptyTable();
+    this.transactionMapper.emptyTable();
+    this.cellMapper.emptyTable();
+    this.liveCellMapper.emptyTable();
+    this.scriptMapper.emptyTable();
   }
 
   private void saveBlocks(List<Integer> blockNumbers) {
@@ -70,14 +78,6 @@ public class FetchDataService {
         this.canonicalChainMapper.selectByBlockNumbers(blockNumbers);
     DbContextHolder.checkoutTestDataSource();
     this.canonicalChainMapper.batchInsert(mercuryCanonicalChains);
-
-    //    DbContextHolder.checkoutRawDataSource();
-    //    List<MercuryUncleRelationship> mercuryUncleRelationships
-    //            =
-    // this.uncleRelationshipMapper.selectByBlockHashes(mercuryBlocks.stream().map(MercuryBlock::getBlockHash).collect(toList()));
-    //    DbContextHolder.checkoutTestDataSource();
-    //    this.uncleRelationshipMapper.batchInsert(mercuryUncleRelationships);
-
   }
 
   private void saveTransactions(List<Integer> blockNumbers) {
@@ -97,12 +97,6 @@ public class FetchDataService {
     List<List<MercuryCell>> cells = Lists.partition(mercuryCells, 500);
     cells.forEach(x -> this.cellMapper.batchInsert(x));
 
-    //    DbContextHolder.checkoutRawDataSource();
-    //    List<MercuryLiveCell> mercuryLiveCells =
-    // this.liveCellMapper.selectByBlockNumbers(blockNumbers);
-    //    DbContextHolder.checkoutTestDataSource();
-    //    List<List<MercuryLiveCell>> liveCells = Lists.partition(mercuryLiveCells, 500);
-    //    liveCells.forEach(x -> this.liveCellMapper.batchInsert(x));
     this.liveCellMapper.insertByCellTable();
 
     List<HexBytes> scriptHashes =
@@ -121,7 +115,7 @@ public class FetchDataService {
     scripts.forEach(x -> this.scriptMapper.batchInsert(x));
   }
 
-  private List<Integer> getBlockNumbersByAddresses() {
+  private List<Integer> getBlockNumbersByAddresses(Integer blockHeight) {
     return ADDRESSES.stream()
         .flatMap(
             x ->
@@ -130,7 +124,7 @@ public class FetchDataService {
                         HexBytes.newHexBytes(AddressParser.parse(x).script.computeHash()))
                     .stream())
         .distinct()
-        .filter(x -> x <= this.blockHeight)
+        .filter(x -> x <= blockHeight)
         .collect(toList());
   }
 }

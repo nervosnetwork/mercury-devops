@@ -1,14 +1,16 @@
 package org.nervos.mercury.regression.test.db.route;
 
 import com.zaxxer.hikari.HikariDataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 @Configuration("dataSource")
 public class DynamicDataSource extends AbstractRoutingDataSource {
@@ -44,16 +46,20 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     return dataSource;
   }
 
+  public void putDataSource(String url, String username, String password) {
+    DataSource dataSource = createDataSource(driverClassName, url, username, password);
+    targetDataSources.put(DataSourceType.RAW_DATA_SOURCE.name(), dataSource);
+    this.afterPropertiesSet();
+  }
+
+  public void removeDataSource() {
+    targetDataSources.remove(DataSourceType.RAW_DATA_SOURCE.name());
+    this.afterPropertiesSet();
+  }
+
   @PostConstruct
   private void initDataSource() {
     Map<Object, Object> dataSources = new HashMap<>(2);
-    dataSources.put(
-        DataSourceType.RAW_DATA_SOURCE.name(),
-        createDataSource(
-            driverClassName,
-            rawDataSourceConfig.getUrl(),
-            rawDataSourceConfig.getUsername(),
-            rawDataSourceConfig.getPassword()));
     dataSources.put(
         DataSourceType.TEST_DATA_SOURCE.name(),
         createDataSource(
