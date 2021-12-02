@@ -114,4 +114,19 @@ public class CellCapacityTest {
     RpcSender.sendRequestAndWriteCase(method, builder.build());
   }
 
+  /**
+   * Params Test
+   * - Param: `block_range`
+   * - Value: [0x2191c0, 0x219990]
+   * - Type: Positive Testing
+   */
+  @Test
+  void testBlockRangeCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    builder.filterBlockRange("0x2191c0", "0x219990");
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
 }
