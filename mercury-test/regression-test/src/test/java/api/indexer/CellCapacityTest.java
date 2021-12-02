@@ -49,4 +49,39 @@ public class CellCapacityTest {
 
     RpcSender.sendRequestAndWriteCase(method, builder.build());
   }
+
+  /**
+   * Params Test
+   * - Param: `script`, `filter.script
+   * - Value: lock script, type script
+   * - Type: Positive Testing
+   */
+  @Test
+  void testLockScriptAndTypeScriptCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    builder.filterScript(typeScript);
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+  /**
+   * Params Test
+   * - Param: `script`, `filter.script
+   * - Value: type script, lock script
+   * - Type: Positive Testing
+   */
+  @Test
+  void testTypeScriptAndLockScriptCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(typeScript);
+    builder.scriptType(ScriptType.type);
+    builder.filterScript(lockScript);
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+
+
 }
