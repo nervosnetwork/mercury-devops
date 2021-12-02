@@ -171,6 +171,22 @@ public class CellCapacityTest {
 
   /**
    * Params Test
+   * - Param: `block_range`
+   * - Value: (out of range)
+   * - Type: Negative Testing
+   */
+  @Test
+  void testOutOfRangeBlockRangeCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    builder.filterBlockRange("0xf374770", "0x1f374770");
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+  /**
+   * Params Test
    * - Param: `output_data_len_range`, `output_data_len_range`, `block_range`
    * - Value: [0x0, 0x2], [0x0, 0x10000000], [0x2191c0, 0x219990]
    * - Type: Positive Testing
