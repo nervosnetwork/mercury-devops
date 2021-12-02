@@ -101,7 +101,7 @@ public class CellCapacityTest {
   /**
    * Params Test
    * - Param: `output_data_len_range`
-   * - Value: [0x0, 0x2]
+   * - Value: [0x0, 0x10000000]
    * - Type: Positive Testing
    */
   @Test
@@ -125,6 +125,24 @@ public class CellCapacityTest {
     SearchKeyBuilder builder = new SearchKeyBuilder();
     builder.script(lockScript);
     builder.scriptType(ScriptType.lock);
+    builder.filterBlockRange("0x2191c0", "0x219990");
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+  /**
+   * Params Test
+   * - Param: `output_data_len_range`, `output_data_len_range`, `block_range`
+   * - Value: [0x0, 0x2], [0x0, 0x10000000], [0x2191c0, 0x219990]
+   * - Type: Positive Testing
+   */
+  @Test
+  void testOutputDateAndOutputCapacityAndBlockRangeCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    builder.filterOutputDataLenRange("0x0", "0x2");
+    builder.filterOutputCapacityRange("0x0", "0x10000000");
     builder.filterBlockRange("0x2191c0", "0x219990");
 
     RpcSender.sendRequestAndWriteCase(method, builder.build());
