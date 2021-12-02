@@ -82,6 +82,21 @@ public class CellCapacityTest {
     RpcSender.sendRequestAndWriteCase(method, builder.build());
   }
 
+  /**
+   * Params Test
+   * - Param: `output_data_len_range`
+   * - Value: [0x0, 0x2]
+   * - Type: Positive Testing
+   */
+  @Test
+  void testOutputDataLenRangeCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    builder.filterOutputDataLenRange("0x0", "0x2");
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
 
 
 }
