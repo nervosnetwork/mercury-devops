@@ -38,6 +38,25 @@ public class CellCapacityTest {
   /**
    * Params Test
    * - Param: `script`
+   * - Value: non-existent lock script
+   * - Type: Negative Testing
+   */
+  @Test
+  void testNonExistentLockScriptCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    Script lockScript = new Script(
+        "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+        "0x0c24d18f16e3c43272695e5db006a22cb9ddde52",
+        Script.TYPE);
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+  /**
+   * Params Test
+   * - Param: `script`
    * - Value: type script
    * - Type: Positive Testing
    */
@@ -52,7 +71,7 @@ public class CellCapacityTest {
 
   /**
    * Params Test
-   * - Param: `script`, `filter.script
+   * - Param: `script`, `filter.script`
    * - Value: lock script, type script
    * - Type: Positive Testing
    */
@@ -61,6 +80,26 @@ public class CellCapacityTest {
     SearchKeyBuilder builder = new SearchKeyBuilder();
     builder.script(lockScript);
     builder.scriptType(ScriptType.lock);
+    builder.filterScript(typeScript);
+
+    RpcSender.sendRequestAndWriteCase(method, builder.build());
+  }
+
+  /**
+   * Params Test
+   * - Param: `script`, `filter.script`
+   * - Value: lock script, non-existent type script
+   * - Type: Negative Testing
+   */
+  @Test
+  void testLockScriptAndNonExistentTypeScriptCapacity() {
+    SearchKeyBuilder builder = new SearchKeyBuilder();
+    builder.script(lockScript);
+    builder.scriptType(ScriptType.lock);
+    Script typeScript = new Script(
+        "0xc5e5dcf215925f7ef4dfaf5f4b4f105bc321c02776d6e7d52a1db3fcd9d011a4",
+        "0x7c7f0ee1d582c385342367792946cff3767fe02f26fd7f07dba23ae3c65b28b1",
+        Script.TYPE);
     builder.filterScript(typeScript);
 
     RpcSender.sendRequestAndWriteCase(method, builder.build());
