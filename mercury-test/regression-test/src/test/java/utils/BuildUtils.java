@@ -168,7 +168,7 @@ public class BuildUtils {
         Path path = Paths.get(testAddressesPath);
         ArrayList<AddressTools.AddressGenerateResult> addresses = new ArrayList();
         for(int i = 0; i < number; i++) {
-            AddressTools.AddressGenerateResult testAddress = AddressTools.generateFullAddress(Network.TESTNET);
+            AddressTools.AddressGenerateResult testAddress = AddressTools.generateAddress(Network.TESTNET);
             addresses.add(testAddress);
         }
         Files.write(path, GsonFactory.newGson().toJson(addresses).getBytes());
@@ -186,11 +186,7 @@ public class BuildUtils {
                 testAddress.address = array.get(i).getAsJsonObject().get("address").toString().replaceAll("\"", "");
                 testAddress.lockArgs = array.get(i).getAsJsonObject().get("lockArgs").toString().replaceAll("\"", "");
                 testAddress.privateKey = array.get(i).getAsJsonObject().get("privateKey").toString().replaceAll("\"", "");
-                // Because mercury return short_format address in SignatureAction, so here we must use short format.
-                ECKeyPair ecKeyPair = ECKeyPair.createWithPrivateKey(Numeric.toBigInt(testAddress.privateKey), true);
-                String publicKey = ecKeyPair.getPublicKey().toString(16);
-                String shortAddress = AddressTools.convertPublicKeyToShortAddress(Network.TESTNET, publicKey);
-                AddressWithKeyHolder.put(shortAddress, testAddress.privateKey);
+
                 AddressWithKeyHolder.put(testAddress.address, testAddress.privateKey);
                 AddressWithKeyHolder.putPubKey(testAddress.address, "0x" + testAddress.lockArgs);
                 testAddresses.add(testAddress);
