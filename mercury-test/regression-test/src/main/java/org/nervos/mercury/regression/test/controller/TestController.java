@@ -33,7 +33,7 @@ public class TestController {
       @RequestParam(value = "mercuryUrl", defaultValue = "127.0.0.1:8116")
           @ApiParam("test 为docker 环境时使用 mercury:8116, 为本地直连的时候使用 127.0.0.1:8116")
           String mercuryUrl,
-      @RequestParam(value = "blockHeight", defaultValue = "3480565") Integer blockHeight) {
+      @RequestParam(value = "blockHeight", defaultValue = "3636244") Integer blockHeight) {
 
     dataSource.putDataSource(
         "jdbc:postgresql://".concat(dbUrl).concat("/mercury"), username, password);
@@ -58,7 +58,7 @@ public class TestController {
       @RequestParam(value = "dbUrl", defaultValue = "127.0.0.1:8432") String dbUrl,
       @RequestParam(value = "username", defaultValue = "postgres") String username,
       @RequestParam(value = "password", defaultValue = "123456") String password,
-      @RequestParam(value = "blockHeight", defaultValue = "3480565") Integer blockHeight) {
+      @RequestParam(value = "blockHeight", defaultValue = "3636244") Integer blockHeight) {
 
     dataSource.putDataSource(
         "jdbc:postgresql://".concat(dbUrl).concat("/mercury"), username, password);

@@ -1,1 +1,128 @@
-{"methodName":"build_transfer_transaction","req":{"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"from":{"items":[{"type":"Identity","value":"0x00af0b41c627807fbddcee75afa174d5a7e5135ebd"}],"source":"Free"},"to":{"to_infos":[{"address":"ckt1qyqqtg06h75ymw098r3w0l3u4xklsj04tnsqctqrmc","amount":"10000000000"}],"mode":"HoldByFrom"},"pay_fee":"ckt1qyqzqfj8lmx9h8vvhk62uut8us844v0yh2hsnqvvgc","change":null,"fee_rate":1000,"since":null},"resp":{"tx_view":{"version":"0x0","cell_deps":[{"out_point":{"tx_hash":"0xe12877ebd2c3c364dc46c5c992bcfaf4fee33fa13eebdf82c591fc9825aab769","index":"0x0"},"dep_type":"code"},{"out_point":{"tx_hash":"0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37","index":"0x0"},"dep_type":"dep_group"},{"out_point":{"tx_hash":"0xec26b0f85ed839ece5f11c4c4e837ec359f5adc4420410f6453b1f6b60fb96a6","index":"0x0"},"dep_type":"dep_group"}],"header_deps":["0x4b01cec21876f7e8a24000112975541305b79a6c9741b05563b43ba2d99b5c72","0x2079bb19165e7d70f2ad8245fab2bbde05b209d98630adba0e1b1fc75eee99b5"],"inputs":[{"since":"0x0","previous_output":{"tx_hash":"0x41d029d76db11c08cef092eb0d267a953fc5de429ec94d76adc18519aa39f07c","index":"0x2"}},{"since":"0x200708027a000cf2","previous_output":{"tx_hash":"0x353d0483bc332d4bc476ec36a7f24d7820c3559d03f57305275c6c8d1e198289","index":"0x1"}},{"since":"0x0","previous_output":{"tx_hash":"0x1962cdc641241a23735184197d756b791f126efc642c77b04b4f0528b8755dd7","index":"0x0"}}],"outputs":[{"capacity":"0x2540be400","lock":{"code_hash":"0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8","hash_type":"type","args":"0x05a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"},"type":null},{"capacity":"0x21870ff63","lock":{"code_hash":"0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8","hash_type":"type","args":"0xaf0b41c627807fbddcee75afa174d5a7e5135ebd"},"type":null},{"capacity":"0xa4dddd5d5","lock":{"code_hash":"0x3419a1c09eb2567f6552ee7a8ecffd64155cffe0f1796e6e61ec088d740c1356","hash_type":"type","args":"0x202647fecc5b9d8cbdb4ae7167e40f5ab1e4baaf"},"type":{"code_hash":"0xc5e5dcf215925f7ef4dfaf5f4b4f105bc321c02776d6e7d52a1db3fcd9d011a4","hash_type":"type","args":"0x7c7f0ee1d582c385342367792946cff3767fe02f26fd7f07dba23ae3c65b28bc"}}],"outputs_data":["0x","0x","0x63000000000000000000000000000000"],"witnesses":["0x61000000100000005500000061000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080000000000000000000000","0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"],"hash":"0x5f5d4d56151b41ce0c6c6c7df5c023f182d446a6ae07d7371f243508bac2003f"},"signature_actions":[{"signature_location":{"index":0,"offset":20},"signature_info":{"algorithm":"Secp256k1","address":"ckt1qyq27z6pccncqlaamnh8ttapwn260egnt67ss2cwvz"},"hash_algorithm":"Blake2b","other_indexes_in_group":[]},{"signature_location":{"index":1,"offset":20},"signature_info":{"algorithm":"Secp256k1","address":"ckt1qyqzqfj8lmx9h8vvhk62uut8us844v0yh2hsnqvvgc"},"hash_algorithm":"Blake2b","other_indexes_in_group":[]},{"signature_location":{"index":2,"offset":20},"signature_info":{"algorithm":"Secp256k1","address":"ckt1qyqzqfj8lmx9h8vvhk62uut8us844v0yh2hsnqvvgc"},"hash_algorithm":"Blake2b","other_indexes_in_group":[]}]},"msg":null}
+{
+  "methodName": "build_transfer_transaction",
+  "req": {
+    "asset_info": {
+      "asset_type": "CKB",
+      "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "from": {
+      "items": [
+        {
+          "type": "Identity",
+          "value": "0x00af0b41c627807fbddcee75afa174d5a7e5135ebd"
+        }
+      ],
+      "source": "Free"
+    },
+    "to": {
+      "to_infos": [
+        {
+          "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqg958atl2zdh8jn3ch8lc72nt0cf864ecqdxm9zf",
+          "amount": "10000000000"
+        }
+      ],
+      "mode": "HoldByFrom"
+    },
+    "pay_fee": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqfqyerlanzmnkxtmd9ww9n7gr66k8jt4tclm9jnk",
+    "change": null,
+    "fee_rate": 1000,
+    "since": null
+  },
+  "resp": {
+    "tx_view": {
+      "version": "0x0",
+      "cell_deps": [
+        {
+          "out_point": {
+            "tx_hash": "0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37",
+            "index": "0x0"
+          },
+          "dep_type": "dep_group"
+        }
+      ],
+      "header_deps": [],
+      "inputs": [
+        {
+          "since": "0x0",
+          "previous_output": {
+            "tx_hash": "0x2bf488bd302a27d9873cdec6b014df55ea2b401b60156cc097797102f625fbbb",
+            "index": "0x0"
+          }
+        },
+        {
+          "since": "0x0",
+          "previous_output": {
+            "tx_hash": "0xce5c349917fbc598fadb841528f36b4473d060116b6ffa96dffccfbd2efc5273",
+            "index": "0x0"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "capacity": "0xe8d4a50d3a",
+          "lock": {
+            "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            "hash_type": "type",
+            "args": "0x202647fecc5b9d8cbdb4ae7167e40f5ab1e4baaf"
+          },
+          "type": null
+        },
+        {
+          "capacity": "0x2540be400",
+          "lock": {
+            "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            "hash_type": "type",
+            "args": "0x05a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"
+          },
+          "type": null
+        },
+        {
+          "capacity": "0xe680992c00",
+          "lock": {
+            "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            "hash_type": "type",
+            "args": "0xaf0b41c627807fbddcee75afa174d5a7e5135ebd"
+          },
+          "type": null
+        }
+      ],
+      "outputs_data": [
+        "0x",
+        "0x",
+        "0x"
+      ],
+      "witnesses": [
+        "0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "hash": "0x592a561a1f147b5a4f84ac04af723abbd6c84e89463e2c23fc051affd65a8459"
+    },
+    "signature_actions": [
+      {
+        "signature_location": {
+          "index": 0,
+          "offset": 20
+        },
+        "signature_info": {
+          "algorithm": "Secp256k1",
+          "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqfqyerlanzmnkxtmd9ww9n7gr66k8jt4tclm9jnk"
+        },
+        "hash_algorithm": "Blake2b",
+        "other_indexes_in_group": []
+      },
+      {
+        "signature_location": {
+          "index": 1,
+          "offset": 20
+        },
+        "signature_info": {
+          "algorithm": "Secp256k1",
+          "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqd0pdquvfuq077aemn447shf4d8u5f4a0glzz2g4"
+        },
+        "hash_algorithm": "Blake2b",
+        "other_indexes_in_group": []
+      }
+    ]
+  },
+  "msg": null
+}

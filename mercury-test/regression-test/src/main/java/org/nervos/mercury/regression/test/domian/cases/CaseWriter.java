@@ -1,6 +1,12 @@
 package org.nervos.mercury.regression.test.domian.cases;
 
-import org.nervos.mercury.regression.test.domian.GsonFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.nervos.mercury.model.common.ExtraFilter;
+import org.nervos.mercury.model.req.item.Item;
+import org.nervos.mercury.model.resp.Ownership;
+import org.nervos.mercury.model.resp.RecordResponse;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +17,15 @@ public class CaseWriter {
 
   private String methodName;
   private String path;
+  Gson g =
+      new GsonBuilder()
+          .serializeNulls()
+          .setPrettyPrinting()
+          .registerTypeAdapter(Ownership.class, new Ownership.Deserializer())
+          .registerTypeAdapter(RecordResponse.class, new RecordResponse())
+          .registerTypeAdapter(ExtraFilter.class, new ExtraFilter())
+          .registerTypeAdapter(Item.class, new Item.Serializer())
+          .create();
 
   public CaseWriter(String methodName, String path) {
     this.methodName = methodName;
@@ -30,7 +45,7 @@ public class CaseWriter {
 
     try {
       CaseInfo<T, R> caseInfo = new CaseInfo<>(this.methodName, t, r, msg);
-      Files.write(path, GsonFactory.newGson().toJson(caseInfo).getBytes());
+      Files.write(path, this.g.toJson(caseInfo).getBytes());
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -1,1 +1,101 @@
-{"methodName":"get_balance","req":{"item":{"type":"Identity","value":"0x00839f1806e85b40c13d3c73866045476cc9a8c214"},"asset_infos":[],"tip_block_number":null},"resp":{"balances":[{"ownership":{"type":"Address","value":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf"},"asset_info":{"asset_type":"UDT","udt_hash":"0xf21e7350fa9518ed3cbb008e0e8c941d7e01a12181931d5608aa366ee22228bd"},"free":"100000000000100","occupied":"0","freezed":"0","claimable":"0"},{"ownership":{"type":"Address","value":"ckt1qypg88ccqm59ksxp85788pnqg4rkejdgcg2qggxamt"},"asset_info":{"asset_type":"UDT","udt_hash":"0x79fe7015d47099cf999212df09f3daf4b9b600886d078d1a6d36cfe9f9e32bd1"},"free":"0","occupied":"0","freezed":"0","claimable":"0"},{"ownership":{"type":"Address","value":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf"},"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"free":"2473744881765","occupied":"56800000000","freezed":"0","claimable":"0"},{"ownership":{"type":"Address","value":"ckt1qypg88ccqm59ksxp85788pnqg4rkejdgcg2qggxamt"},"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"free":"0","occupied":"14200000000","freezed":"0","claimable":"0"}],"tip_block_number":3480565},"msg":null}
+{
+  "methodName": "get_balance",
+  "req": {
+    "item": {
+      "type": "Identity",
+      "value": "0x00839f1806e85b40c13d3c73866045476cc9a8c214"
+    },
+    "asset_infos": [],
+    "tip_block_number": null
+  },
+  "resp": {
+    "balances": [
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qq6pngwqn6e9vlm92th84rk0l4jp2h8lurchjmnwv8kq3rt5psf4vqvrnuvqd6zmgrqn60rnsesy23mvex5vy9qqmpnum"
+        },
+        "asset_info": {
+          "asset_type": "CKB",
+          "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "free": "1624199984832",
+        "occupied": "55600000000",
+        "freezed": "1300000000",
+        "claimable": "0"
+      },
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qq6pngwqn6e9vlm92th84rk0l4jp2h8lurchjmnwv8kq3rt5psf4vqvrnuvqd6zmgrqn60rnsesy23mvex5vy9qqmpnum"
+        },
+        "asset_info": {
+          "asset_type": "UDT",
+          "udt_hash": "0x300065e3504bfa8405ba7faf017ee02da71905b27e68fa6c03518fc89ea079d9"
+        },
+        "free": "1000000000000",
+        "occupied": "0",
+        "freezed": "0",
+        "claimable": "0"
+      },
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qq6pngwqn6e9vlm92th84rk0l4jp2h8lurchjmnwv8kq3rt5psf4vqvrnuvqd6zmgrqn60rnsesy23mvex5vy9qqmpnum"
+        },
+        "asset_info": {
+          "asset_type": "UDT",
+          "udt_hash": "0x79fe7015d47099cf999212df09f3daf4b9b600886d078d1a6d36cfe9f9e32bd1"
+        },
+        "free": "0",
+        "occupied": "0",
+        "freezed": "0",
+        "claimable": "0"
+      },
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd"
+        },
+        "asset_info": {
+          "asset_type": "UDT",
+          "udt_hash": "0xf21e7350fa9518ed3cbb008e0e8c941d7e01a12181931d5608aa366ee22228bd"
+        },
+        "free": "101000000000000",
+        "occupied": "0",
+        "freezed": "0",
+        "claimable": "0"
+      },
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd"
+        },
+        "asset_info": {
+          "asset_type": "CKB",
+          "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "free": "4648099870614",
+        "occupied": "85200000000",
+        "freezed": "1405844892533",
+        "claimable": "0"
+      },
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qq6pngwqn6e9vlm92th84rk0l4jp2h8lurchjmnwv8kq3rt5psf4vqvrnuvqd6zmgrqn60rnsesy23mvex5vy9qqmpnum"
+        },
+        "asset_info": {
+          "asset_type": "UDT",
+          "udt_hash": "0xf21e7350fa9518ed3cbb008e0e8c941d7e01a12181931d5608aa366ee22228bd"
+        },
+        "free": "8420",
+        "occupied": "0",
+        "freezed": "0",
+        "claimable": "0"
+      }
+    ],
+    "tip_block_number": 3636218
+  },
+  "msg": null
+}

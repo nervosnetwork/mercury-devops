@@ -1,1 +1,36 @@
-{"methodName":"get_balance","req":{"item":{"type":"Address","value":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf"},"asset_infos":[{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"}],"tip_block_number":null},"resp":{"balances":[{"ownership":{"type":"Address","value":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf"},"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"free":"2473744881765","occupied":"56800000000","freezed":"0","claimable":"0"}],"tip_block_number":3480565},"msg":null}
+{
+  "methodName": "get_balance",
+  "req": {
+    "item": {
+      "type": "Address",
+      "value": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd"
+    },
+    "asset_infos": [
+      {
+        "asset_type": "CKB",
+        "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ],
+    "tip_block_number": null
+  },
+  "resp": {
+    "balances": [
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd"
+        },
+        "asset_info": {
+          "asset_type": "CKB",
+          "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "free": "4648099870614",
+        "occupied": "85200000000",
+        "freezed": "1405844892533",
+        "claimable": "0"
+      }
+    ],
+    "tip_block_number": 3636218
+  },
+  "msg": null
+}

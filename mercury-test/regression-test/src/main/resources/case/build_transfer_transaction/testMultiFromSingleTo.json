@@ -1,1 +1,112 @@
-{"methodName":"build_transfer_transaction","req":{"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"from":{"items":[{"type":"Identity","value":"0x00af0b41c627807fbddcee75afa174d5a7e5135ebd"},{"type":"Identity","value":"0x0005a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"}],"source":"Free"},"to":{"to_infos":[{"address":"ckt1qyqzqfj8lmx9h8vvhk62uut8us844v0yh2hsnqvvgc","amount":"10000000000"}],"mode":"HoldByFrom"},"pay_fee":null,"change":null,"fee_rate":1000,"since":null},"resp":{"tx_view":{"version":"0x0","cell_deps":[{"out_point":{"tx_hash":"0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37","index":"0x0"},"dep_type":"dep_group"}],"header_deps":[],"inputs":[{"since":"0x0","previous_output":{"tx_hash":"0x216aaf2361c502dc12cf75b0296756d73f43ea207093a2b05dcd508eb3e37eca","index":"0x0"}},{"since":"0x0","previous_output":{"tx_hash":"0xb05d5d67610bf8e91bc6db2bac2faafbb212b3a71c6371658825f345e6ab793e","index":"0x0"}}],"outputs":[{"capacity":"0x2540be400","lock":{"code_hash":"0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8","hash_type":"type","args":"0x202647fecc5b9d8cbdb4ae7167e40f5ab1e4baaf"},"type":null},{"capacity":"0x2540be1ec","lock":{"code_hash":"0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8","hash_type":"type","args":"0x05a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"},"type":null}],"outputs_data":["0x","0x"],"witnesses":["0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","0x10000000100000001000000010000000"],"hash":"0x8d55ba8137ea5b6ceb5e783a12226cb89e94606d02f047c735f2e87c7d8e22dd"},"signature_actions":[{"signature_location":{"index":0,"offset":20},"signature_info":{"algorithm":"Secp256k1","address":"ckt1qyqqtg06h75ymw098r3w0l3u4xklsj04tnsqctqrmc"},"hash_algorithm":"Blake2b","other_indexes_in_group":[1]}]},"msg":null}
+{
+  "methodName": "build_transfer_transaction",
+  "req": {
+    "asset_info": {
+      "asset_type": "CKB",
+      "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "from": {
+      "items": [
+        {
+          "type": "Identity",
+          "value": "0x00af0b41c627807fbddcee75afa174d5a7e5135ebd"
+        },
+        {
+          "type": "Identity",
+          "value": "0x0005a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"
+        }
+      ],
+      "source": "Free"
+    },
+    "to": {
+      "to_infos": [
+        {
+          "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqfqyerlanzmnkxtmd9ww9n7gr66k8jt4tclm9jnk",
+          "amount": "10000000000"
+        }
+      ],
+      "mode": "HoldByFrom"
+    },
+    "pay_fee": null,
+    "change": null,
+    "fee_rate": 1000,
+    "since": null
+  },
+  "resp": {
+    "tx_view": {
+      "version": "0x0",
+      "cell_deps": [
+        {
+          "out_point": {
+            "tx_hash": "0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37",
+            "index": "0x0"
+          },
+          "dep_type": "dep_group"
+        }
+      ],
+      "header_deps": [],
+      "inputs": [
+        {
+          "since": "0x0",
+          "previous_output": {
+            "tx_hash": "0x41d029d76db11c08cef092eb0d267a953fc5de429ec94d76adc18519aa39f07c",
+            "index": "0x0"
+          }
+        },
+        {
+          "since": "0x0",
+          "previous_output": {
+            "tx_hash": "0x0660c9e7fc7609c75f9db968c8deb19eab2bec8f73c2f005e31ebd77317a5c80",
+            "index": "0x1"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "capacity": "0x2540be400",
+          "lock": {
+            "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            "hash_type": "type",
+            "args": "0x202647fecc5b9d8cbdb4ae7167e40f5ab1e4baaf"
+          },
+          "type": null
+        },
+        {
+          "capacity": "0xcc60f4e046",
+          "lock": {
+            "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            "hash_type": "type",
+            "args": "0x05a1fabfa84db9e538e2e7fe3ca9adf849f55ce0"
+          },
+          "type": null
+        }
+      ],
+      "outputs_data": [
+        "0x",
+        "0x"
+      ],
+      "witnesses": [
+        "0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "0x10000000100000001000000010000000"
+      ],
+      "hash": "0x8808e4213093a9ad588f0eee63cf78e835f45cbe5982d98c9a341d3778d35a04"
+    },
+    "signature_actions": [
+      {
+        "signature_location": {
+          "index": 0,
+          "offset": 20
+        },
+        "signature_info": {
+          "algorithm": "Secp256k1",
+          "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqg958atl2zdh8jn3ch8lc72nt0cf864ecqdxm9zf"
+        },
+        "hash_algorithm": "Blake2b",
+        "other_indexes_in_group": [
+          1
+        ]
+      }
+    ]
+  },
+  "msg": null
+}

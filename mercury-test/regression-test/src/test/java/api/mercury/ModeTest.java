@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.transaction.Transaction;
 import org.nervos.ckb.utils.AmountUtils;
@@ -30,7 +31,7 @@ import constant.AddressWithKeyHolder;
 import constant.UdtHolder;
 import utils.SignUtils;
 
-// @Disabled
+@Disabled
 public class ModeTest {
 
   Gson g = GsonFactory.newGson();

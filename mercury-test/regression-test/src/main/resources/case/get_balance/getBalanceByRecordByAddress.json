@@ -1,1 +1,36 @@
-{"methodName":"get_balance","req":{"item":{"type":"Record","value":"0xf4341eb97d02d7c7e19ec68ce08317104dde11e9d60205092ffaffe4957f499f0000000300636b74317179716738386363716d35396b7378703835373838706e716734726b656a646763673271786375327166"},"asset_infos":[{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"}],"tip_block_number":null},"resp":{"balances":[{"ownership":{"type":"Address","value":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf"},"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"free":"0","occupied":"14200000000","freezed":"0","claimable":"0"}],"tip_block_number":3480565},"msg":null}
+{
+  "methodName": "get_balance",
+  "req": {
+    "item": {
+      "type": "Record",
+      "value": "0x8afa725eaea80e6bd388c3c7b1bf2c14f6d35d5c5c46c9e2e1c39f42eac343db0000000200636b7431717a646130637230386d38356863386a6c6e6670337a65723778756c656a79777434396b74327272307674687977616135307877737176726e75767164367a6d6772716e3630726e7365737932336d7665783576793971306738686664"
+    },
+    "asset_infos": [
+      {
+        "asset_type": "CKB",
+        "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ],
+    "tip_block_number": null
+  },
+  "resp": {
+    "balances": [
+      {
+        "ownership": {
+          "type": "Address",
+          "value": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd"
+        },
+        "asset_info": {
+          "asset_type": "CKB",
+          "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "free": "0",
+        "occupied": "14200000000",
+        "freezed": "0",
+        "claimable": "0"
+      }
+    ],
+    "tip_block_number": 3636218
+  },
+  "msg": null
+}

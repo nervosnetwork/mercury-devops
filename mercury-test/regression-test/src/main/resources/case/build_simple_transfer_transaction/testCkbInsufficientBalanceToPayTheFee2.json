@@ -1,1 +1,24 @@
-{"methodName":"build_simple_transfer_transaction","req":{"asset_info":{"asset_type":"CKB","udt_hash":"0x0000000000000000000000000000000000000000000000000000000000000000"},"from":["ckt1qyqw7sma3lqt04nwlv2kwjmmvjzpe5fulpjq7vp7e9"],"to":[{"address":"ckt1qyqg88ccqm59ksxp85788pnqg4rkejdgcg2qxcu2qf","amount":"10000000000"}],"pay_Fee":null,"change":null,"fee_rate":1000,"since":null},"resp":null,"msg":"RpcService method build_simple_transfer_transaction error {\"code\":-32001,\"message\":\"Custom error: Error(-11009): \\\"Asset type CKB hash 0000000000000000000000000000000000000000000000000000000000000000 token is not enough\\\"\"}"}
+{
+  "methodName": "build_simple_transfer_transaction",
+  "req": {
+    "asset_info": {
+      "asset_type": "CKB",
+      "udt_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "from": [
+      "ckt1qyqg8lxevjmxz0cwr49qhlfun27j4l6hc6gspglsw8"
+    ],
+    "to": [
+      {
+        "address": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvrnuvqd6zmgrqn60rnsesy23mvex5vy9q0g8hfd",
+        "amount": "10000000000"
+      }
+    ],
+    "pay_Fee": null,
+    "change": null,
+    "fee_rate": 1000,
+    "since": null
+  },
+  "resp": null,
+  "msg": "RpcService method build_simple_transfer_transaction error {\"code\":-32001,\"message\":\"Custom error: Error(-11009): \\\"Asset type CKB hash 0000000000000000000000000000000000000000000000000000000000000000 token is not enough\\\"\"}"
+}
