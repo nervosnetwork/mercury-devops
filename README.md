@@ -168,4 +168,39 @@ $ cd {mercury-devops}/mercury-benchmark && screen python3 main.py testnet get_sp
 
 
 # mercury-test
-重构集成中，敬请期待！
+
+原理如下
+![](./resource/test.jpg)
+
+## 部署
+
+```shell
+$ cd {mercury-devops}/mercury-test-ci && make deploy
+```
+
+
+## 使用
+
+### 通过 swagger 测试
+
+访问浏览器
+```http
+http://localhost:8080/swagger-ui.html#/test-controller/testUsingGET
+
+```
+
+请求参数：
+- blockHeight 抽取数据的高度
+- dbUrl       要抽取的数据库 ip:prot
+- mercuryUrl  mercury ip:prot
+- password    要抽取的数据库的密码
+- username    要抽需求数据库的账号
+
+
+### 用例生成
+通过 {mercury-devops}/mercury-test/regression-test/src/test/java/api/ 下的测试用例运行可以自动将请求和访问结果生成测试用例保存于项目中
+
+以上可以通过 {mercury-devops}/mercury-test-ci 生生测试环境，并运行一次测试用例以抽取数据
+
+
+

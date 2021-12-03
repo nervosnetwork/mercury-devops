@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 public class TestController {
@@ -29,7 +30,9 @@ public class TestController {
       @RequestParam(value = "dbUrl", defaultValue = "127.0.0.1:8432") String dbUrl,
       @RequestParam(value = "username", defaultValue = "postgres") String username,
       @RequestParam(value = "password", defaultValue = "123456") String password,
-      @RequestParam(value = "mercuryUrl", defaultValue = "127.0.0.1:8116") String mercuryUrl,
+      @RequestParam(value = "mercuryUrl", defaultValue = "127.0.0.1:8116")
+          @ApiParam("test 为docker 环境时使用 mercury:8116, 为本地直连的时候使用 127.0.0.1:8116")
+          String mercuryUrl,
       @RequestParam(value = "blockHeight", defaultValue = "3480565") Integer blockHeight) {
 
     dataSource.putDataSource(
@@ -45,6 +48,22 @@ public class TestController {
     TestRunner runner = new TestNgRunner();
     testSuiteInfos.forEach(x -> runner.addSuite(x));
     runner.run();
+
+    dataSource.removeDataSource();
+  }
+
+  @ApiOperation("抽取数据")
+  @GetMapping("/mercury/fetchDatas")
+  public void fetchDatas(
+      @RequestParam(value = "dbUrl", defaultValue = "127.0.0.1:8432") String dbUrl,
+      @RequestParam(value = "username", defaultValue = "postgres") String username,
+      @RequestParam(value = "password", defaultValue = "123456") String password,
+      @RequestParam(value = "blockHeight", defaultValue = "3480565") Integer blockHeight) {
+
+    dataSource.putDataSource(
+        "jdbc:postgresql://".concat(dbUrl).concat("/mercury"), username, password);
+
+    fetchDataService.fetchData(blockHeight);
 
     dataSource.removeDataSource();
   }
