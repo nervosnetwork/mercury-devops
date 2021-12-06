@@ -20,6 +20,7 @@ public interface RpcMethods {
   String GET_MERCURY_INFO = "get_mercury_info";
   String INDEXER_GET_TIP = "get_tip";
   String BUILD_SUDT_ISSUE_TRANSACTION = "build_sudt_issue_transaction";
+  String INDEXER_GET_CELL_CAPACITY = "get_cells_capacity";
 
   List<String> RPC_METHODS =
       Arrays.asList(
