@@ -41,6 +41,8 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class BuildUtils {
+    public static int newSudtRequiredCkb = 224;
+
     public static void transferFreeCkb(String fromAddress, String toAddress, BigInteger amount) throws IOException{
         System.out.println("from: " + fromAddress + ", to: " + toAddress + ", amount: " + amount + " free CKB");
         TransferPayloadBuilder builder = new TransferPayloadBuilder();
@@ -119,11 +121,11 @@ public class BuildUtils {
         BuildUtils.consumeClaimableUdt(address, AddressWithKeyHolder.testAddress0(), amount);
     }
 
-    public static void adjustAcpNumber(String fromAddress, String target_address, int amount) throws IOException {
+    public static void adjustAcpNumber(String fromAddress, String target_address, int amount, String udtHash) throws IOException {
         System.out.println("address " + target_address + " create " + amount + " acp cell, acp address: " + AddressTools.generateAcpAddress(target_address));
         AdjustAccountPayloadBuilder builder = new AdjustAccountPayloadBuilder();
         builder.item(ItemFactory.newIdentityItemByAddress(target_address));
-        builder.assetInfo(AssetInfo.newUdtAsset(UdtHolder.UDT_HASH));
+        builder.assetInfo(AssetInfo.newUdtAsset(udtHash));
         builder.addFrom(ItemFactory.newIdentityItemByAddress(fromAddress));
         builder.accountNumber(BigInteger.valueOf(amount));
         TransactionCompletionResponse s = ApiFactory.getApi().buildAdjustAccountTransaction(builder.build());
@@ -138,7 +140,11 @@ public class BuildUtils {
     }
 
     public static void ensureOneAcp(String address) throws IOException {
-        BuildUtils.adjustAcpNumber(AddressWithKeyHolder.testAddress0(), address, 1);
+        BuildUtils.adjustAcpNumber(AddressWithKeyHolder.testAddress0(), address, 1, UdtHolder.UDT_HASH);
+    }
+
+    public static void ensureOneAcp(String address, String udtHash) throws IOException {
+        BuildUtils.adjustAcpNumber(AddressWithKeyHolder.testAddress0(), address, 1, udtHash);
     }
 
     public static void ensureBeOnChain(String txHash) throws IOException {
@@ -215,7 +221,55 @@ public class BuildUtils {
         return balance.balances;
     }
 
+    public static void ensureAtLeastCkbFreeBalance(String address, BigInteger freeAmount) throws IOException {
+        BigInteger freeBalance = getCkbFreeBalance(address);
+        System.out.println("Address " + address + " has " + freeBalance + " free CKB");
+
+        freeBalance = legalizeCkbTweaking(address, freeAmount, freeBalance);
+
+        supplyCkbFreeBalance(address, freeAmount, freeBalance);
+    }
+
     public static void ensureCkbFreeBalance(String address, BigInteger freeAmount) throws IOException {
+        BigInteger freeBalance = getCkbFreeBalance(address);
+        System.out.println("Address " + address + " has " + freeBalance + " free CKB");
+
+        freeBalance = legalizeCkbTweaking(address, freeAmount, freeBalance);
+
+        supplyCkbFreeBalance(address, freeAmount, freeBalance);
+        reduceCkbFreeBalance(address, freeAmount, freeBalance);
+    }
+
+    public static BigInteger legalizeCkbTweaking(String address, BigInteger freeAmount, BigInteger freeBalance) throws IOException {
+        BigInteger transferAmount = freeBalance.subtract(freeAmount).abs();
+        // if transfer amount less than minimum CKB, then clear CKB first, then send freeAmount again
+        if(transferAmount.compareTo(BigInteger.ZERO) != 0 && transferAmount.compareTo(AmountUtils.ckbToShannon(61))  == -1) {
+            System.out.println("Address " + address + " clear " + freeBalance + " CKB, because transfer amount " + transferAmount + " less than minimum transferable CKB");
+            BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), freeBalance);
+            return BigInteger.ZERO;
+        }
+        return freeBalance;
+    }
+
+    public static void supplyCkbFreeBalance(String address, BigInteger freeAmount, BigInteger freeBalance) throws IOException {
+        BigInteger transferAmount = freeBalance.subtract(freeAmount).abs();
+
+        if(freeBalance.compareTo(freeAmount) == -1) {
+            System.out.println("Address " + address + " add " + transferAmount + " CKB");
+            BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress0(), address, transferAmount);
+        }
+    }
+
+    public static void reduceCkbFreeBalance(String address, BigInteger freeAmount, BigInteger freeBalance) throws IOException {
+        BigInteger transferAmount = freeBalance.subtract(freeAmount).abs();
+
+        if(freeBalance.compareTo(freeAmount) == 1) {
+            System.out.println("Address " + address + " reduce " + transferAmount + " CKB");
+            BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), transferAmount);
+        }
+    }
+
+    public static BigInteger getCkbFreeBalance(String address) throws IOException {
         List<BalanceResponse> balances = BuildUtils.getBalance(address);
         BigInteger freeBalance = BigInteger.ZERO;
         for (BalanceResponse balance: balances) {
@@ -223,23 +277,8 @@ public class BuildUtils {
                 freeBalance = freeBalance.add(balance.free);
             }
         }
-        System.out.println("Address " + address + " has " + freeBalance + " free CKB");
-        BigInteger transferAmount = freeBalance.subtract(freeAmount).abs();
-        // if transfer amount less than minimum CKB, then clear CKB first, then send freeAmount again
-        if(transferAmount.compareTo(BigInteger.ZERO) != 0 && transferAmount.compareTo(AmountUtils.ckbToShannon(61))  == -1) {
-            System.out.println("Address " + address + " clear " + freeBalance + " CKB, because transfer amount " + transferAmount + " less than minimum transferable CKB");
-            BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), freeBalance);
-            BuildUtils.ensureCkbFreeBalance(address, freeAmount);
-            return;
-        }
 
-        if(freeBalance.compareTo(freeAmount) == 1) {
-            System.out.println("Address " + address + " reduce " + transferAmount + " CKB");
-            BuildUtils.transferFreeCkb(address, AddressWithKeyHolder.testAddress0(), transferAmount);
-        } else if(freeBalance.compareTo(freeAmount) == -1) {
-            System.out.println("Address " + address + " add " + transferAmount + " CKB");
-            BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress0(), address, transferAmount);
-        }
+        return freeBalance;
     }
 
     @Test
@@ -479,5 +518,30 @@ public class BuildUtils {
     @Test
     void supplyCkb() throws IOException{
         BuildUtils.transferFreeCkb(AddressWithKeyHolder.testAddress2(), AddressWithKeyHolder.testAddress0(), AmountUtils.ckbToShannon(1000));
+    }
+
+    public static void issueSudt(String ownerAddress, String targetAddress, int amount) throws IOException {
+        System.out.println("address " + ownerAddress + " issues " + amount + " sUdt to " + targetAddress);
+
+        SudtIssuePayloadBuilder builder = new SudtIssuePayloadBuilder();
+        builder.owner(ownerAddress);
+        builder.to(
+                To.newTo(
+                    Arrays.asList(
+                        new ToInfo(targetAddress, AmountUtils.ckbToShannon(amount))),
+                    Mode.HoldByFrom));
+
+        TransactionCompletionResponse s = ApiFactory.getApi().buildSudtIssueTransaction(builder.build());
+        Transaction tx = SignUtils.sign(s);
+        String txHash = ApiFactory.getApi().sendTransaction(tx);
+        System.out.println("tx_hash: " + txHash);
+        BuildUtils.ensureBeOnChain(txHash);
+    }
+
+    public static void ensureUdtExisted(String ownerAddress) throws IOException {
+        System.out.println("try to ensure udt " + UdtHolder.getUdtHashFromOwner(ownerAddress) + ", owned by address " + ownerAddress + " to be on chain");
+
+        BuildUtils.ensureAtLeastCkbFreeBalance(ownerAddress, AmountUtils.ckbToShannon(newSudtRequiredCkb));
+        BuildUtils.issueSudt(ownerAddress, AddressWithKeyHolder.testAddress0(), 1);
     }
 }

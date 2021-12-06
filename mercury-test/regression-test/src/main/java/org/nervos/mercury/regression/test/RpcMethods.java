@@ -19,6 +19,7 @@ public interface RpcMethods {
   String GET_DB_INFO = "get_db_info";
   String GET_MERCURY_INFO = "get_mercury_info";
   String INDEXER_GET_TIP = "get_tip";
+  String BUILD_SUDT_ISSUE_TRANSACTION = "build_sudt_issue_transaction";
 
   List<String> RPC_METHODS =
       Arrays.asList(
@@ -33,5 +34,6 @@ public interface RpcMethods {
           "build_adjust_account_transaction",
           "get_spent_transaction",
           "query_transactions",
-          "get_transaction_info");
+          "get_transaction_info",
+          BUILD_SUDT_ISSUE_TRANSACTION);
 }
