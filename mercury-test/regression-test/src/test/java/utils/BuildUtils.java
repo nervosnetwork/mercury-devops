@@ -142,19 +142,28 @@ public class BuildUtils {
     }
 
     public static void ensureBeOnChain(String txHash) throws IOException {
-        String status = "";
+        BigInteger committedBlockNumber = null;
         int index = 0;
-        System.out.println(index + " try get " + txHash + " status");
-        while (!status.equals("committed")) {
+        System.out.println("try to ensure transaction " + txHash + " to be on chain");
+        while (true) {
             if(index >= 900) {
                 throw new IOException("30 minutes failed to be on chain, " + txHash + " may lost");
             }
             try {
+                String status = "committed";
+
                 index++;
-                TransactionWithStatus txWithStatus = ApiFactory.getApi().getTransaction(txHash);
-                status = txWithStatus.txStatus.status;
                 BigInteger rpcTipBlockNumber = BuildUtils.getRpcTipBlockNumber();
                 BigInteger mercuryTipBlockNumber = BuildUtils.getMercuryTipBlockNumber();
+                if (committedBlockNumber == null) {
+                    TransactionWithStatus txWithStatus = ApiFactory.getApi().getTransaction(txHash);
+                    status = txWithStatus.txStatus.status;
+                    if (status.equals("committed")) {
+                        committedBlockNumber = rpcTipBlockNumber;
+                    }
+                } else if (mercuryTipBlockNumber.compareTo(committedBlockNumber) != -1) {
+                    break;
+                }
                 System.out.println(txHash + " rpc status: " + status + ", tip block number: rpc-" + rpcTipBlockNumber + ", mercury-" + mercuryTipBlockNumber);
                 TimeUnit.SECONDS.sleep(2);
             } catch (Exception e) {
