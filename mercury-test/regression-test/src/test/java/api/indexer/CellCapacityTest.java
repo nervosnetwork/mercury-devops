@@ -172,7 +172,7 @@ public class CellCapacityTest {
   /**
    * Params Test
    * - Param: `block_range`
-   * - Value: (out of range)
+   * - Value: [0xf374770, 0x1f374770) (out of range)
    * - Type: Negative Testing
    */
   @Test
