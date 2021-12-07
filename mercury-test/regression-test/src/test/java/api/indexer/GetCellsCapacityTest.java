@@ -7,7 +7,7 @@ import org.nervos.indexer.model.ScriptType;
 import org.nervos.indexer.model.SearchKeyBuilder;
 import org.nervos.mercury.regression.test.RpcMethods;
 
-public class CellCapacityTest {
+public class GetCellsCapacityTest {
   String method = RpcMethods.INDEXER_GET_CELL_CAPACITY;
   // You can find the following lock script and type script in the output#1
   // of tx 0xeb7ebb26f7c0f7822925001bf2eaea0b00b8f742bde38c30dc3e43efb6947b51
