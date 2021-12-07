@@ -4,7 +4,7 @@ import api.RpcSender;
 import org.junit.jupiter.api.Test;
 import org.nervos.mercury.regression.test.RpcMethods;
 
-public class TipTest {
+public class GetTipTest {
   String method = RpcMethods.INDEXER_GET_TIP;
 
   /**
