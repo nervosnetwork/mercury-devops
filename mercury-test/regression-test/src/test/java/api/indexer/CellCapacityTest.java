@@ -1,5 +1,6 @@
 package api.indexer;
 
+import api.RpcSender;
 import org.junit.jupiter.api.Test;
 import org.nervos.ckb.type.Script;
 import org.nervos.indexer.model.ScriptType;
