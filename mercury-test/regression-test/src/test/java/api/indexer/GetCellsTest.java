@@ -16,7 +16,7 @@ import java.math.BigInteger;
 import constant.ApiFactory;
 
 @Disabled
-public class CellsTest {
+public class GetCellsTest {
   Gson g = GsonFactory.newGson();
 
   @Test
