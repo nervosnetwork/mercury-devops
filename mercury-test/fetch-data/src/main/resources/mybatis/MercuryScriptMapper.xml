@@ -36,6 +36,17 @@
         where script_hash = #{scriptHash,jdbcType=BLOB}
     </select>
 
+    <select id="selectByScriptArgs"
+            parameterType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from mercury_script
+        where script_args = #{scriptArgs,jdbcType=BLOB}
+    </select>
+
     <select id="selectByScriptHashes" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

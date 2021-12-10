@@ -13,6 +13,10 @@ public interface MercuryCellMapper {
 
   List<MercuryCell> selectByBlockNumbers(List<Integer> blockNumbers);
 
+  List<MercuryCell> selectByConsumedTxHash(List<HexBytes> blockNumbers);
+
+  List<MercuryCell> selectByBlockTxHash(List<HexBytes> blockNumbers);
+
   int deleteByPrimaryKey(Long id);
 
   int insert(MercuryCell record);

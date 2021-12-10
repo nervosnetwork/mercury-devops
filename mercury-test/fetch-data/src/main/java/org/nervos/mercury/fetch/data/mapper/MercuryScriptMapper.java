@@ -18,6 +18,8 @@ public interface MercuryScriptMapper {
 
   MercuryScript selectByPrimaryKey(HexBytes scriptHash);
 
+  List<MercuryScript> selectByScriptArgs(HexBytes scriptArgs);
+
   List<MercuryScript> selectByScriptHashes(List<HexBytes> scriptHashes);
 
   int updateByPrimaryKeySelective(MercuryScript record);

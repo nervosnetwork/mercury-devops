@@ -7,7 +7,7 @@
 
     <!--  使用本地 jar 驱动  -->
     <classPathEntry
-            location="/usr/local/Cellar/gradle/7.0/libexec/caches/modules-2/files-2.1/org.postgresql/postgresql/42.2.8/6f394c7df5600d11b221f356ff020440d2ece44f/postgresql-42.2.8.jar"/>
+            location="/usr/local/Cellar/gradle/7.3/libexec/caches/modules-2/files-2.1/org.postgresql/postgresql/42.2.18/a0a9c1d43c7727eeaf1b729477891185d3c71751/postgresql-42.2.18.jar"/>
     <context id="postgresql" targetRuntime="MyBatis3" defaultModelType="flat">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -41,224 +41,225 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+
         <!-- 表名 -->
-        <table tableName="mercury_block" domainObjectName="MercuryBlock"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="parent_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="transactions_root"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="proposals_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="uncles_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="uncles"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="dao"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="nonce"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="proposals"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_block" domainObjectName="MercuryBlock"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="parent_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="transactions_root"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="proposals_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="uncles_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="uncles"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="dao"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="nonce"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="proposals"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
-        <table tableName="mercury_canonical_chain" domainObjectName="MercuryCanonicalChain"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_canonical_chain" domainObjectName="MercuryCanonicalChain"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
-        <table tableName="mercury_cell" domainObjectName="MercuryCell"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="tx_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="data"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="consumed_block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="consumed_tx_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="since"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_cell" domainObjectName="MercuryCell"-->
+        <!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="tx_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="data"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="consumed_block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="consumed_tx_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="since"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
-        <table tableName="mercury_in_update" domainObjectName="MercuryInUpdate"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>
+        <!--        <table tableName="mercury_in_update" domainObjectName="MercuryInUpdate"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--        </table>-->
 
-        <table tableName="mercury_indexer_cell" domainObjectName="mercuryIndexerCell"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="tx_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
-
-
-        <table tableName="mercury_live_cell" domainObjectName="MercuryLiveCell"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="tx_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="lock_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="type_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="data"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
-
-        <table tableName="mercury_registered_address" domainObjectName="MercuryRegisteredAddress"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="lock_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
-
-        <table tableName="mercury_script" domainObjectName="MercuryScript"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="script_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="script_hash_160"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="script_code_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="script_args"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_indexer_cell" domainObjectName="MercuryIndexerCell"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="tx_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
 
-        <table tableName="mercury_sync_status" domainObjectName="MercurySyncStatus"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--        <table tableName="mercury_live_cell" domainObjectName="MercuryLiveCell"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="tx_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="lock_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="type_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="data"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
-        <table tableName="mercury_transaction" domainObjectName="MercuryTransaction"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="tx_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="cell_deps"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="header_deps"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="witnesses"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_registered_address" domainObjectName="MercuryRegisteredAddress"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="lock_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="mercury_script" domainObjectName="MercuryScript"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="script_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="script_hash_160"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="script_code_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="script_args"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
 
-        <table tableName="mercury_uncle_relationship" domainObjectName="MercuryUncleRelationship"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <columnOverride column="block_hash"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-            <columnOverride column="uncle_hashes"
-                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"
-                            jdbcType="BLOB"/>
-        </table>
+        <!--        <table tableName="mercury_sync_status" domainObjectName="MercurySyncStatus"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <!--        <table tableName="mercury_transaction" domainObjectName="MercuryTransaction"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="tx_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="cell_deps"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="header_deps"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="witnesses"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
+
+
+        <!--        <table tableName="mercury_uncle_relationship" domainObjectName="MercuryUncleRelationship"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" enableCountByExample="false"-->
+        <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--            <columnOverride column="block_hash"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--            <columnOverride column="uncle_hashes"-->
+        <!--                            javaType="org.nervos.mercury.fetch.data.entity.type.HexBytes"-->
+        <!--                            jdbcType="BLOB"/>-->
+        <!--        </table>-->
 
     </context>
 </generatorConfiguration>

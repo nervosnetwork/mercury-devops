@@ -13,6 +13,10 @@ public class HexBytes {
     return hexBytes;
   }
 
+  public String toHex() {
+    return Numeric.toHexString(this.hexBytes);
+  }
+
   public static HexBytes newHexBytes(String hex) {
     return new HexBytes(Numeric.hexStringToByteArray(hex));
   }
