@@ -34,7 +34,7 @@ public class QueryService {
 
     List<MercuryScript> mercuryScripts =
         scriptMapper.selectByScriptArgs(
-            HexBytes.newHexBytes("0x1a4ff63598e43af9cd42324abb7657fa849c5bc3"));
+            HexBytes.newHexBytes("0xa3b8598e1d53e6c5e89e8acb6b4c34d3adb13f2b"));
 
     List<HexBytes> txHashes =
         indexerCellMapper.selectByLockHashes(
