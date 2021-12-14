@@ -1,5 +1,6 @@
 import datetime
 import os
+import time
 
 from model.config import WrkConfig
 
@@ -62,7 +63,9 @@ class WrkGroup(WrkScript):
         self.__name = name
         self.__group = []
         self.__markdown = "## {}\n### 压测脚本\n```lua\n{}\n```\n\n### 压测命令\n```shell\n$ {}\n" \
-                          "```\n\n {} \n\n### 压测结果\n {} \n\n Implementation time period: {} \n\n"
+                          "```\n\n {} \n\n### 压测结果\n {} \n\n Implementation time period: {} ~ {} \n\n"
+        self.__start_time = ''
+        self.__end_time = ''
 
         super(WrkGroup, self).__init__(script_name, script_dir, config)
 
@@ -76,15 +79,13 @@ class WrkGroup(WrkScript):
         self.__group.append(wrk)
 
     def get_markdown(self):
-        startTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         data = ""
         for x in self.__group:
             if isinstance(x, Wrk):
                 data = data + x.get_markdown()
-        endTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         return self.__markdown.format(self.__name, self.get_script_file(), self.get_cmd(), data,
-                               self.get_table(), startTime + " ~ " + endTime)
+                                      self.get_table(), self.__start_time, self.__end_time)
 
     def get_table(self):
         collection_group = {}
@@ -116,9 +117,11 @@ class WrkGroup(WrkScript):
         return table
 
     def run(self):
+        self.__start_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         for x in self.__group:
             if isinstance(x, Wrk):
                 x.run()
+        self.__end_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 
 class BenchmarkSuite:
