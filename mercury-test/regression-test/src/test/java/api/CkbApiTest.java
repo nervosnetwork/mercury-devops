@@ -2,6 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nervos.api.CkbApi;
 import org.nervos.api.DefaultCkbApi;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /** @author zjh @Created Date: 2021/7/25 @Description: @Modify by: */
+@Disabled
 public class CkbApiTest {
 
   private static String MERCURY_URL = "http://127.0.0.1:8116";
