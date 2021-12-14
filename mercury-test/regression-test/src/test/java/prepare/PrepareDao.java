@@ -31,8 +31,13 @@ public class PrepareDao {
      * Prepare addresses for `testFrom`
      * use testAddress[0]
      */
-    public static void prepareDepositFrom() throws IOException {
+    public static void prepareDepositFromAddress0() throws IOException {
         String testAddress = testAddresses.get(0).address;
+        BuildUtils.ensureCkbFreeBalance(testAddress, AmountUtils.ckbToShannon(300));
+    }
+
+    public static void prepareDepositFromAddress1() throws IOException {
+        String testAddress = testAddresses.get(1).address;
         BuildUtils.ensureCkbFreeBalance(testAddress, AmountUtils.ckbToShannon(300));
     }
 }
