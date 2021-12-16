@@ -39,6 +39,7 @@
             #{id}
         </foreach>
         AND type_hash = #{typeHash}
+        limit 20
     </select>
 
 

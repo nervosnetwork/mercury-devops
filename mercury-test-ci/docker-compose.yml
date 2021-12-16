@@ -18,7 +18,7 @@ services:
       - ./config/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
       - ./config/my-postgres.conf:/etc/postgresql/postgresql.conf
     networks:
-      - mercury-test-net
+      - mercury-regression-test-net
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
 
   mercury:
@@ -33,11 +33,11 @@ services:
     depends_on:
       - postgres
     networks:
-      - mercury-test-net
+      - mercury-regression-test-net
     command: ./mercury -c devtools/config/testnet_config.toml
 
-  mercury-test:
-    container_name: mercury-test
+  mercury-regression-test:
+    container_name: mercury-regression-test
     restart: always
     image: nervos/mercury-test:v0.1.0
     ports:
@@ -45,9 +45,9 @@ services:
     volumes:
       - ./test-output:/app/test-output
     networks:
-      - mercury-test-net
+      - mercury-regression-test-net
     command: java -jar -Dtest.data.source.url=jdbc:postgresql://postgres:5432/mercury mercury-test-0.1.0.jar
 
 
 networks:
-  mercury-test-net:
+  mercury-regression-test-net:

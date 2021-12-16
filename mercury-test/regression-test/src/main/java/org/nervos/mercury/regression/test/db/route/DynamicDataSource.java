@@ -43,6 +43,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     dataSource.setJdbcUrl(url);
     dataSource.setUsername(username);
     dataSource.setPassword(password);
+
+    dataSource.setMaximumPoolSize(50);
+
     return dataSource;
   }
 
