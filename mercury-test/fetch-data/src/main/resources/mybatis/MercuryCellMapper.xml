@@ -73,19 +73,19 @@
         ,
         <include refid="Blob_Column_List"/>
         from mercury_cell
-        where tx_hash in
+        where consumed_tx_hash in
         <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </select>
 
-    <select id="selectByBlockTxHash" resultMap="ResultMapWithBLOBs">
+    <select id="selectByTxHash" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from mercury_cell
-        where consumed_tx_hash in
+        where tx_hash in
         <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>

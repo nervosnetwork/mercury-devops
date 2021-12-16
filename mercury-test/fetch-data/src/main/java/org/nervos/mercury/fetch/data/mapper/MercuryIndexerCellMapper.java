@@ -1,5 +1,6 @@
 package org.nervos.mercury.fetch.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.nervos.mercury.fetch.data.entity.MercuryIndexerCell;
 import org.nervos.mercury.fetch.data.entity.type.HexBytes;
 
@@ -12,7 +13,8 @@ public interface MercuryIndexerCellMapper {
 
   int insertSelective(MercuryIndexerCell record);
 
-  List<HexBytes> selectByLockHashes(List<HexBytes> hashes);
+  List<HexBytes> selectByLockHashes(
+      @Param("hashes") List<HexBytes> hashes, @Param("typeHash") HexBytes typeHash);
 
   MercuryIndexerCell selectByPrimaryKey(Long id);
 

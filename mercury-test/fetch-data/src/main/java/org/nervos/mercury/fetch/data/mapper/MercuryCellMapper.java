@@ -15,7 +15,7 @@ public interface MercuryCellMapper {
 
   List<MercuryCell> selectByConsumedTxHash(List<HexBytes> blockNumbers);
 
-  List<MercuryCell> selectByBlockTxHash(List<HexBytes> blockNumbers);
+  List<MercuryCell> selectByTxHash(List<HexBytes> blockNumbers);
 
   int deleteByPrimaryKey(Long id);
 
