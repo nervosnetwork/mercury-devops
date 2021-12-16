@@ -147,6 +147,10 @@ public class BuildUtils {
         BuildUtils.adjustAcpNumber(AddressWithKeyHolder.testAddress0(), address, 1, udtHash);
     }
 
+    public static void ensureAcpCount(String address, int count) throws IOException {
+        BuildUtils.adjustAcpNumber(AddressWithKeyHolder.testAddress0(), address, count, UdtHolder.UDT_HASH);
+    }
+
     public static void ensureBeOnChain(String txHash) throws IOException {
         BigInteger committedBlockNumber = null;
         int index = 0;
