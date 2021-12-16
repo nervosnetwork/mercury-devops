@@ -62,8 +62,15 @@ public class QueryService {
 
     List<MercuryTransaction> mercuryTransactions = transactionMapper.selectByTxHashes(txHashes);
 
+    sw.split();
+    System.out.println("query tx: ".concat(String.valueOf(sw.getSplitTime())));
     List<MercuryCell> mercuryCells = mercuryCellMapper.selectByTxHash(txHashes);
+    sw.split();
+    System.out.println("query outputs: ".concat(String.valueOf(sw.getSplitTime())));
+
     List<MercuryCell> mercuryCells1 = mercuryCellMapper.selectByConsumedTxHash(txHashes);
+    sw.split();
+    System.out.println("query inputs: ".concat(String.valueOf(sw.getSplitTime())));
 
     Map<String, List<MercuryCell>> outputGroup =
         mercuryCells.stream().collect(groupingBy(x -> x.getTxHash().toHex()));
