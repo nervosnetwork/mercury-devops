@@ -1,4 +1,4 @@
-package api.indexer;
+package api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -18,7 +18,12 @@ public class RpcSender {
     public static JsonElement sendRequest(String method, Object payload) {
         try {
             System.out.println("request: " + g.toJson(payload));
-            JsonElement response = rpc.post(method, g.fromJson(g.toJson(payload), JsonObject.class));
+            JsonElement response;
+            if (payload != null) {
+                 response = rpc.post(method, g.fromJson(g.toJson(payload), JsonObject.class));
+            } else {
+                response = rpc.post(method, null);
+            }
             System.out.println("response: " + g.toJson(response));
             return response;
         } catch (IOException e) {
@@ -30,8 +35,9 @@ public class RpcSender {
     public static void sendRequestAndWriteCase(String method, Object payload) {
         JsonElement response = sendRequest(method, payload);
         if (response != null) {
+            // Get the name of method that calls this functions
             StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-            StackTraceElement e = stacktrace[2];//maybe this number needs to be corrected
+            StackTraceElement e = stacktrace[2];
             String caseName = e.getMethodName();
             CaseWriter cw = new CaseWriter(method, "./src/main/resources");
             cw.write(caseName, null, response, null);
