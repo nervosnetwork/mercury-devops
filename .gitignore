@@ -1,5 +1,6 @@
 .idea
 .vsc
 .DS_Store
+.vscode
 
 test-output
